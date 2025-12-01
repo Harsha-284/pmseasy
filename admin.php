@@ -10498,8 +10498,11 @@ $totalCommissionAmt += $commissionValue;
                                             const statusInfo = roomData.availability[dateString] || {
                                               status: 0
                                             };
+                                            // console.log(statusInfo);
+
                                             const status = statusInfo.status;
                                             const fullName = statusInfo.fullname || '';
+                                            const contact = statusInfo.contact || '';
                                             const checkin = statusInfo.checkin || '';
                                             const checkout = statusInfo.checkout || '';
                                             const unique_booking_number = statusInfo
@@ -10517,7 +10520,6 @@ $totalCommissionAmt += $commissionValue;
 
                                             availabilityCells +=
                                               `<td data-bookingid="${(status === 1 && bookingid)}" class="tb-color-2" style="background-color: ${backgroundColor}; padding: 0;">`;
-
 
                                             function formatDate(dateString) {
                                               const date = new Date(dateString);
@@ -10538,14 +10540,14 @@ $totalCommissionAmt += $commissionValue;
                                               if (isRoomAssigned === 1) {
                                                 availabilityCells += `
 																						<a data-toggle="tooltip" data-placement="top" data-html="true"
-																						title="Booked by: ${fullName}<br><span style='display:block; text-align:left;'>BookingId: FR${bookingid}<br>(Check-in: ${formattedCheckin},<br>Check-out: ${formattedCheckout})</span>" 
+																						title="<span style='display:block; text-align:left;'>BookingId: ${bookingid},<br>Booked by: ${fullName},<br>Contact: ${contact},<br>Check-in: ${formattedCheckin},<br>Check-out: ${formattedCheckout}</span>" 
 																						href="LBF_roomnumberbooking.php?id=${roomData.id}&date=${dateString}" 
 																						class='fancybox fancybox.iframe' style="display: block; width: 100%; height: 100%; text-decoration: none;">
 																						<span style="color:white; font-weight:400;">${unique_booking_number}</span>
 																						</a>`
                                               } else {
                                                 availabilityCells += `
-																								<a class="fancybox fancybox.iframe" href="LBF_getallbrninfo.php?id=${roomtypeid}&date=${dateString}&room_id=${roomData.id}" data-toggle="tooltip" data-placement="top" title="Room is Already Reserved"  style="display: block; width: 100%; height: 100%; text-decoration: none; background-color:#428bca; ">
+																								<a class="fancybox fancybox.iframe" href="LBF_getallbrninfo.php?id=${roomtypeid}&date=${dateString}&room_id=${roomData.id}" data-toggle="tooltip" data-placement="top" data-html="true" title="<span style='display:block; text-align:left;'>BookingId: ${bookingid},<br>Booked by: ${fullName},<br>Contact: ${contact},<br>Check-in: ${formattedCheckin}</span>"  style="display: block; width: 100%; height: 100%; text-decoration: none; background-color:#428bca; ">
 																									<span style="color:white; font-weight:400;">${unique_booking_number}</span>
 																								</a>`;
                                               }

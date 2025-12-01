@@ -417,6 +417,11 @@ include 'udf.php'; ?>
 					<div class="border">
 						<h6 class="bill-heading">Payment Trail</h6>
 						<div class="table-section">
+							<?php
+							$reg_date = new DateTime($row['reg_date']);
+							$payment = $conn->query("select id,payment_type, date_of_payment, txnid, cheque_bank, cheque_no, cheque_date, comment,amount,discount_type,discount_percent,discount_flat from payment_mode where bookingid=$row[id] and deleted=0 order by id desc;");
+							$payment_count = $payment->num_rows;
+							if($payment_count > 0){ ?>
 							<table id="payment-table" class="table table-bordered br-none mg-top" style="border-collapse: collapse; width: 100%; border: none; margin: 5px 0px">
 								<thead style="border-bottom: 1px solid #ddd;">
 									<tr class="table-color" style="border-bottom: 1px solid #ddd;border-top: 1px solid #ddd; font-size: 15px; ">
@@ -518,6 +523,7 @@ include 'udf.php'; ?>
 									} ?>
 								</tbody>
 							</table>
+							<?php } ?>
 							<div>
 								<a id="booking-edit-add" href="LBF_editpaymentdetails.php?id=<?= $row['id']; ?>&isUpdate=0" class="btn available">Add Payment details </a>
 							</div>

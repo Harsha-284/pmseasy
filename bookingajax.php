@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			$rs_row = execute("select count(*)totalrooms,r.chargeperextra from roomtypes r left join roomnumbers rn on rn.roomtype=r.id where r.id=$rt and r.active=1 and (r.adults+r.extraallowed)>=$adults and r.children>=$children");
 			$totalrooms = $rs_row['totalrooms'];
-			
+
 			if ($rpid && $rate_plan) {
 				if ($totalrooms - $previouslybookedrooms < $no_of_rooms) {
 					echo json_encode(['total_rooms' => 0, 'extra_charge' => $rs_row['chargeperextra']]);
@@ -1459,7 +1459,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$bookingQuery = $conn->query("
 				SELECT rd.roomnumber, b.status, u.fullname, 
 					   CAST(b.checkindatetime AS DATE) AS checkindate, 
-					   CAST(b.checkoutdatetime AS DATE) AS checkoutdate, 
+					   CAST(b.checkoutdatetime AS DATE) AS checkoutdate, u.contact,
 					   b.checkoutdatetime, b.ticker,rd.isRoomAssigned, b.paid, b.id as bookingid 
 				FROM bookings b 
 				JOIN room_distribution rd ON rd.bookingid = b.id 
@@ -1502,6 +1502,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						// No existing booking for this room on this date, assign the booking
 						$bookings[$roomNumber][$currentDate] = [
 							'status' => $bookingStatus,
+							'contact' => $booking['contact'],
 							'fullname' => $booking['fullname'],
 							'checkin' => $checkinDate,
 							'checkout' => $checkoutDate,
@@ -1521,6 +1522,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 							// Replace the existing booking if the current one is more relevant
 							$bookings[$roomNumber][$currentDate] = [
 								'status' => $bookingStatus,
+								'contact' => $booking['contact'],
 								'fullname' => $booking['fullname'],
 								'checkin' => $checkinDate,
 								'checkout' => $checkoutDate,
@@ -1548,6 +1550,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						$currentDate = date('Y-m-d', $date);
 						$availability[$roomType][$roomNumber]['availability'][$currentDate] = isset($bookings[$roomData['id']][$currentDate]) ? $bookings[$roomData['id']][$currentDate] : [
 							'status' => 0,
+							'contact' => '',
 							'fullname' => '',
 							'checkin' => '',
 							'checkout' => '',

@@ -141,6 +141,58 @@ function postResponse()
         $modifiedCheckOutDate->modify('-1 day');
         $res = updateCmAvailability($checkindatetime->format("Y-m-d"), $modifiedCheckOutDate->format("Y-m-d"), $availble, $roomtype, $hotelCode);
         if ($res === true) {
+            // ------------------------------
+            // SEND EMAIL + WHATSAPP
+            // ------------------------------
+            $hotelInfo = execute("SELECT h.id, u.company
+                      FROM hotels h 
+                      JOIN users u ON h.user = u.id 
+                      WHERE u.cm_company_name = '$hotelCode'");
+
+            $hotelid = $hotelInfo['id'];
+            $hotelName = $hotelInfo['company'];
+            echo $email;
+            // var_dump(empty($email));
+            // if (!empty($email)) {
+            // try {
+            $subject = "Your Booking Confirmation – $hotelName";
+
+            $message = "Dear $fullname,<br><br>"
+                . "Thank you for choosing <strong>$hotelName</strong>.<br>"
+                . "Your booking has been confirmed.<br><br>"
+                . "<strong>Hotel:</strong> $hotelName<br>"
+                . "Check-in: " . $checkindatetime->format('d-m-Y H:i') . "<br>"
+                . "Check-out: " . $checkoutdatetime->format('d-m-Y H:i') . "<br><br>"
+                . "Warm regards,<br>"
+                . "$hotelName Team";
+
+            $voucher = generateAndDownloadVoucher($bookingid);
+            $voucherContent = $voucher['content'];
+
+            $myemail = myemail5($email, $subject, $message, "", "", "PMSEasy", $voucherContent);
+            echo "<pre>";
+            print_r($myemail);
+            echo "</pre>";
+            // print_r($myemail);
+            // } catch (Exception $e) {
+            //     error_log("Email sending failed: " . $e->getMessage());
+            // }
+            // }
+            // ------------------------------
+            // WhatsApp Message
+            // ------------------------------
+            $wa_message = "Hello $fullname,\n"
+                . "Thank you for booking your stay at *$hotelName*.\n"
+                . "Your reservation is confirmed!\n\n"
+                . "Hotel: $hotelName\n"
+                . "Check-in: " . $checkindatetime->format('d-m-Y H:i') . "\n"
+                . "Check-out: " . $checkoutdatetime->format('d-m-Y H:i') . "\n\n"
+                . "We look forward to hosting you.\n"
+                . "- $hotelName Team";
+
+
+            sendwhatsapp($phone, $wa_message);
+
             $response = array(
                 "success" => true,
                 "message" => "Reservation Booked Successfully",
@@ -245,4 +297,88 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     getResponse();
 } else {
     echo "Invalid request method.";
+}
+
+function sendwhatsapp($cellno, $smstext)
+{
+    // $varsms = "authentic-key=31334e696b68696c73697240676d61696c2e636f6d3130301726726008&route=1&number=" . $cellno . "&message=" . $smstext;
+    // $url = "http://wapp.powerstext.in/http-tokenkeyapi.php?" . $varsms;
+
+    $url = "https://wapp.powerstext.in/http-tokenkeyapi.php?authentic-key=31334e696b68696c73697240676d61696c2e636f6d3130301726726008&route=1&number=" . $cellno . "&message=" . urlencode($smstext);
+    // echo $url;
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTPGET => true
+    ]);
+
+    $response = curl_exec($curl);
+    // print_r($response);
+    $error = curl_error($curl);
+    // dd($error);
+    curl_close($curl);
+
+    if ($error) {
+        return "cURL Error: " . $error;
+    } else {
+        return $response;
+    }
+}
+
+function generateAndDownloadVoucher($booking)
+{
+    $filename = "Booking Confirmation";
+    $url = "https://pmseasy.in/pms/voucher.php?id=" . $booking;
+    $label = " Booking Confirmation";
+    $data = array(
+        "url"                => $url,
+        "filename"            => $filename,
+        "uniqueFilename"    => true,
+        "label"                => $label,
+        "paper"                => "A4",
+        "orientation"        => "portrait",
+        "printBackground"    => true
+    );
+
+    $jsonData = json_encode($data);
+    $url = "https://okpdf.banqueteasy.com/api";
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+    ));
+
+    $server_response = curl_exec($ch);
+
+    if (curl_errno($ch))
+        $error = curl_error($ch);
+    else
+        $error = [];
+
+    curl_close($ch);
+    // dd($server_response);
+    //printr(http_build_query($data));
+    $server_response = json_decode($server_response, true);
+
+    if ($server_response['success']) {
+        $return['preview'] = $server_response['previewUrl'];
+        $return['download'] = $server_response['downloadUrl'];
+        $return['content'] = $server_response['content'];
+        $return['error'] = '';
+    } else {
+        $return['preview'] = "";
+        $return['download'] = "";
+        $return['error'] = $error;
+    }
+
+    return $return;
 }
