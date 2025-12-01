@@ -8733,7 +8733,7 @@ function save_CM_Hotel_Name(userId) {
                         function updateBookings(year, month) {
                           let refDate = getMonthStartAndEnd(year, month);
                           let apiUrl =
-                            `https://www.pmseasy.in/pms/bookingajax.php?month=${year}-${String(month).padStart(2, '0')}&hotelID=<?= $_SESSION['hotel'] ?>`;
+                            `bookingajax.php?month=${year}-${String(month).padStart(2, '0')}&hotelID=<?= $_SESSION['hotel'] ?>`;
 
                           $('#loader').show();
                           $('#availability-table').hide();
@@ -9142,7 +9142,7 @@ $('#loader').hide();
 																		// Function to update bookings based on year and month
 																		function updateBookings(year, month) {
 																			let refDate = getMonthStartAndEnd(year, month);
-																			let apiUrl = `https://www.pmseasy.in/pms/bookingajax.php?month=${year}-${String(month).padStart(2, '0')}&assign_hotel=<?= $_SESSION['hotel'] ?>`;
+																			let apiUrl = `bookingajax.php?month=${year}-${String(month).padStart(2, '0')}&assign_hotel=<?= $_SESSION['hotel'] ?>`;
 
 																			$('#loader').show();
 																			$('#availability-table').hide();
@@ -10417,7 +10417,7 @@ $totalCommissionAmt += $commissionValue;
                                   function updateBookings(year, month) {
                                     let refDate = getMonthStartAndEnd(year, month);
                                     let apiUrl =
-                                      `https://www.pmseasy.in/pms/bookingajax.php?month=${year}-${String(month).padStart(2, '0')}&hotel=<?= $_SESSION['hotel'] ?>`;
+                                      `bookingajax.php?month=${year}-${String(month).padStart(2, '0')}&hotel=<?= $_SESSION['hotel'] ?>`;
 
                                     $('#loader').show();
                                     $('#availability-table').hide();

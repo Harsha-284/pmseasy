@@ -81,7 +81,7 @@ function fetchRatePlan(roomtypeid) {
     let currendate = new Date();
     let date = `${currendate.getFullYear()}-0${currendate.getMonth() + 1}-${currendate.getDate()}`;
 
-    return fetch(`https://www.pmseasy.in/pms/bookingajax.php?roomtypeid=${roomtypeid}&date=${date}`, {
+    return fetch(`bookingajax.php?roomtypeid=${roomtypeid}&date=${date}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ let initialSyncDone = false; // Flag to track if initial synchronization is done
 function getRoomRatePlan(roomtypeid, noOfRoom, index, total_stay, extra_charge) {
     let currendate = new Date();
     let date = `${currendate.getFullYear()}-0${currendate.getMonth() + 1}-${currendate.getDate()}`
-    fetch(`https://www.pmseasy.in/pms/bookingajax.php?roomtypeid=${roomtypeid}&date=${date}`, {
+    fetch(`bookingajax.php?roomtypeid=${roomtypeid}&date=${date}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -264,7 +264,7 @@ function syncRadioSelection(selectedId) {
 
 async function getFulldaytariffRatePlan(rateplanid, validfrom, validto) {
     try {
-        const response = await fetch(`https://www.pmseasy.in/pms/bookingajax.php?rateplanids=${rateplanid}&validfrom=${validfrom}&validto=${validto}`, {
+        const response = await fetch(`bookingajax.php?rateplanids=${rateplanid}&validfrom=${validfrom}&validto=${validto}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

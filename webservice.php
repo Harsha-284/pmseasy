@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         $invoicestr = '' . $hotel_prefix['invoice_prefix'] . '' . $invoice_num['invoice_number'] . '';
                     }
                     if ($isinvoiceCreated == 1) {
-                        $invoiceUrl = "https://www.pmseasy.in/pms/LBF_finalinvoice.php?id={$row['roomnumberid']}&date=" . $date->format("Y-m-d") . "&hotel=" . $_GET['hotel'];
+                        $invoiceUrl = "LBF_finalinvoice.php?id={$row['roomnumberid']}&date=" . $date->format("Y-m-d") . "&hotel=" . $_GET['hotel'];
                         $row['invoice_url'] = $invoiceUrl;
                     }
                     $row['invoicestr'] = $invoicestr;

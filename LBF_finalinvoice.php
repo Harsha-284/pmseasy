@@ -328,7 +328,7 @@ include 'udf.php'; ?>
 
 		<script>
 			$(document).ready(function() {
-				let apiUrl = `https://www.pmseasy.in/pms/bookingajax.php?bookingid=<?= $row['id'] ?>`;
+				let apiUrl = `bookingajax.php?bookingid=<?= $row['id'] ?>`;
 
 				$.getJSON(apiUrl, function(data) {
 
