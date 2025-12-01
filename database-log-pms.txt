@@ -1,0 +1,163 @@
+database changes log (pms)
+1) alter table roomtypes add cmroomid varchar(200);
+2) alter table users add cm_company_name varchar(200);
+3) CREATE TABLE room_rate_plans (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    roomtype VARCHAR(255) ,
+    cm_rate_plan VARCHAR(255) ,
+    room_rate_plan VARCHAR(255),
+    deleted int(11)
+    );
+
+4) CREATE TABLE room_rate_plans_validity (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    rateplanid INT(11) ,
+    fulldaytariff DECIMAL(10, 2),
+    validfrom DATE,
+    validto DATE
+);
+
+5)ALTER TABLE room_distribution ADD COLUMN deleted INT(11) DEFAULT 	0;
+
+6)CREATE TABLE additional_services (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    service varchar(200) ,
+    gst varchar(255),
+    charge DECIMAL(10, 2),
+     hsn varchar(255),
+     hotel varchar(255)
+);
+
+7) CREATE TABLE seasonal_rate_plans_validity (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    rateplanid INT(11) ,
+    fulldaytariff DECIMAL(10, 2),
+    validfrom DATE,
+    validto DATE
+);
+
+8)ALTER TABLE additional_services
+ADD COLUMN created_at DATETIME DEFAULT NOW();
+
+9)ALTER TABLE additional_services
+ADD COLUMN updated_at DATETIME DEFAULT NOW();
+
+10) CREATE TABLE payment_mode (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    payment_type ENUM('online', 'upi', 'cash', 'credit/debit card', 'payatcheckout', 'discount', 'writeoff', 'neft/rtgs/imps', 'cheque/dd') NOT NULL,
+    date_of_payment DATE NOT NULL,
+    txnid VARCHAR(255) NULL,
+    discount_flat varchar(255),
+    discount_percent varchar(255),
+    discount_type varchar(255),
+    cheque_bank VARCHAR(255) NULL,
+    cheque_no VARCHAR(255) NULL,
+    cheque_date DATE NULL,
+    comment TEXT NULL,
+    bookingid varchar(255),
+    amount varchar(255),
+    deleted INT(11) DEFAULT 0
+);
+
+11)ALTER TABLE users
+ADD id_proof varchar(255);
+
+12)ALTER TABLE users
+ADD id_proof_path varchar(255);
+
+13)ALTER TABLE additional_services
+ADD vat varchar(255);
+
+14)CREATE TABLE payment_mode_receipt (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    paymentmodeid varchar(255),
+    bookingid varchar(255),
+    amount varchar(255)
+)
+
+15)CREATE TABLE additional_services_receipt (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    additional_service_id varchar(255),
+    bookingid varchar(255),
+    amount varchar(255)
+)
+
+16)ALTER TABLE additional_services
+ADD tax varchar(255);
+
+17)CREATE TABLE guest_additional_services (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    additional_service_id varchar(255),
+    bookingid varchar(255),
+    quantity int(11),
+    deleted INT(11) DEFAULT 0,
+    created_at DATE DEFAULT CURRENT_DATE
+)
+
+18)ALTER TABLE bookings
+ADD intialtariff varchar(255);
+
+19)ALTER TABLE additional_services_receipt 
+ADD deleted INT(11) DEFAULT 0;
+
+20)ALTER TABLE additional_services_receipt 
+ADD guest_service_id varchar(255);
+
+21)ALTER TABLE additional_services 
+ADD ishotelroomtax INT(11) DEFAULT 0;
+
+22)CREATE TABLE invoice_setup (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    hotel varchar(255),
+    start_invoice_no varchar(255),
+    invoice_prefix varchar(255),
+    signature_label varchar(255),
+    bank_detail varchar(255),
+    account_no varchar(255),
+    branch_detail varchar(255),
+    ifsc varchar(255),
+    upi_id varchar(255),
+    gstin_no varchar(255)
+)
+
+21)ALTER TABLE invoices 
+ADD customer_gstin varchar(255);
+
+22)ALTER TABLE invoices 
+ADD invoice_data LONGTEXT;
+
+24)ALTER TABLE invoices 
+ADD invoice_number varchar(255);
+
+25)ALTER TABLE invoices 
+ADD hotel varchar(255);
+
+26)ALTER TABLE additional_services 
+ADD deleted INT(11) DEFAULT 0;
+
+27)ALTER TABLE room_distribution 
+ADD isRoomAssigned INT(11) DEFAULT 0;
+
+28)ALTER TABLE invoice_setup 
+ADD state varchar(255);
+
+29)ALTER TABLE invoice_setup 
+ADD isgst INT(11) DEFAULT 1;
+
+30) CREATE TABLE hotel_staff (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11),
+    hotel_id INT(11),
+    permission LONGTEXT,
+    deleted INT(11) DEFAULT 0;
+);
+
+31) CREATE TABLE hotel_task_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11),
+    hotel_id INT(11),
+    message varchar(255),
+    deleted INT(11) DEFAULT 0,
+    module varchar(255),
+    created_at DATETIME DEFAULT NOW()
+);

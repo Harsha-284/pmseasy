@@ -1,0 +1,85 @@
+@font-face {
+	font-family:'HelveticaNeue-Regular';
+	src: url('../font/helvetica/HelveticaNeue_gdi.eot');
+	src: url('../font/helvetica/HelveticaNeue_gdi.eot?#iefix') format('embedded-opentype'),
+		url('../font/helvetica/HelveticaNeue_gdi.woff') format('woff'),
+		url('../font/helvetica/HelveticaNeue_gdi.ttf') format('truetype'),
+		url('../font/helvetica/HelveticaNeue_gdi.svg#HelveticaNeue-Regular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+	font-stretch: normal;
+	unicode-range: U+0-10FFFF;
+}
+@font-face {
+	font-family: 'HelveticaNeue-UltraLigCondObl';
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigCondObl.eot');
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigCondObl.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigCondObl.woff') format('woff'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigCondObl.ttf')  format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'HelveticaNeue-UltraLigExtObl';
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigExtObl.eot');
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigExtObl.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigExtObl.woff') format('woff'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigExtObl.ttf')  format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'HelveticaNeue-Ultra';
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLight.eot');
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLight.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLight.woff') format('woff'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLight.ttf')  format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'HelveticaNeue-UltraItal';
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLightItal.eot');
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLightItal.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLightItal.woff') format('woff'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLightItal.ttf')  format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'HelveticaNeue-UltraLigCond';
+	src: url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigCond.eot');
+	src: url('../font/Helvetica Ultra Light/HelveticaNeue-UltraLigCond.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigCond.woff') format('woff'),
+		url('../fonts/Helvetica Ultra Light/HelveticaNeue-UltraLigCond.ttf')  format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+
+
+/*################################################## Login #########################################################################*/
+#wrapper{width:100%;height:auto;overflow:hidden;}
+.cust_login_wrapper {max-width:430px;margin:0 auto;padding:9% 20px 0 20px;box-sizing:border-box;}
+.cust_login_row {overflow:hidden;}
+.cust_login_row_logo {width:100%;overflow:hidden;text-align:center;}
+.cust_login_row_logo a{display:block;overflow:hidden;text-align:-webkit-center;text-align:-moz-center;}
+.cust_login_row_heading {overflow:hidden;padding:28px 0 30px 0;box-sizing:border-box;}
+.cust_login_row_heading p {text-align:center;    font-family: 'Montserrat', sans-serif;font-size:36px;color:#fff;margin: 0; font-weight:400;}
+.cust_login_row_heading span {text-align:center;font-size:12px;color:#191919;display:block;text-align:center;}
+.cust_login_row_form {overflow:hidden;}
+.cust_login_row_form input {width:100%;height:60px;line-height:60px;padding:10px;box-sizing:border-box;border-radius:10px;outline:none;border:none;margin-bottom:5px;font-size:14px;color:#191919;}
+.cust_login_row_form input:hover {box-shadow:inset 0 0 0px 5px #be3634;}
+.cust_login_row_form input:focus {box-shadow:inset 0 0 0px 5px #be3634;}
+.cust_login_row_form button {border:none;background:#be3634;text-transform:uppercase;font-size:14px;line-height:16px;color:#ffffff;width:100%;text-align:center;padding:22px 0;border-radius:10px;outline:none;margin-top:12px;}
+.cust_login_row_forgotpass {overflow:hidden;padding:25px 0 0 0;box-sizing:border-box;}
+.cust_login_row_forgotpass p {text-align:center;font-size:12px;color:#fff;}
+.cust_login_row_forgotpass p a {text-decoration:underline;color:#fff;}
+.login_button{background: #399BFF;text-align: center;border-radius: 9px;}
+.login_button a{color:#fff;text-decoration:none;display:block;padding: 16px;}
+/*################################################## Login #########################################################################*/
+

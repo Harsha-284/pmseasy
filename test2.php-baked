@@ -1,0 +1,65 @@
+<?php 
+/////////////////////////////////// You can change your testing mail id on line 62 
+require_once ("/home/frotels/public_html/frotels/PHPMailer_5.2.0/class.phpmailer.php");
+function myemail($to,$subject,$data,$cc,$bcc,$from,$attachment="")
+{
+	$mail = new PHPMailer();
+
+	$mail->IsSMTP();                                      // set mailer to use SMTP
+	$mail->Host = "smtp.zoho.com";  // specify main and backup server
+	$mail->SMTPAuth = true;     // turn on SMTP authentication
+	$mail->Port = 587;
+	$mail->SMTPSecure = 'ssl';
+	$mail->SMTPDebug = 2;
+
+
+	$mail->Username = "noreply@frotels.com";  // SMTP username
+	$mail->Password = "Just@Freshen#Up$1979"; // SMTP password
+	$mail->From = "noreply@frotels.com";
+	
+	$mail->FromName = "Frotels";
+	
+	$to_arr = explode(",",$to);
+	$cc_arr	= explode(",",$cc);
+	$bcc_arr= explode(",",$bcc);
+	
+	foreach($to_arr as $to)
+		$mail->AddAddress($to);
+
+	if($cc!="")
+	{
+		foreach($cc_arr as $cc)
+			$mail->AddCC($cc);
+	}
+
+	if($bcc!="")
+	{
+		foreach($bcc_arr as $bcc)
+			$mail->AddBcc($bcc);
+	}
+	
+	$mail->WordWrap = 80;                                 // set word wrap to 50 characters
+	if($attachment!="")
+	{
+		$attarray = explode("||DELIMITER||",$attachment);
+		for($i=0; $i<sizeof($attarray); $i++)
+			$mail->AddAttachment($attarray[$i]);
+	}
+	$mail->IsHTML(true);                                  // set email format to HTML
+
+	$mail->Subject = $subject;
+	$mail->Body    = $data;
+	//$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+
+	if($mail->Send())
+		return true;
+	else
+		return false;
+}
+
+/////////////// You may change your mail ID here ///////////////
+
+if(myemail("mailhostingserver@gmail.com","Test","Test Message","","","noreply@frotels.com"))
+	echo "Sent";
+else
+	echo "Failed";?>

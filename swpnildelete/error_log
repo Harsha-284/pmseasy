@@ -1,0 +1,9 @@
+[03-Jan-2018 13:59:24 Asia/Kolkata] PHP Warning:  require_once(/home/imperial/public_html/scrm/PHPMailer_5.2.0/class.phpmailer.php): failed to open stream: No such file or directory in /home/frotels/public_html/frotels/swpnildelete/udf.php on line 172
+[03-Jan-2018 13:59:24 Asia/Kolkata] PHP Fatal error:  require_once(): Failed opening required '/home/imperial/public_html/scrm/PHPMailer_5.2.0/class.phpmailer.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/frotels/public_html/frotels/swpnildelete/udf.php on line 172
+[03-Jan-2018 14:00:24 Asia/Kolkata] PHP Notice:  Undefined variable: report in /home/frotels/public_html/frotels/swpnildelete/csvexport.php on line 42
+[09-Jan-2018 17:20:58 Asia/Kolkata] PHP Warning:  mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in /home/frotels/public_html/frotels/swpnildelete/csvexport.php on line 60
+[09-Jan-2018 17:20:58 Asia/Kolkata] PHP Fatal error:  Call to a member function fetch_field() on boolean in /home/frotels/public_html/frotels/swpnildelete/csvexport.php on line 64
+[09-Jan-2018 17:21:44 Asia/Kolkata] PHP Warning:  mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in /home/frotels/public_html/frotels/swpnildelete/csvexport.php on line 60
+[09-Jan-2018 17:21:44 Asia/Kolkata] PHP Fatal error:  Call to a member function fetch_field() on boolean in /home/frotels/public_html/frotels/swpnildelete/csvexport.php on line 64
+[09-Jan-2018 17:22:56 Asia/Kolkata] PHP Warning:  mysqli_num_fields() expects parameter 1 to be mysqli_result, boolean given in /home/frotels/public_html/frotels/swpnildelete/csvexport.php on line 60
+[09-Jan-2018 17:22:56 Asia/Kolkata] PHP Fatal error:  Call to a member function fetch_field() on boolean in /home/frotels/public_html/frotels/swpnildelete/csvexport.php on line 64

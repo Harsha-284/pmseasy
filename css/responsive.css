@@ -1,0 +1,2922 @@
+@media only screen and (max-width:2560px) {
+    .hotel-mydashboard-section2 .ms-10-2 {
+        margin-left: 10px;
+        width: 275px !important;
+    }
+
+    .hotel-mydashboard-section2 .card {
+        width: 275px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .mr-4 {
+        margin-left: 4px !important;
+        width: 275px !important;
+    }
+
+    .hotel-mydashboard-section2 .ms-10-3 {
+        margin-left: 10px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        width: 560px !important;
+    }
+
+    .card-ms-11 {
+        margin-left: 6px;
+    }
+
+    .hotellinkblocks {
+        width: 279.5px !important;
+    }
+
+    .graph-card-section {
+        margin-right: 13px !important;
+        margin-left: 14px !important;
+        margin-top: 15px !important;
+    }
+
+    .bookmap-section #yearSelector {
+        width: 168px !important;
+        font-size: 13px !important;
+        height: 32px !important;
+    }
+
+
+
+}
+
+@media only screen and (max-width:1920px) {
+.hotel-mydashboard-section3 .card.card-ms-11 {
+    margin-left: 5px;
+}
+.invoice-setup-form .ps-10{
+padding-right: 10px !important;
+}
+    .card-ms-11 {
+        margin-left: 0px;
+    }
+
+    .agent-section1 .action-btn {
+        margin-top: -10px;
+    }
+
+    .view-bulk-room .filter-action-btn2 {
+        padding: 7px 10px !important;
+    }
+
+    .hotel-mydasboard-section {
+        margin-right: 16px;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .mr-4 {
+        margin-left: 4px !important;
+        width: 255px !important;
+    }
+
+    .hotel-mydashboard-section2 {
+        margin-right: 16px !important;
+        margin-left: 0 !important;
+    }
+
+    .hotel-mydashboard-section2 .card {
+        width: 254px !important;
+    }
+
+    .hotel-mydashboard-section2 .ms-10-1 {
+        margin-left: 3px !important;
+    }
+
+
+    .hotel-mydashboard-section2 .ms-10-3 {
+        margin-left: 8px !important;
+    }
+
+    .hotel-mydashboard-section2 .ms-10-2 {
+        margin-left: 9px;
+        width: 255px !important;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin-right: 16px !important;
+        margin-left: 7px !important;
+    }
+
+    .cancellation-section .the-box {
+        margin-right: 25px;
+    }
+
+    .cancellation-section2 .the-box {
+        margin-right: 25px;
+    }
+
+    .booking-reports .form-control {
+        width: 101% !important;
+    }
+
+    .hotellinkblocks {
+        width: 258px !important;
+font-size:12px !important;
+    }
+
+    .px-0 {
+        padding: 0 !important;
+    }
+
+    .d-flex {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .agent-section3 .d-flex {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: left;
+        flex-direction: row;
+        gap: 10px;
+
+    }
+
+    .agent-section3 .col-xs-12 {
+        padding: 0 !important;
+
+    }
+
+    .invoice-image {
+        width: 50%;
+    }
+
+    .invoice-image img {
+        width: 485px;
+    }
+
+    .form form {
+        width: 50%;
+    }
+
+    .invoces-setup-section {
+        height: 620px;
+    }
+
+    .hotel-task-log-section select#module {
+        width: 213px !important;
+    }
+
+    .hotel-task-log-section .filter-container {
+        padding: 0px 8px !important;
+    }
+
+    .book-report-section input.form-control {
+        width: 100% !important;
+    }
+
+    .booking-section-btn {
+        width: 70px !important;
+    }
+
+    .booking-section-btn .filter-action-btn1,
+    .booking-section-btn .filter-action-btn2 {
+        width: 70px !important;
+    }
+
+    .book-report-section .btn-toolbar .btn-group input,
+    .book-report-section .btn-toolbar .btn-group select,
+    .book-report-section .btn-toolbar .btn-group .btn {
+        font-size: 13px !important;
+        padding: 8px 12px;
+        height: 34px;
+        width: 196.3px;
+    }
+
+    .cm-setup-section table.table {
+        width: 100% !important;
+        margin-bottom: 0px;
+    }
+
+    .cm-setup-section input[type="text"] {
+        max-width: 280px;
+        font-size: 13px;
+    }
+
+    .cm-setup-section .action-btn,
+    .cm-setup-section .btn-info,
+    .cm-setup-section .btn-danger {
+        font-size: 12px !important;
+        padding: 5px !important;
+        position: relative;
+        left: 10px;
+    }
+
+    .cancellation-section .filter-action-btn2,
+    .cancellation-section2 .filter-action-btn2,
+    .invoices-section .filter-action-btn2,
+    .hotel-task-log-section .filter-action-btn2 {
+        padding: 6px 10px !important;
+    }
+
+    .agent-section2 .filter-action-btn2 {
+        padding: 6.2px 10px !important;
+    }
+
+    h1#cm-setup {
+        top: 26px;
+        font-size: 17px;
+    }
+
+    .bookmap-section .book-div {
+        display: flex;
+        gap: 5px;
+        margin-left: 0px !important;
+        margin-top: 8px;
+        margin-right: -9px;
+    }
+
+    .bookmap-section #yearSelector {
+        width: 125px !important;
+        font-size: 13px !important;
+        height: 32px !important;
+    }
+
+    .bookmap-section #book-brn {
+        height: 31px;
+        width: 125px;
+        font-size: 11px;
+    }
+
+    .bookmap-section .ms-0 {
+        margin-left: -55px !important;
+    }
+
+    .w-210 {
+        width: 485px !important;
+    }
+
+    .ps-4 {
+        margin-top: 3px;
+        padding-left: 4px !important;
+        width: 4%;
+
+    }
+
+    .pe-4 {
+        margin-top: 4px;
+        padding-left: 10px !important;
+        padding-right: 4px !important;
+        width: 4.4%;
+    }
+
+    .invoices-section .top-table {
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .invoices-section .top-table .btn-group,
+    .invoices-section .top-table .col-lg-2 {
+        margin-bottom: 0 !important;
+    }
+
+    .invoices-section .top-table .btn-group input,
+    .invoices-section .top-table .btn-group select {
+        width: 204px !important;
+        height: 34px;
+    }
+
+    .invoices-section form {
+        margin-bottom: 20px;
+    }
+
+    .invoices-section .pagination-container ul.pagination {
+        font-size: 16px;
+    }
+
+
+
+    .form-check-label {
+        float: none Im !important;
+    }
+
+    .invoice-setup {
+        height: 630px;
+
+    }
+
+    .gst-section.top-table {
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .gst-section .top-table .btn-group,
+    .gst-section .top-table .col-lg-2 {
+        margin-bottom: 0 !important;
+    }
+
+    .gst-section form {
+        margin-bottom: 20px;
+    }
+
+    .gst-section .float-left {
+        float: left !important;
+    }
+
+    .invoices-section .pagination-container ul.pagination {
+        font-size: 16px;
+    }
+
+    .gst-section .top-table .btn-group input,
+    .gst-section .top-table .btn-group select {
+        width: 204px !important;
+        font-size: 13px !important;
+    }
+
+    .book-report-section .the-box {
+        width: 100% !important;
+    }
+
+    .fs-12 {
+        width: 100px;
+        justify-content: center;
+    }
+
+    #yearSelector {
+        width: 250px !important;
+        font-size: 13px !important
+    }
+
+    .agent-section3 .w-11 {
+        width: 205px;
+        padding: 5px;
+    }
+
+    .agent-section3 .t-20 {
+        width: 30px !important;
+    }
+
+    .inside-green-section {
+        height: 80px !important;
+    }
+
+    .hotel-mydasboard-section .justify-content-between {
+        justify-content: left !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        width: 517px !important;
+    }
+
+    .graph-card-section {
+        margin-right: 15px !important;
+        margin-left: 14px !important;
+    }
+
+    .hotel-task-log-section .col-lg-2 .filter-action-btn1 {
+        margin-top: 0;
+        margin-left: 52px !important;
+    }
+
+    .hotel-task-log-section .the-box {
+        margin-right: 34px;
+    }
+
+    .hotel-task-log-section .filter-container form .col-lg-2 {
+        width: 11%;
+        display: inline-block;
+        margin-bottom: 0;
+        padding: 0 5px;
+    }
+
+    .hotel-task-log-section .col-lg-2 .filter-action-btn1 {
+        width: auto;
+        margin-top: 0;
+        margin-left: 38px;
+    }
+
+    .hotel-task-log-section .col-lg-2 .filter-action-btn2 {
+        margin-right: 10px;
+    }
+
+    .hotel-task-log-section .table {
+        font-size: 15px;
+    }
+
+    .hotel-task-log-section .pagination-container ul.pagination {
+        font-size: 16px;
+    }
+
+    .set-room-box1 {
+        margin-right: 18px !important;
+    }
+
+    .set-room-box2 {
+        margin-left: -14px !important;
+    }
+
+    .agent-section1 .w-408 {
+        width: 403px !important;
+    }
+}
+
+@media only screen and (max-width:1441px) {
+.invoice-setup-form .ps-10{
+padding-right: 0px !important;
+}
+    .invoces-setup-section {
+        height: auto;
+    }
+
+    .book-report-section .btn-toolbar .btn-group input,
+    .book-report-section .btn-toolbar .btn-group select,
+    .book-report-section .btn-toolbar .btn-group .btn {
+        width: 176.3px;
+    }
+
+    .bookmap-section .cal-month {
+        gap: 3px !important;
+    }
+
+    .agent-section1 .w-408 {
+        width: 284px !important;
+    }
+
+    .ms-110 {
+        padding-left: 1.5 !important;
+    }
+
+    .hotel-task-log-section .col-lg-2 .filter-action-btn1 {
+        margin-left: 0 !important;
+    }
+
+    .bulk-room-activity-rows {
+        margin-right: -10px !important;
+        margin-left: -10px !important;
+    }
+
+    .invoices-section d-flex-btn .col-lg-1 {
+        padding: 8px;
+        margin-top: 10px;
+    }
+
+    .bookmap-section #yearSelector {
+        height: 31px !important;
+        width: 100px !important;
+        font-size: 13px !important;
+    }
+
+    #room-details-box .btn-toolbar {
+        margin-left: 0px;
+    }
+
+    .bookmap-section #book-brn {
+        height: 29px;
+        width: 80px;
+        font-size: 11px;
+        padding: 7px;
+    }
+
+    .btn-group.booking-section-btn {
+        top: 3px;
+    }
+
+    .view-bulk-room .filter-action-btn2 {
+        padding: 7px 10px !important;
+    }
+
+    .cancellation-section .filter-action-btn2,
+    .cancellation-section2 .filter-action-btn2,
+    .book-report-section .filter-action-btn2,
+    .invoices-section .filter-action-btn2,
+    .hotel-task-log-section .filter-action-btn2,
+    .agent-section2 .filter-action-btn2 {
+        padding: 6px 10px !important;
+    }
+
+    .gst-section .filter-action-btn2 {
+        padding: 6px 5px !important;
+        width: 50px !important;
+    }
+
+    .gst-section .d-flex-btn {
+        display: flex;
+        gap: 39px;
+    }
+
+    .gst-section .filter-action-btn1 {
+        padding: 6px 5px !important;
+        width: 50px !important;
+    }
+
+    .book-report-section .the-box {
+        width: 100% !important;
+    }
+
+    .cancellation-section .the-box {
+        margin-right: 23px;
+    }
+
+    .cancellation-section2 .the-box {
+        margin-right: 23px;
+    }
+
+    .hotellinkblocks {
+        width: 16.2% !important;
+        font-size: 10px !important;
+    }
+
+    .ms-20 {
+        margin-left: 40px;
+
+    }
+
+    .fs-12 {
+        font-size: 10.4px !important;
+        padding: 5px 9.2px !important;
+    }
+
+    #yearSelector {
+        width: 100px !important;
+        font-size: 13px !important;
+    }
+
+    .invoice-setup {
+        padding: 15px 15px 20px;
+
+    }
+
+    .invoces-setup-section .col-md-1 {
+        float: none;
+    }
+
+    .fs-12 {
+        font-size: 12.4px !important;
+        padding: 5px 9.2px !important;
+        width: 100px;
+        justify-content: center;
+    }
+
+    .book-report-section input.form-control {
+        width: 129px !important;
+    }
+
+    .book-report-section .chosen-select {
+        width: 120px !important;
+    }
+
+    .bookmap-section .btn {
+        font-size: 10px;
+        height: 29px;
+    }
+
+    .bookmap-section .action-btn {
+        font-size: 10px;
+    }
+
+    .bookmap-section .ms-0 {
+        margin-left: -10px !important;
+    }
+
+    .bookmap-section .w-75 {
+        width: 90px;
+margin-right: 9px !important;
+    }
+
+    .bookmap-section .book-div {
+        margin-left: 0px !important;
+    }
+
+    .agent-section1 .action-btn {
+        margin-top: -10px;
+    }
+
+    .cm-setup-section table.table {
+        width: 100% !important;
+        margin-bottom: 0px;
+    }
+
+    .cm-setup-section input[type="text"] {
+        max-width: 280px;
+        font-size: 13px;
+    }
+
+    .cm-setup-section .action-btn,
+    .cm-setup-section .btn-info,
+    .cm-setup-section .btn-danger {
+        font-size: 12px !important;
+        padding: 5px !important;
+        position: relative;
+        left: 10px;
+    }
+
+    h1#cm-setup {
+        top: 26px;
+        font-size: 17px;
+    }
+
+    .invoices-section .top-table {
+        flex-wrap: wrap;
+        gap: 9px;
+        display: flex;
+        align-items: center;
+    }
+
+    .invoices-section .top-table .btn-group,
+    .invoices-section .top-table .col-lg-2 {
+        margin-bottom: 0 !important;
+        margin-left: -4px;
+    }
+
+    .d-flex-btn {
+        display: flex;
+        gap: 45px;
+        width: 100px;
+    }
+
+    .invoices-section .top-table .btn-group input,
+    .invoices-section .top-table .btn-group select {
+        /* width: auto; */
+        width: 132px !important;
+        height: 34px;
+    }
+
+    .invoices-section form {
+        margin-bottom: 20px;
+    }
+
+    .invoices-section .pagination-container ul.pagination {
+        font-size: 14px;
+    }
+
+    .gst-section .top-table {
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .gst-section .top-table .gst-section .btn-group,
+    .gst-section .top-table .gst-section .col-lg-2 {
+        margin-bottom: 0 !important;
+    }
+
+    .gst-section form {
+        margin-bottom: 20px;
+    }
+
+    .gst-section .table-mt-20 {
+        margin-top: 20px !important;
+
+    }
+
+    .gst-section .pagination-container ul.pagination {
+        font-size: 14px;
+    }
+
+    .gst-section .top-table .btn-group input,
+    .gst-section .top-table .btn-group select {
+        width: 135.9px !important;
+        font-size: 13px !important;
+    }
+
+    .agent-section1 .row>div {
+        flex: 1 1 22%;
+        max-width: 22%;
+    }
+
+    .agent-section1 .form-control {
+        font-size: 13px;
+    }
+
+    .agent-section1 .form-label {
+        font-size: 9px !important;
+    }
+
+    .agent-section1 #add-agent-btn {
+        width: 100%;
+        /* margin-left: 75px !important; */
+        height: 28px;
+    }
+
+    .agent-section1 .action-btn {
+        background-color: #37BC9B !important;
+        color: white !important;
+        font-size: 11px !important;
+        padding: 5px 15px;
+        border: none !important;
+    }
+
+    .agent-section2 .table>tbody>tr>td {
+        padding: 5px !important;
+        font-size: 13px !important;
+    }
+
+    .agent-section2 .form-header h1 {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .agent-section2 .col-xs-3 {
+        flex: 1 1 48%;
+        max-width: 48%;
+        margin-bottom: -4px;
+    }
+
+    .agent-section2 .form-control {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .agent-section2 #reset-agent-btn {
+        width: 100%;
+        /* margin-left: -20px !important; */
+        margin-top: 4px !important;
+    }
+
+    .agent-section2 #apply-agent-btn {
+        width: 100%;
+        margin-left: -1px !important;
+        margin-top: 4px !important;
+    }
+
+    .bookmap-section .table>thead:first-child>tr:first-child>th {
+        font-size: 10px !important;
+        text-transform: uppercase;
+        padding: 7px 5px !important;
+    }
+
+    .hotel-mydashboard-section2 .ms-10-1 {
+        margin-left: 0px !important;
+    }
+
+    .hotel-mydashboard-section2 .ms-10-2 {
+        margin-left: 0px;
+    }
+
+    .agent-section3 .form-group {
+        font-size: 10px !important;
+    }
+
+    .agent-section3 .d-flex {
+        display: flex;
+        margin-top: 0px;
+        margin-left: 4px;
+    }
+
+    .agent-section3 .filter-action-btn2 {
+        margin-left: 0px;
+        height: 29px;
+
+    }
+
+    .agent-section3 .filter-action-btn1 {
+        height: 29px;
+    }
+
+    .agent-section3 .form-header h1 {
+        font-size: 14px;
+    }
+
+    .agent-section3 .w-11 {
+        width: 140px;
+        padding: 5px;
+    }
+
+    .agent-section3 .col-xs-12 {
+        padding: 0;
+    }
+
+    .w-210 {
+        width: 325.4px !important;
+    }
+
+    .agent-section2 .row {
+        margin-right: 0 !important;
+    }
+
+    .ps-4 {
+        margin-top: 3px;
+        padding-left: 4px !important;
+        width: 6%;
+
+    }
+
+    .pe-4 {
+        margin-top: 3px;
+        padding-left: 10px !important;
+        padding-right: 4px !important;
+        width: 6%;
+    }
+
+    .cancellation-section #cnl-booking {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 16px; */
+    }
+
+    .cancellation-section .form-header h1 {
+        font-size: 14px;
+    }
+
+    .cancellation-section .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 8px;
+        font-size: 10px;
+    }
+
+    .cancellation-section2 .label {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 10px; */
+    }
+
+    .cancellation-section2 .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 1.3px;
+        font-size: 9px;
+    }
+
+    .page-heading {
+        margin-top: 30px;
+    }
+
+    .hotel-mydasboard-section .page-heading {
+        margin-top: -5px;
+        margin-left: 6.2px !important;
+    }
+
+    .hotel-mydasboard-section {
+        margin-right: 21px !important;
+
+    }
+
+    .hotel-mydasboard-section .col-lg-4 .label {
+        font-size: 10px !important;
+        color: #000 !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 .label,
+    .hotel-mydasboard-section .col-lg-4 .count {
+        color: #555 !important;
+        font-size: 10px !important;
+    }
+
+    .tiles-number {
+        font-size: 21px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 {
+        width: 33% !important;
+        padding: 11px;
+        padding-top: 0px !important;
+        margin-left: -6px !important;
+        margin-right: 0.1px;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card {
+        width: 358px !important;
+        height: 335px;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card .card-body {
+        padding-left: 23px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 #col-3 #col-6 {
+        height: 225px;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin-top: 8px !important;
+        margin-right: 23px !important;
+        margin-left: 5px !important;
+        padding: 0 !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        width: 357px !important;
+    }
+
+    .graph-card-section {
+        margin: 10px 0px 0 12px !important;
+    }
+
+    .graph-card-section .card {
+        width: 1095px !important;
+    }
+
+    .graph-card-section .card .card-body {
+        height: 275px !important;
+    }
+
+    .graph-card {
+        margin-left: -5px;
+    }
+
+    .graph-card #myBarChart {
+        width: 1072px !important;
+    }
+
+    .tiles-number {
+        font-size: 23px !important;
+    }
+
+    .hotel-mydasboard-section-row {
+        margin: 0px 0px 0 6px !important;
+    }
+
+    .graph-card-section {
+        margin: 10px 0px 0 15px !important;
+    }
+
+    .hotel-mydasboard-section {
+        gap: 9.5px;
+        margin-bottom: 0px !important;
+        margin-left: -14px !important;
+        margin-right: 11px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 {
+        height: 280px !important;
+        width: 370.6px !important;
+    }
+
+    .hotel-mydashboard-section2 {
+        padding-right: 0px !important;
+        margin-right: -3px !important;
+        margin-left: 6px !important;
+        margin-top: -19px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 {
+        width: 33.8% !important;
+    }
+
+    .hotel-mydashboard-section2 .card {
+        padding-left: 10px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card {
+        width: 356px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hotel-mydashboard-section2 .ms-1 {
+        margin-left: 0 !important;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin-left: 9px !important;
+        margin-right: 30px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 {
+        padding-left: 5px;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        height: auto !important;
+        width: 356px !important;
+    }
+
+    .hotel-mydashboard-section3 .card-ms-5 {
+        margin-left: 7px !important;
+    }
+
+    .hotel-mydashboard-section3 .card-ms-11 {
+        margin-left: 13px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card .card-body {
+        padding-left: 20px !important;
+    }
+
+    .graph-card {
+        padding-right: 27px !important;
+    }
+
+    .graph-card-section .card {
+        width: 1095px !important;
+    }
+
+    .graph-card-section .card .card-body {
+        height: 340px !important;
+    }
+
+    .graph-card {
+        margin-left: -2px;
+    }
+
+    .graph-card #myBarChart {
+        width: 1535px !important;
+    }
+
+    .green-section {
+        margin-right: 16px !important;
+    }
+
+    .hotel-task-log-section .the-box {
+        margin-right: 34px;
+    }
+
+    .hotel-task-log-section .filter-container form .col-lg-2 {
+        width: 21.7%;
+        display: inline-block;
+        margin-bottom: 0;
+    }
+
+    .hotel-task-log-section select#module {
+        width: 225px !important;
+    }
+
+    .hotel-task-log-section .table {
+        font-size: 15px;
+    }
+
+    .hotel-task-log-section .pagination-container ul.pagination {
+        font-size: 14px;
+    }
+
+    .set-room-type {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px 0px;
+    }
+
+    .set-room-type .col-xs-6 {
+        padding: 0px 0px !important;
+    }
+
+    .bulk-room-activity {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px 10px;
+    }
+
+    .bulk-room-activity .col-xs-2 {
+        width: 20%;
+        margin: 10px 0px !important;
+    }
+
+    .bulk-room-activity-rows .size-1of4 {
+        width: 25% !important;
+    }
+
+    .view-bulk-room .bulk-room-table {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 0px 0px;
+    }
+
+    .set-room-box1 {
+        /* height: 279px; */
+        margin-right: 4px !important;
+    }
+
+    .set-room-box2 {
+        margin-right: 4px !important;
+        margin-left: 2px !important;
+    }
+}
+
+@media only screen and (max-width:1366px) {
+.invoice-setup-form .ps-10{
+padding-right: 0px !important;
+}
+
+    .book-report-section .btn-toolbar .btn-group input,
+    .book-report-section .btn-toolbar .btn-group select,
+    .book-report-section .btn-toolbar .btn-group .btn {
+        width: 117.3px;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 .label {
+        font-size: 9px !important;
+        color: #000 !important;
+    }
+
+    .hotel-task-log-section .filter-action-btn1 {
+        margin-left: -20px !important;
+    }
+
+    #yearSelector {
+        width: 156px !important;
+        font-size: 13px !important;
+    }
+
+    .hotel-task-log-section select#module {
+        width: 210px !important;
+    }
+
+    .agent-section1 .w-408 {
+        width: 260px !important;
+    }
+
+    .gst-section .top-table .btn-group input,
+    .gst-section .top-table .btn-group select {
+        width: 124.7px !important;
+        font-size: 13px !important;
+    }
+
+    .invoices-section .top-table .btn-group input,
+    .invoices-section .top-table .btn-group select {
+        width: 121.3px !important;
+        font-size: 13px !important;
+    }
+
+    .book-div {
+        position: absolute;
+        top: 0;
+        right: 20px;
+    }
+
+    .ms-0 {
+        margin-left: 0 !important;
+    }
+
+    .bookmap-section #yearSelector {
+        margin-left: 0 !important;
+    }
+
+    #room-type-jump {
+        height: 19px !important;
+    }
+
+    a#scrollBotton {
+        font-size: 12.3px !important;
+        justify-content: center;
+    }
+
+    .bookmap-section #room-type-jump {
+        padding: 0 !important;
+    }
+
+    .hotel-mydashboard-section2 {
+        margin-left: -6px !important;
+        margin-top: -32px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 {
+        width: 33% !important;
+        padding: 10px !important;
+        margin-bottom: 0px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card {
+        margin-bottom: 0px !important;
+    }
+    .bookmap-section .w-75 {
+        width: 90px;
+        margin-right: -10px !important;
+    }
+    .hotel-mydashboard-section2 .col-lg-2 .ms-7-2 {
+        margin-top: -12px !important;
+margin-left: 0 !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-1 {
+        margin-top: -12px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-10-2 {
+        margin-top: -12px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card {
+        width: 340px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms {
+        margin-left: 5px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-10 {
+        margin-left: 11px !important;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin: 7px !important;
+        margin-top: 3px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        width: 340px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card-ms-5 {
+        margin-left: -1px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card-ms-11 {
+        margin-left: -2px !important;
+    }
+
+    .hotel-mydasboard-section {
+        margin-right: 0 !important;
+    }
+
+    .graph-card-section {
+        margin-left: 12px !important;
+        margin-right: 10px !important;
+        margin-top: -7px !important;
+    }
+
+    .green-section {
+        margin-right: 0px !important;
+    }
+
+    .graph-card-section .card .card-body {
+        height: 335px !important;
+    }
+
+    .hotellinkblocks {
+        width: 166.2px !important;
+        font-size: 10px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 {
+        height: 280px !important;
+        width: 345.6px !important;
+        padding-right: 0;
+    }
+
+    .agent-section1 .row>div {
+        flex: 1 1 23%;
+        max-width: 23%;
+    }
+
+    .agent-section1 .form-control {
+        font-size: 13px;
+    }
+
+    .agent-section1 .form-label {
+        font-size: 9px !important;
+    }
+
+    .agent-section1 #add-agent-btn {
+        width: 100%;
+        /* margin-left: 106px !important; */
+        height: 28px;
+    }
+
+    .agent-section1 .action-btn {
+        background-color: #37BC9B !important;
+        color: white !important;
+        font-size: 11px !important;
+        padding: 5px 15px;
+        border: none !important;
+    }
+
+    .agent-section2 .form-header h1 {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .agent-section2 .col-xs-3 {
+        flex: 1 1 48%;
+        max-width: 48%;
+        margin-bottom: -4px;
+    }
+
+    .agent-section2 .form-control {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .agent-section2 #reset-agent-btn {
+        width: 100%;
+        /* margin-left: -20px !important; */
+        margin-top: 4px !important;
+    }
+
+    .agent-section2 #apply-agent-btn {
+        width: 100%;
+        margin-left: -1px !important;
+        margin-top: 4px !important;
+    }
+
+    .agent-section3 .form-group {
+        font-size: 10px !important;
+    }
+
+    .agent-section3 .d-flex {
+        display: flex;
+        gap: 5px;
+        margin-left: 0px;
+    }
+
+    .agent-section3 .filter-action-btn2 {
+        margin-left: 4px;
+        height: 29px;
+
+    }
+
+    .agent-section3 .filter-action-btn1 {
+        /* margin-left: -20px; */
+        height: 29px;
+
+    }
+
+    .agent-section3 .form-header h1 {
+        font-size: 14px;
+    }
+
+    .cancellation-section #cnl-booking {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 16px; */
+    }
+
+    .cancellation-section .form-header h1 {
+        font-size: 14px;
+    }
+
+    .cancellation-section .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 8px;
+        font-size: 10px;
+    }
+
+    .cancellation-section2 .label {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 10px; */
+    }
+
+    .cancellation-section2 .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 1.3px;
+        font-size: 9px;
+    }
+
+    .agent-section3 .w-11 {
+        width: 130px;
+        padding: 5px;
+    }
+
+    .bulk-room-activity-rows {
+        margin-right: -10px !important;
+        margin-left: -10px !important;
+    }
+
+    .w-210 {
+        width: 292px !important
+    }
+
+    .agent-section2 .row {
+        margin-right: 0 !important;
+    }
+
+    .ps-4 {
+        margin-top: 3px;
+        padding-left: 4px !important;
+        width: 7%;
+    }
+
+    .pe-4 {
+        margin-top: 3px;
+        padding-left: 10px !important;
+        padding-right: 4px !important;
+        width: 7%;
+
+    }
+    .bookmap-section .table>thead:first-child>tr:first-child>th {
+        font-size: 9px !important;
+        text-transform: uppercase;
+        padding: 7px 5px !important;
+    }
+    .book-report-section input.form-control {
+        width: 124px !important;
+    }
+}
+
+@media only screen and (max-width:1280px) {
+.invoice-setup-form .ps-10{
+padding-right: 0px !important;
+}
+        .invoice-image img {
+        width: 475px;
+    }
+    .bookmap-section .table>thead:first-child>tr:first-child>th {
+        font-size: 8px !important;
+        text-transform: uppercase;
+        padding: 7px 5px !important;
+    }
+
+   .bookmap-section .table>tbody>tr>td {
+        font-size: 9px !important;
+    }
+
+    .hotel-mydashboard-section2 .card {
+        padding-left: 0px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 {
+        height: 280px !important;
+        width: 313px !important;
+    }
+
+    .cm-setup-section table.table {
+        width: 100% !important;
+        margin-bottom: 0px;
+    }
+
+    .cm-setup-section input[type="text"] {
+        max-width: 280px;
+        font-size: 13px;
+    }
+
+    .cm-setup-section .action-btn,
+    .cm-setup-section .btn-info,
+    .cm-setup-section .btn-danger {
+        font-size: 12px !important;
+        padding: 5px !important;
+        position: relative;
+        left: 10px;
+    }
+
+    h1#cm-setup {
+        top: 26px;
+        font-size: 17px;
+    }
+
+    .invoices-section .top-table {
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .invoices-section .top-table .invoices-section .btn-group,
+    .invoices-section .top-table .invoices-section .col-lg-2 {
+        margin-bottom: 0 !important;
+    }
+
+    .invoices-section .top-table .btn-group input,
+    .invoices-section .top-table .btn-group select {
+        height: 34px;
+        font-size: 12px !important;
+    }
+
+    .invoices-section form {
+        margin-bottom: 20px;
+    }
+
+    .invoices-section .pagination-container ul.pagination {
+        font-size: 12px;
+    }
+
+    .gst-section .top-table {
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .gst-section .top-table .gst-section .btn-group,
+    .gst-section .top-table .gst-section .col-lg-2 {
+        margin-bottom: 0 !important;
+    }
+
+
+    .gst-section form {
+        margin-bottom: 20px;
+    }
+
+    .gst-section .pagination-container ul.pagination {
+        font-size: 12px;
+    }
+
+    .page-heading {
+        margin-top: 30px;
+    }
+
+    .hotel-mydasboard-section .page-heading {
+
+        margin-top: -5px;
+    }
+
+    .hotel-mydasboard-section {
+        margin-right: 24px !important;
+
+    }
+
+    .tiles-number {
+        font-size: 25px !important;
+    }
+
+    .hotel-mydasboard-section .pr-0 {
+        padding-right: 0px !important;
+    }
+
+    .panel-heading-font .panel-title {
+        font-size: 15px !important;
+        line-height: 17px;
+    }
+
+
+
+    .hotel-mydashboard-section2 .col-lg-2 .card {
+        width: 309px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card .card-body {
+        padding-left: 21px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 #col-3 #col-6 {
+        height: 225px;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin-top: 8px !important;
+        margin-right: 20px !important;
+        margin-left: 6px !important;
+        padding: 0 !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        width: 309px !important;
+    }
+
+    .row.graph-card-section {
+        margin-left: 13px !important;
+    }
+
+    .graph-card-section .card {
+        width: 938px !important;
+    }
+
+    .graph-card-section .card .card-body {
+        height: 275px !important;
+    }
+
+    .graph-card {
+        margin-left: -6px !important;
+    }
+
+    .graph-card #myBarChart {
+        width: 902px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 {
+        height: 280px !important;
+        width: 313px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 .label {
+        color: #000 !important;
+        font-size: 9px !important;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin-bottom: 4px !important;
+    }
+
+    .room-type {
+        height: 30%;
+        padding: 30px 30px;
+    }
+
+    .hotel-task-log-section .the-box {
+        margin-right: 34px;
+    }
+
+    .hotel-task-log-section .filter-container form .col-lg-2 {
+        width: 21%;
+        display: inline-block;
+        margin-bottom: 0;
+    }
+
+    .hotel-task-log-section select#module {
+        width: 185px !important;
+    }
+        .agent-section1 .w-408 {
+        width: 239px !important;
+    }
+
+    .hotel-task-log-section .table {
+        font-size: 15px;
+    }
+
+    .hotel-task-log-section .pagination-container ul.pagination {
+        font-size: 12px;
+    }
+
+    .set-room-box1 {
+
+        margin-right: 6px !important;
+    }
+
+    .w-210 {
+        width: 272px !important;
+    }
+
+    .set-room-box2 {
+        margin-right: 9px !important;
+        margin-left: 0px !important;
+    }
+
+    .hotel-task-log-section .filter-action-btn1 {
+        margin-left: 0px !important;
+        margin-right: 3px;
+
+    }
+
+    .hotel-task-log-section .filter-action-btn2 {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    .invoices-section .top-table .btn-group input,
+    .invoices-section .top-table .btn-group select {
+        width: 108px !important;
+        font-size: 13px !important;
+    }
+
+    #room-availability-body .table>tbody>tr>td {
+        padding: 0 !important;
+        font-size: 10px !important;
+    }
+
+    .pe-7 {
+        padding-left: 7px;
+    }
+
+    .cancellation-section .the-box {
+        margin-right: 20px;
+    }
+
+    .cancellation-section2 .the-box {
+        margin-right: 20px;
+    }
+
+    .hotellinkblocks {
+        width: 150.1px !important;
+        font-size: 10px !important;
+    }
+
+    .ms-20 {
+        margin-left: 40px;
+
+    }
+
+    .fs-12 {
+        font-size: 10.4px !important;
+        padding: 5px 9.2px !important;
+        width: 65px;
+        display: flex !important;
+        justify-content: center;
+    }
+
+    #yearSelector {
+        width: 132px !important;
+        font-size: 13px !important;
+    }
+
+    .booking-reports .form-control {
+        width: 101% !important;
+    }
+
+    .bookmap-section .action-btn {
+        margin-right: 0 !important;
+    }
+
+    .bookmap-section .book-div {
+        position: absolute;
+        top: 0;
+        right: 2px;
+    }
+
+    .bookmap-section #yearSelector {
+        margin-left: 0 !important;
+        width: 142px !important;
+    }
+
+    .book-report-section input.form-control {
+        width: 100px !important;
+    }
+
+    .bulk-room-activity-rows {
+        margin-right: -20px !important;
+        margin-left: -10px !important;
+    }
+
+    .invoces-setup-section .col-md-1 {
+        float: none;
+    }
+
+    .gst-section .top-table .btn-group input,
+    .gst-section .top-table .btn-group select {
+        width: 114.9px !important;
+        font-size: 13px !important;
+    }
+
+    .agent-section3 .w-11 {
+        width: 233px;
+        padding: 0px 5px !important;
+    }
+
+    .agent-section3 .col-xs-12 {
+        padding: 0 !important;
+        width: 102%;
+    }
+
+    .book-report-section .btn-toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0px !important;
+        align-items: center;
+        margin-left: -12px;
+    }
+
+
+
+    .book-div {
+        position: absolute;
+        top: 0;
+        right: 20px;
+    }
+
+    .ms-0 {
+        margin-left: 0 !important;
+    }
+
+    .bookmap-section #yearSelector {
+        margin-left: 0 !important;
+    }
+
+    #room-type-jump {
+        height: 19px !important;
+        gap: 11px !important;
+
+    }
+
+    a#scrollBotton {
+        font-size: 11.1px !important;
+        justify-content: center;
+    }
+
+    .bookmap-section #room-type-jump {
+        padding: 0 !important;
+    }
+
+    .agent-section1 .row>div {
+        flex: 1 1 24%;
+        max-width: 24%;
+        margin-bottom: -7px;
+    }
+
+    .agent-section1 .form-control {
+        font-size: 13px;
+    }
+
+    .agent-section1 .form-label {
+        font-size: 9px !important;
+    }
+
+    .agent-section1 #add-agent-btn {
+        width: 100%;
+        /* margin-left: 102px !important; */
+        height: 28px;
+    }
+
+    .agent-section1 .action-btn {
+        background-color: #37BC9B !important;
+        color: white !important;
+        font-size: 11px !important;
+        padding: 5px 15px;
+        border: none !important;
+    }
+
+    .agent-section2 .form-header h1 {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .agent-section2 .col-xs-3 {
+        flex: 1 1 48%;
+        max-width: 48%;
+        margin-bottom: -4px;
+    }
+
+    .agent-section2 .form-control {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .agent-section2 #apply-agent-btn {
+        /* width: 150%; */
+        margin-left: -1px !important;
+        margin-top: 4px !important;
+    }
+
+    .agent-section2 #reset-agent-btn {
+        /* width: 150%; */
+        /* margin-left: 15px !important; */
+        margin-top: 3px !important;
+    }
+
+    .agent-section2 button.btn.btn-danger {
+        padding: 5px;
+        position: relative;
+        /* left: 30px; */
+    }
+
+    .agent-section2 .table>tbody>tr>td {
+        padding: 5px !important;
+        font-size: 13px !important;
+    }
+
+    .agent-section2 .col-xs-12 {
+        width: 100% !important;
+        padding-left: 0px !important;
+    }
+
+    .agent-section3 .form-header h1 {
+        font-size: 14px;
+    }
+
+    .agent-section3 .form-group {
+        font-size: 9px !important;
+    }
+
+    .agent-section3 .d-flex {
+        display: flex;
+        margin-top: 2px;
+        margin-left: 4px;
+    }
+
+    .agent-section3 .filter-action-btn2 {
+        margin-left: 13px;
+        height: 29px;
+        margin-top: -2px;
+
+    }
+
+    .agent-section3 .filter-action-btn1 {
+        margin-left: 0px;
+        height: 29px;
+        margin-top: -2px;
+
+    }
+
+    .cancellation-section #cnl-booking {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 16px; */
+    }
+
+    .cancellation-section .form-header h1 {
+        font-size: 14px;
+    }
+
+    .cancellation-section .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 8px;
+        font-size: 10px;
+    }
+
+    .cancellation-section2 .label {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 10px; */
+    }
+
+    .cancellation-section2 .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 1.3px;
+        font-size: 9px;
+    }
+
+    .page-heading {
+        margin-top: 30px;
+    }
+
+    .hotel-mydasboard-section .page-heading {
+
+        margin-top: -5px;
+    }
+
+    .hotel-mydasboard-section {
+        margin-right: 24px !important;
+
+    }
+
+    .hotel-mydashboard-section2 {
+        margin-left: 0px !important;
+        margin-right: 4px !important;
+        /* margin-top: 19px !important; */
+        margin-top: -23px !important;
+        gap: 5px;
+
+    }
+
+    .tiles-number {
+        font-size: 25px !important;
+    }
+
+    .hotel-mydasboard-section .pr-0 {
+        padding-right: 0px !important;
+    }
+
+    .panel-heading-font .panel-title {
+        font-size: 15px !important;
+        line-height: 17px;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 {
+        width: 32% !important;
+        padding: 0px !important;
+        padding-top: 0px !important;
+        margin-left: -6px !important;
+        margin-right: 3px;
+        margin-bottom: 0 !important;
+
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-7-2 {
+        margin-left: 5px !important;
+        margin-top: -2px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms {
+        margin-left: 6px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-1 {
+        margin-left: 11px !important;
+        margin-top: -2px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-10-2 {
+        margin-left: 16px !important;
+        margin-top: -2px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card {
+        margin-bottom: 2px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card .card-body {
+        padding-left: 21px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 #col-3 #col-6 {
+        height: 225px;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin-top: 8px !important;
+        margin-right: 15px !important;
+        margin-left: 13px !important;
+        padding: 0 !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 {
+        padding-left: 0 !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card-ms-5 {
+        margin-left: -1px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card-ms-11 {
+        margin-left: -3px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        width: 309px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card .card-body {
+        padding-left: 20px !important;
+    }
+
+    .row.graph-card-section {
+        margin-left: 13px !important;
+    }
+
+    .graph-card-section {
+        margin-top: 0px !important;
+    }
+
+    .graph-card-section .card {
+        width: 933px !important;
+    }
+
+    .graph-card-section .card .card-body {
+        height: 275px !important;
+    }
+
+    .graph-card {
+        margin-left: -6px !important;
+    }
+
+    .graph-card #myBarChart {
+        width: 902px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 .label {
+        color: #000 !important;
+        font-size: 9px !important;
+    }
+
+    .room-type {
+        height: 30%;
+        padding: 30px 30px;
+    }
+
+    .set-room-type {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px 0px;
+    }
+
+    .set-room-type .col-xs-6 {
+        padding: 0px 0px !important;
+    }
+
+    .bulk-room-activity {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px 10px;
+    }
+
+    .bulk-room-activity .col-xs-2 {
+        width: 20%;
+        margin: 10px 0px !important;
+    }
+
+    .bulk-room-activity-rows .size-1of4 {
+        width: 33% !important;
+    }
+
+    .view-bulk-room .bulk-room-table {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 0px 0px;
+    }
+}
+
+
+
+
+@media only screen and (max-width:1150px) {
+.invoice-setup-form .ps-10{
+padding-right: 0px !important;
+}
+
+    .gst-section .top-table .btn-group input,
+    .gst-section .top-table .btn-group select {
+        width: 173px !important;
+        font-size: 13px !important;
+    }
+
+    .bulk-room-activity .action-btn {
+        margin-left: -19px !important;
+    }
+
+    .book-report-section .form-control.chosen-select {
+        width: 153px !important;
+    }
+
+    .hotel-task-log-section select#module {
+        width: 135px !important;
+    }
+
+    .gst-section .d-flex-btn {
+        display: flex;
+        gap: 0px;
+    }
+
+    .hotel-task-log-section .mx-40 {
+        margin-right: -40px !important;
+        margin-left: -5px !important;
+    }
+
+    .container-fluid {
+        padding: 0 !important;
+    }
+
+    .invoces-setup-section .col-md-1 {
+
+        float: none;
+    }
+
+    .book-div {
+        position: absolute;
+        top: 0;
+        right: 3px;
+    }
+
+    .ms-0 {
+        margin-left: 0 !important;
+    }
+
+    .with-nav-tabs .panel-heading {
+        height: 35px !important;
+    }
+
+    .bookmap-section #yearSelector {
+        margin-left: 0 !important;
+        width: 112px !important;
+    }
+
+    .book-report-section input.form-control {
+        width: 147px !important;
+    }
+
+    .book-report-section .btn-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px !important;
+    }
+
+    .nav>li>a {
+        position: relative;
+        display: block;
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .update-btn {
+        margin-left: 0px;
+    }
+
+    #room-type-jump {
+        height: 19px !important;
+    }
+
+    a#scrollBotton {
+        font-size: 8.7px !important;
+        justify-content: center;
+    }
+
+    .bookmap-section #room-type-jump {
+        padding: 0 !important;
+    }
+
+    .bookmap-section .action-btn {
+        margin-right: 0 !important;
+    }
+
+    .bookmap-section .fs-12 {
+        width: 50.2px;
+    }
+
+    .agent-section3 .col-xs-12 {
+        padding-right: 0 !important;
+    }
+
+    .bulk-room-activity .action-btn {
+        margin-left: -19px !important;
+    }
+
+    .agent-section3 label {
+        display: inline-block;
+        max-width: 100%;
+        font-weight: 500;
+        font-size: 10px !important;
+        text-transform: uppercase;
+    }
+
+    .cancellation-section .the-box {
+        margin-right: 25px;
+    }
+
+    .cancellation-section2 .the-box {
+        margin-right: 25px;
+    }
+
+    .hotellinkblocks {
+        width: 127.3px !important;
+        font-size: 10px !important;
+        margin-right: 3px !important;
+        margin-top: 3px !important;
+    }
+
+    .ms-20 {
+        margin-left: 40px;
+
+    }
+
+    .fs-12 {
+        font-size: 12.4px;
+        padding: 5px 9.5px !important;
+    }
+
+    #yearSelector {
+        width: 75px !important;
+        font-size: 13px !important;
+    }
+
+    .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 4px;
+        font-size: 10.4px;
+
+    }
+
+    td.size.tb-color {
+        font-size: 11px !important;
+    }
+
+    .booking-reports .btn-group {
+        width: 11% !important;
+    }
+
+    .booking-reports .form-control {
+        width: 110% !important;
+    }
+
+    .bulk-room-activity .action-btn {
+        margin-left: -19px !important;
+    }
+
+    /* .cm-setup-section .the-box {
+    padding: 20px;
+  } */
+    .cm-setup-section #table-setup {
+        width: 100% !important;
+        /* margin-top: 50px; */
+        margin-bottom: 0px;
+    }
+
+    .cm-setup-section input[type="text"] {
+        max-width: 220px;
+        font-size: 13px;
+    }
+
+    .cm-setup-section .action-btn,
+    .cm-setup-section .btn-info,
+    .cm-setup-section .btn-danger {
+        font-size: 12px !important;
+        padding: 5px !important;
+        position: relative;
+        left: 10px;
+    }
+
+    h1#cm-setup {
+        /* position: absolute; */
+        top: 20px;
+        font-size: 15px;
+    }
+
+    ul.nav-user {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: absolute;
+        top: 0;
+        right: -10px;
+    }
+
+    .cm-setup-section #table-cm {
+        width: 100% !important;
+        margin-top: 43px;
+        margin-bottom: 0px;
+    }
+
+    table#table-cm th {
+        width: 40.1% !important;
+    }
+
+    .invoices-section .top-table {
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        display: flex;
+    }
+
+    .invoices-section .top-table .invoices-section .btn-group,
+    .invoices-section .top-table .invoices-section .col-lg-2 {
+        margin-bottom: 0 !important;
+    }
+
+    .invoices-section .top-table .btn-group input,
+    .invoices-section .top-table .btn-group select {
+        width: 173 !important;
+        /* min-width: 100px; */
+        height: 34px;
+        font-size: 12px !important;
+    }
+
+    .invoices-section .d-flex-btn {
+        display: flex;
+        gap: 0px;
+    }
+
+
+    .invoices-section form {
+        margin-bottom: 20px;
+    }
+
+    .invoices-section .pagination-container ul.pagination {
+        font-size: 10px;
+    }
+
+    .gst-section .top-table {
+        flex-wrap: wrap;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .gst-section .top-table .gst-section .btn-group,
+    .gst-section .top-table .gst-section .col-lg-2 {
+        margin-bottom: 0 !important;
+    }
+
+    .gst-section form {
+        margin-bottom: 20px;
+    }
+
+    .gst-section .pagination-container ul.pagination {
+        font-size: 10px;
+    }
+
+    .bulk-room-activity .action-btn {
+        margin-left: -19px !important;
+    }
+
+    .hotel-task-log-section .filter-container form .col-lg-2 {
+        width: 19.6% !important;
+
+    }
+
+    .agent-section1.row>div {
+        flex: 1 1 31%;
+        max-width: 31%;
+        margin-bottom: -7px;
+    }
+
+    .agent-section1 .form-header h1 {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .agent-section1 .form-control {
+        font-size: 13px;
+    }
+
+    .agent-section1 .form-label {
+        font-size: 7px !important;
+    }
+
+
+    .agent-section1 #add-agent-btn {
+        width: 100%;
+        height: 28px;
+    }
+
+    .agent-section1 .action-btn {
+        background-color: #37BC9B !important;
+        color: white !important;
+        font-size: 11px !important;
+        padding: 5px 15px;
+        border: none !important;
+    }
+
+    .agent-section2 .form-header h1 {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+
+    .agent-section2 .col-xs-3 {
+        flex: 1 1 48%;
+        max-width: 48%;
+        margin-bottom: -4px;
+    }
+
+    .agent-section2 .form-control {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .agent-section2 #reset-agent-btn {
+        /* width: 170%; */
+        padding: 6px 4px !important;
+        margin-left: 5px !important;
+        margin-top: 0px !important;
+    }
+
+    .w-210 {
+        width: 203px !important;
+    }
+
+    .agent-section2 #apply-agent-btn {
+        /* width: 170%; */
+        padding: 6px 4px !important;
+        margin-left: -1px !important;
+        margin-top: 0px !important;
+    }
+
+    .agent-section2 button.btn.btn-danger {
+        padding: 5px;
+        position: relative;
+    }
+
+    .agent-section2 .table>tbody>tr>td {
+        padding: 3px !important;
+        font-size: 10px !important;
+    }
+
+    .agent-section3 .w-11 {
+        width: 24.666667%;
+
+    }
+
+    .cancellation-section #cnl-booking {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 16px; */
+    }
+
+    .cancellation-section .form-header h1 {
+        font-size: 14px;
+    }
+
+    .cancellation-section .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .cancellation-section2 .label {
+        font-size: 12px !important;
+        color: #fff !important;
+        position: relative;
+        /* top: 10px; */
+    }
+
+    .cancellation-section2 .table>thead>tr>th,
+    .table>tbody>tr>th,
+    .table>tfoot>tr>th,
+    .table>thead>tr>td,
+    .table>tbody>tr>td,
+    .table>tfoot>tr>td {
+        padding: 1.3px;
+        font-size: 9px;
+    }
+
+    .agent-section2 .col-xs-3 {
+        min-width: 196px !important;
+    }
+
+    .agent-section2 .mr-5 {
+        margin-right: 5px !important;
+    }
+
+    .agent-section2 .form-label {
+        font-size: 8px !important;
+    }
+
+    .bulk-room-activity .action-btn {
+        margin-left: -19px !important;
+    }
+
+    form.navbar-form.navbar-left input.form-control {
+        height: 34;
+        width: 165px !important;
+        font-size: 13px;
+    }
+
+    .page-heading {
+        margin-top: 30px;
+    }
+
+    .hotel-mydasboard-section .page-heading {
+        margin-top: -5px !important;
+
+    }
+
+    .hotel-mydasboard-section {
+        margin-right: 20px !important;
+
+    }
+
+    .tiles-number {
+        font-size: 21px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 {
+        width: 31% !important;
+        padding: 10px;
+        padding-top: 0px !important;
+        margin-left: 0px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms {
+        margin-left: 1px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-10 {
+        margin-left: 7px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .card {
+        width: 256px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-7-2 {
+        margin-left: 0px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-1 {
+        margin-left: 6px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 .ms-10-2 {
+        margin-left: 12px !important;
+    }
+
+    .row.hotel-mydashboard-section3 {
+        margin-left: 6px !important;
+        /* margin-top: 0 !important; */
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card-ms-5 {
+        margin-left: -2px !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card-ms-11 {
+        margin-left: -1px !important;
+    }
+
+    .row.graph-card-section {
+        margin: 15px 8px !important;
+    }
+
+    .ms-7 {
+        margin-left: -5px !important;
+    }
+
+    .ms {
+        margin-left: 3px !important;
+    }
+
+    .hotel-mydashboard-section2 .col-lg-2 #col-3 #col-6 {
+        height: 225px;
+    }
+
+    .hotel-mydashboard-section3 {
+        margin-top: 9px !important;
+        margin-right: 3px !important;
+        margin-left: -1px !important;
+        padding: 0 !important;
+    }
+
+    .hotel-mydashboard-section3 .col-lg-4 .card {
+        width: 256px !important;
+    }
+
+    .graph-card-section .card {
+        width: 783px !important;
+        margin-left: -2px;
+    }
+
+    .graph-card-section .card .card-body {
+        height: 229px !important;
+    }
+
+    .graph-card {
+        margin-left: -2px;
+    }
+
+    .tiles-number {
+        font-size: 19px !important;
+    }
+
+    .panel-heading-font .panel-title {
+        font-size: 15px !important;
+        line-height: 17px;
+    }
+
+    .room-type {
+        height: 20%;
+        padding: 30px 30px;
+    }
+
+    .hotel-mydashboard-section2 {
+        margin-left: -1px !important;
+        margin-right: 0px !important;
+        margin-top: -15px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 {
+        height: 280px !important;
+        width: 262px !important;
+    }
+
+    .hotel-mydasboard-section .col-lg-4 .label {
+        color: #000 !important;
+        font-size: 8px !important;
+    }
+
+    .hotel-task-log-section .the-box {
+        margin-right: 25px;
+    }
+
+    .hotel-task-log-section .filter-container form .col-lg-2 {
+        width: 20%;
+        display: inline-block;
+        margin-bottom: 0;
+        padding: 0 5px;
+    }
+
+    .hotel-task-log-section .col-lg-2 .filter-action-btn1 {
+        width: auto;
+        margin-top: 0;
+        margin-left: -10px !important;
+        margin-right: 12px;
+    }
+
+    .hotel-task-log-section .col-lg-2 .filter-action-btn2 {
+        margin-left: 8px;
+        position: absolute;
+        padding: 4px 10px !important;
+        font-size: 13px;
+    }
+
+    .hotel-task-log-section .filter-action-btn2 {
+        padding: 4px 10px !important;
+    }
+
+    .hotel-task-log-section .table {
+        font-size: 14px;
+    }
+
+    .hotel-task-log-section .pagination-container ul.pagination {
+        font-size: 10px;
+    }
+
+    .set-room-type {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px 0px;
+    }
+
+    .set-room-type .col-xs-6 {
+        padding: 0px 0px !important;
+    }
+
+    .set-room-type .col-xs-6 a {
+        margin: 0px;
+        padding: 0px;
+        font-size: 14px;
+    }
+
+    #yearSelector {
+        width: 111px !important;
+        font-size: 13px !important;
+    }
+
+    .room-details-table td {
+        font-size: 12px;
+    }
+
+    .room-details-table th {
+        font-size: 12px;
+    }
+
+    .room-details-table .label {
+        font-size: 11px !important;
+    }
+
+    .bulk-room-activity {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0px 10px;
+    }
+
+    .bulk-room-activity .col-xs-2 {
+        width: 20%;
+        margin: 10px 0px !important;
+    }
+
+    .bulk-room-activity-rows .size-1of4 {
+        width: 33% !important;
+    }
+
+    .bulk-room-activity-rows .action-btn {
+        margin-bottom: -28px;
+    }
+
+    .view-bulk-room .bulk-room-table {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 0px 0px;
+    }
+
+    .bulk-room-activity .action-btn {
+        margin-left: -19px !important;
+    }
+
+    .set-room-box1 {
+        margin-right: 9px !important;
+    }
+
+    .set-room-box2 {
+        margin-right: 0px !important;
+        margin-left: -4px !important;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1079px) {
+    .cancellation-section h1.page-heading {
+        font-size: 16px;
+    }
+
+    .cancellation-section .btn-toolbar .btn-group input,
+    .cancellation-section .btn-toolbar .btn-group .btn {
+        font-size: 12px;
+        padding: 6px 12px;
+        color: white;
+    }
+
+    .cancellation-section table th,
+    .cancellation-section table td {
+        font-size: 11px;
+        padding: 6px 8px;
+
+    }
+
+    .cancellation-section .btn-toolbar {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+}
+
+/* For large screens: 1024px to 1200px */
+@media screen and (min-width: 1024px) and (max-width: 1079px) {
+    .cancellation-section2 h1.page-heading {
+        font-size: 16px;
+        margin-left: -11px;
+    }
+
+    .cancellation-section2 .btn-toolbar .btn-group input,
+    .cancellation-section2 .btn-toolbar .btn-group .btn {
+        font-size: 12px;
+        padding: 6px 12px;
+        color: white;
+
+    }
+
+    .cancellation-section2 table th,
+    .cancellation-section2 table td {
+        font-size: 11px;
+        padding: 6px 8px;
+    }
+
+    .cancellation-section2 .btn-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        align-items: center;
+        margin-left: -11px;
+    }
+}
+
+
+/* For large screens: 1024px to 1200px */
+@media screen and (min-width: 1024px) and (max-width: 1079px) {
+    .book-report-section h1.page-heading {
+        font-size: 16px;
+    }
+
+    .book-report-section .btn-toolbar .btn-group input,
+    .book-report-section .btn-toolbar .btn-group select,
+    .book-report-section .btn-toolbar .btn-group .btn {
+        font-size: 13px;
+        padding: 8px 12px;
+        height: 32px;
+    }
+
+    .book-report-section table th,
+    .book-report-section table td {
+        font-size: 11px;
+        padding: 6px 8px;
+    }
+
+    .book-report-section .btn-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        margin-left: -12px;
+    }
+}
+
+/*Ronit's css for responsive */
+@media screen and (max-width: 1024px) {
+    .hotellinkblocks {
+        width: 15.8% !important;
+        font-size: 10px !important;
+    }
+
+    .the-box {
+        margin-right: 0 !important;
+    }
+
+    .page-content {
+        margin-left: 240px;
+    }
+
+    .cal-month {
+        margin-left: 0 !important;
+    }
+
+    #yearSelector {
+        margin-left: -20px !important;
+    }
+
+    .ms-20 {
+        margin-left: 20px;
+    }
+
+    .fs-12 {
+        font-size: 12.4px;
+    }
+
+    /* select.form-control.chosen-select {
+    width: 155px !important;
+} */
+    .book-div {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .ms-0 {
+        margin-left: 0 !important;
+    }
+
+    .month-list {
+        margin-left: 0 !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .book-div {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .ms-0 {
+        margin-left: 0 !important;
+    }
+
+    .bookmap-section #yearSelector {
+        margin-left: 0 !important;
+    }
+
+    #room-type-jump {
+        height: 19px !important;
+    }
+
+    a#scrollBotton {
+        font-size: 7.6px !important;
+        justify-content: center;
+    }
+
+    .bookmap-section #room-type-jump {
+        padding: 0 !important;
+    }
+}

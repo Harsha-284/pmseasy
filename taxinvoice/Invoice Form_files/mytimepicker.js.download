@@ -1,0 +1,160 @@
+$(document).ready(function(){
+	var hrs		= Array();
+	var mins	= Array();
+	var apm		= Array();
+	var flag1	= 0;
+	
+	$(".mtp").each(function(index){
+		hrs[index]	= "12";
+		mins[index] = "00";
+		apm[index]	= "PM";
+		
+		var pickerBody = '<div class="hours" pickerid='+index+'>';
+		pickerBody += '<div class="time_width hours_button_back"><label>Hours (HH)</label>';
+		
+		for(i=0; i<12; i++)
+		{
+			t = i<9?"0"+(i+1):(i+1);
+			pickerBody += '<button type="button" class="hours_number" hrid='+index+'_'+i+' pickerid='+index+'>'+t+'</button>';
+		}
+		
+		pickerBody += '</div><div class="time_width minute_button_back"><label>Minutes (MM)</label>';
+		
+		for(i=0; i<4; i++)
+		{
+			t = i?i*15:"00";
+			pickerBody += '<button type="button" class="minutes_number" minid='+index+'_'+i+' pickerid='+index+'>'+t+'</button>';
+		}
+		
+		pickerBody += '</div><div class="time_width ap_button_back"><label>AM/PM</label>';
+		pickerBody += '<button type="button" class="ampm" aid='+index+'_AM'+' pickerid='+index+'>AM</button>';
+		pickerBody += '<button type="button" class="ampm" aid='+index+'_PM'+' pickerid='+index+'>PM</button>';
+		pickerBody += '</div></div>';
+		
+		$(".mtp")[index].innerHTML = $(".mtp")[index].innerHTML + pickerBody;
+		
+		$(this).attr("pickerid",index);
+		$(this).children("input").attr("pickerid",index);
+		
+		inputtime = $("input[pickerid="+index+"]").val();
+		
+		$(".mytimepicker").attr('autocomplete','off');
+		
+		if(inputtime!="")
+		{
+			temp= inputtime.split(" ");
+			apm[index]	= temp[1];
+
+			temp= temp[0].split(":");
+			hrs[index]	= temp[0];
+			mins[index] = temp[1];
+			
+			setTime(index,hrs[index],mins[index],apm[index]);
+		}
+	});
+	
+	function setTime(pid,h,m,a)
+	{
+		$("input[pickerid="+pid+"]").val(h+":"+m+" "+a);
+		
+		$(".hours_number[pickerid="+pid+"]").each(function(index){
+			if($(".hours_number[hrid="+pid+"_"+index+"]").html()==h)
+				$(".hours_number[hrid="+pid+"_"+index+"]").addClass("active_button");
+			else
+				$(".hours_number[hrid="+pid+"_"+index+"]").removeClass("active_button");
+		});
+		
+		$(".minutes_number[pickerid="+pid+"]").each(function(index){
+			if($(".minutes_number[minid="+pid+"_"+index+"]").html()==m)
+				$(".minutes_number[minid="+pid+"_"+index+"]").addClass("active_button");
+			else
+				$(".minutes_number[minid="+pid+"_"+index+"]").removeClass("active_button");
+		});
+		
+		if(a == "AM")
+		{
+			$(".ampm[aid="+pid+"_AM]").addClass("active_button");
+			$(".ampm[aid="+pid+"_PM]").removeClass("active_button");
+		}
+		else
+		{
+			$(".ampm[aid="+pid+"_PM]").addClass("active_button");
+			$(".ampm[aid="+pid+"_AM]").removeClass("active_button");
+		}
+		
+		if($("input[pickerid="+pid+"]").attr("onchange"))
+			getFunctions($("input[pickerid="+pid+"]").attr("onchange"));
+	}
+	
+	function getFunctions(str)
+	{
+		var str1 = str.trim();
+		
+		if(str1!="")
+		{
+			var functions = str1.split(";");
+			var fcount = functions.length;
+			
+			for(i=0; i<fcount; i++)
+			{
+				if(functions[i].includes("()"))
+				{
+					fname = functions[i].replace("()","").trim();
+					window[fname]("");
+				}
+				else if(functions[i]!="")
+				{
+					temp	= functions[i].split("(");
+					fname	= temp[0].trim();
+					params	= temp[1].replace(")","");
+					
+					window[fname](params);
+				}
+			}
+		}
+	}
+	
+	function closeAll()
+	{
+		if(flag1==0)
+			$(".hours").hide();
+		
+		flag1 = 0;
+	}
+	
+	$(".mytimepicker").focus(function(){
+		pickerid = $(this).attr("pickerid");
+		$(".hours[pickerid="+pickerid+"]").show();
+		flag1 = 1;
+	});
+	
+	$(".hours_number").click(function(){
+		temp = $(this).attr("pickerid");
+		hrs[temp] = $(this).html();
+		setTime(temp,hrs[temp],mins[temp],apm[temp]);
+		flag1 = 1;
+	});
+	
+	$(".minutes_number").click(function(){
+		temp = $(this).attr("pickerid");
+		mins[temp] = $(this).html();
+		setTime(temp,hrs[temp],mins[temp],apm[temp]);
+		flag1 = 1;
+	});
+	
+	$(".ampm").click(function(){
+		temp = $(this).attr("pickerid");
+		apm[temp] = $(this).html();
+		setTime(temp,hrs[temp],mins[temp],apm[temp]);
+		flag1 = 1;
+	});
+	
+	$(".close-btn").click(function(){
+		pkrid = $(this).attr("pickerid");
+		$(".hours[pickerid="+pkrid+"]").hide();
+	});
+	
+	$(document).click(function(){
+		closeAll();
+	});
+});

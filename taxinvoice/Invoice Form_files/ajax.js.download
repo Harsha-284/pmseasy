@@ -1,0 +1,1101 @@
+function get_amenities(type)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = ajaxRequest.responseText;
+			document.getElementById("amenities").innerHTML = str;
+		}
+	}
+	
+	ajaxRequest.open("GET","ajax.php?Pg=get_amenities&type="+type, true);
+	ajaxRequest.send(null);
+}
+
+function get_locations(city)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = ajaxRequest.responseText;
+			document.getElementById("location").innerHTML = str;
+		}
+	}
+	
+	ajaxRequest.open("GET","ajax.php?Pg=get_locations&city="+city, true);
+	ajaxRequest.send(null);
+}
+
+function edit_banquet(banquet)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = ajaxRequest.responseText;
+			window.location = "main.php?Pg=banquet_details";
+		}
+	}
+	
+	ajaxRequest.open("GET","ajax.php?Pg=edit_banquet&banquet="+banquet, true);
+	ajaxRequest.send(null);
+}
+
+function edit_hall(hall)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = ajaxRequest.responseText;
+			window.location = "main.php?Pg=hall_details";
+		}
+	}
+	
+	ajaxRequest.open("GET","ajax.php?Pg=edit_hall&hall="+hall, true);
+	ajaxRequest.send(null);
+}
+
+function deactivate_banquet(banquet)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	/*
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = ajaxRequest.responseText;
+		}
+	}
+	*/
+	ajaxRequest.open("GET","ajax.php?Pg=deactivate_banquet&banquet="+banquet, true);
+	ajaxRequest.send(null);
+}
+
+function deactivate_hall(hall)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	/*
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = ajaxRequest.responseText;
+		}
+	}
+	*/
+	ajaxRequest.open("GET","ajax.php?Pg=deactivate_hall&hall="+hall, true);
+	ajaxRequest.send(null);
+}
+
+function get_enquiry_details(eid)
+{
+	if(eid==0 || eid=="")
+	{
+		document.getElementById("fullname").value = "";
+		document.getElementById("address").value = "";
+		document.getElementById("email").value = "";
+		document.getElementById("contact").value = "";
+		document.getElementById("event").value = "";
+		document.getElementById("doe").value = "";
+		document.getElementById("evet_start_time").value = "";
+		document.getElementById("evet_end_time").value = "";
+		document.getElementById("capacity").value = "";
+		document.getElementById("halls").value = "";
+		
+		document.getElementById("fullname").disabled		= false;
+		document.getElementById("address").disabled			= false;
+		document.getElementById("email").disabled			= false;
+		document.getElementById("contact").disabled			= false;
+		document.getElementById("event").disabled			= false;
+		document.getElementById("doe").disabled				= false;
+		document.getElementById("evet_start_time").disabled = false;
+		document.getElementById("evet_end_time").disabled	= false;
+		document.getElementById("capacity").disabled		= false;
+		document.getElementById("halls").disabled			= false;
+	}
+	else
+	{
+		var ajaxRequest;
+		
+		try
+		{
+			ajaxRequest = new XMLHttpRequest();
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			}
+			catch (e)
+			{
+				try
+				{
+					ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				catch (e)
+				{
+					alert("Your browser broke!");
+					return false;
+				}
+			}
+		}
+		
+		ajaxRequest.onreadystatechange = function()
+		{
+			if(ajaxRequest.readyState == 4)
+			{
+				var response = JSON.parse(ajaxRequest.responseText);
+				//console.log(response);
+				document.getElementById("fullname").value		= response.fullname;
+				document.getElementById("address").value		= response.address;
+				document.getElementById("email").value			= response.email;
+				document.getElementById("contact").value		= response.contact;
+				document.getElementById("event").value			= response.eventid;
+				document.getElementById("doe").value			= response.event_date;
+				document.getElementById("evet_start_time").value= response.event_time_from;
+				document.getElementById("evet_end_time").value	= response.event_time_to;
+				document.getElementById("capacity").value		= response.capacity;
+				document.getElementById("halls").value			= response.halls;
+				
+				document.getElementById("fullname").disabled		= true;
+				document.getElementById("address").disabled			= true;
+				document.getElementById("email").disabled			= true;
+				document.getElementById("contact").disabled			= true;
+				document.getElementById("event").disabled			= true;
+				document.getElementById("doe").disabled				= true;
+				document.getElementById("evet_start_time").disabled = true;
+				document.getElementById("evet_end_time").disabled	= true;
+				document.getElementById("capacity").disabled		= true;
+				document.getElementById("halls").disabled			= true;
+			}
+		}
+		
+		ajaxRequest.open("GET",base_url+"erp/ajax.php?Pg=get_enquiry_details&id="+eid, true);
+		ajaxRequest.send(null);
+	}
+}
+
+function get_client_details(contact)
+{
+	if(contact=="" || contact=="0")
+	{
+		document.getElementById("client").value		= "";
+		document.getElementById("address").value	= "";
+		document.getElementById("email").value		= "";
+		document.getElementById("contact").value	= "";
+		document.getElementById("gstin").value		= "";
+		//document.getElementById("clientstate").value= "";
+		
+		/*
+		document.getElementById("client").readOnly		= false;
+		document.getElementById("address").readOnly		= false;
+		document.getElementById("email").readOnly		= false;
+		document.getElementById("contact").readOnly		= false;
+		document.getElementById("gstin").readOnly		= false;
+		document.getElementById("clientstate").readOnly	= false;
+		*/
+	}
+	else
+	{
+		var ajaxRequest;
+		
+		try
+		{
+			ajaxRequest = new XMLHttpRequest();
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			}
+			catch (e)
+			{
+				try
+				{
+					ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				catch (e)
+				{
+					alert("Your browser broke!");
+					return false;
+				}
+			}
+		}
+		
+		ajaxRequest.onreadystatechange = function()
+		{
+			if(ajaxRequest.readyState == 4)
+			{
+				var response = JSON.parse(ajaxRequest.responseText);
+				//console.log(response);
+				document.getElementById("client").value	= response.fullname;
+				document.getElementById("address").value= response.address;
+				document.getElementById("email").value	= response.email;
+				document.getElementById("contact").value= response.contact;
+				document.getElementById("gstin").value	= response.gstin;
+				
+				if(response.state)
+					document.getElementById("clientstate").value = response.state;
+				else
+					document.getElementById("clientstate").value = response.banquet_state;
+				
+				/*
+				document.getElementById("client").readOnly		= true;
+				document.getElementById("address").readOnly		= true;
+				document.getElementById("email").readOnly		= true;
+				document.getElementById("contact").readOnly		= true;
+				document.getElementById("gstin").readOnly		= true;
+				document.getElementById("clientstate").readOnly	= true;
+				*/
+			}
+		}
+		
+		ajaxRequest.open("GET",base_url+"erp/ajax.php?Pg=get_client_details&contact="+contact, true);
+		ajaxRequest.send(null);
+	}
+}
+
+function get_lb_enquiry_details(contact)
+{
+	if(contact == 0)
+	{
+		document.getElementById("client").value	= "";
+		document.getElementById("address").value= "";
+		document.getElementById("email").value	= "";
+		document.getElementById("contact").value= "";
+	}
+	else
+	{
+		var ajaxRequest;
+		
+		try
+		{
+			ajaxRequest = new XMLHttpRequest();
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			}
+			catch (e)
+			{
+				try
+				{
+					ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				catch (e)
+				{
+					alert("Your browser broke!");
+					return false;
+				}
+			}
+		}
+		
+		ajaxRequest.onreadystatechange = function()
+		{
+			if(ajaxRequest.readyState == 4)
+			{
+				var response = JSON.parse(ajaxRequest.responseText);
+				//console.log(response);
+				document.getElementById("client").value	= response.fullname;
+				document.getElementById("address").value= response.address;
+				document.getElementById("email").value	= response.email;
+				document.getElementById("contact").value= response.contact;
+			}
+		}
+		
+		ajaxRequest.open("GET",base_url+"erp/ajax.php?Pg=get_enquiry_details&contact="+contact, true);
+		ajaxRequest.send(null);
+	}
+}
+
+function disable_ad(id)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	/*
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = ajaxRequest.responseText;
+		}
+	}
+	*/
+	ajaxRequest.open("GET","ajax.php?Pg=disable_ad&id="+id, true);
+	ajaxRequest.send(null);
+}
+
+function send_email_otp()
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = JSON.parse(ajaxRequest.responseText);
+			
+			if(str.otp_sent == "1")
+			{
+				document.getElementById("sent").style.display = "block";
+				document.getElementById("alreadyverified").style.display = "none";
+			}
+			else
+			{
+				document.getElementById("sent").style.display = "none";
+				document.getElementById("alreadyverified").style.display = "block";
+			}
+		}
+	}
+	
+	ajaxRequest.open("GET",base_url+"services/services.php?Pg=send_email_otp", true);
+	ajaxRequest.send(null);
+}
+
+function send_booking_invoice(bkid,email,contact)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = JSON.parse(ajaxRequest.responseText);
+			
+			if(str.email_sent == "1" && str.sms_sent == "1")
+				document.getElementById("msg_box").innerHTML = "Email & SMS are sent!";
+			else if(str.email_sent == "1")
+				document.getElementById("msg_box").innerHTML = "Email has been sent!";
+			else if(str.sms_sent == "1")
+				document.getElementById("msg_box").innerHTML = "SMS has been sent!";
+			else
+				document.getElementById("msg_box").innerHTML = "There was a problem while sending this invoice.";
+		}
+	}
+	//console.log(email+" "+contact);
+	ajaxRequest.open("GET",base_url+"services/app_services.php?Pg=send_booking_invoice&bkid="+bkid+"&email="+email+"&contact="+contact, true);
+	ajaxRequest.send(null);
+}
+
+function send_booking_invoice_prof(bkid,email,contact)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = JSON.parse(ajaxRequest.responseText);
+			
+			if(str.email_sent == "1" && str.sms_sent == "1")
+				document.getElementById("msg_box_prof").innerHTML = "Email & SMS are sent!";
+			else if(str.email_sent == "1")
+				document.getElementById("msg_box_prof").innerHTML = "Email has been sent!";
+			else if(str.sms_sent == "1")
+				document.getElementById("msg_box_prof").innerHTML = "SMS has been sent!";
+			else
+				document.getElementById("msg_box_prof").innerHTML = "There was a problem while sending this invoice.";
+		}
+	}
+	//console.log(email+" "+contact);
+	ajaxRequest.open("GET",base_url+"services/app_services.php?Pg=send_booking_invoice_prof&bkid="+bkid+"&email="+email+"&contact="+contact, true);
+	ajaxRequest.send(null);
+}
+
+function send_quotation(qid,revid,email,contact)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var str = JSON.parse(ajaxRequest.responseText);
+			
+			if(str.email_sent == "1" && str.sms_sent == "1")
+				document.getElementById("msg_box").innerHTML = "Email & SMS are sent!";
+			else if(str.email_sent == "1")
+				document.getElementById("msg_box").innerHTML = "Email has been sent!";
+			else if(str.sms_sent == "1")
+				document.getElementById("msg_box").innerHTML = "SMS has been sent!";
+			else
+				document.getElementById("msg_box").innerHTML = "There was a problem while sending this invoice.";
+		}
+	}
+	//console.log(email+" "+contact);
+	ajaxRequest.open("GET",base_url+"services/api_services.php?Pg=send_quotation&quotationid="+qid+"&revid="+revid+"&email="+email+"&contact="+contact,true);
+	ajaxRequest.send(null);
+}
+
+function get_food_package_menu(fpid)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			var data = JSON.parse(ajaxRequest.responseText);
+			document.getElementById("food_menu_container-items").innerHTML = data.html;
+			
+			itemList = flist = [];
+			
+			data.foodList.forEach(function(v,i){
+				itemList.push(v.fi);
+				flist.push(v);
+			});
+		}
+	}
+	
+	if(fpid!="{}")
+	{
+		fpid = JSON.parse(fpid);
+		ajaxRequest.open("GET",base_url+"erp/ajax.php?Pg=get_food_package_menu&fpid="+fpid.id, true);
+		ajaxRequest.send(null);
+	}
+}
+
+// function myemail()
+// {
+// 	alert("hi");
+// }
+
+function preselected_food_package_menu(fpid,bid,lbid)
+{
+	var ajaxRequest;
+	
+	try
+	{
+		ajaxRequest = new XMLHttpRequest();
+	}
+	catch (e)
+	{
+		try
+		{
+			ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch (e)
+		{
+			try
+			{
+				ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch (e)
+			{
+				alert("Your browser broke!");
+				return false;
+			}
+		}
+	}
+	
+	ajaxRequest.onreadystatechange = function()
+	{
+		if(ajaxRequest.readyState == 4)
+		{
+			//console.log("food_menu_container-items");
+			var data = JSON.parse(ajaxRequest.responseText);
+			document.getElementById("food_menu_container-items"+lbid).innerHTML = data.html;
+			//console.log(data.foodList);
+			itemList = flist = [];
+			
+			data.foodList.forEach(function(v,i){
+				itemList.push(v.fi);
+				flist.push(v);
+			});
+		}
+	}
+	
+	ajaxRequest.open("GET",base_url+"erp/ajax.php?Pg=preselected_food_package_menu&fpid="+fpid+"&bid="+bid, true);
+	ajaxRequest.send(null);
+}
+
+function myemail(mailto,mailsubject,maildata,mailcc,mailbcc,mailfrom,mailattachment)
+{
+	$.ajax({
+		type	: "POST",
+		url		: base_url+"erp/ajax.php?Pg=send_email",
+		async 	: true,
+		data	: {
+					to 			: mailto,
+					cc 			: mailcc,
+					bcc 		: mailbcc,
+					subject 	: mailsubject,
+					data 		: maildata,
+					from 		: mailfrom,
+					attachment 	: mailattachment
+				  },
+	});
+}
+
+function add_new_fi(header,item)
+{
+	$.ajax({
+		type	: "POST",
+		url		: base_url+"erp/ajax.php?Pg=add_new_fi",
+		data	: {
+					fheader	: header,
+					fitem	: item
+				  }
+	})
+}
+
+function toggle_sms(module)
+{
+	$.ajax({
+		type	: "POST",
+		url		: base_url+"erp/ajax.php?Pg=toggle_sms",
+		data	: {
+					"module" : module
+				  }
+	})
+}
+
+function checkAvailability(bookingid)
+{
+	var halls			= document.getElementById("halls");
+	var slot			= document.getElementById("slot");
+	var eventStartDate	= document.getElementById("eventStartDate");
+	var eventEndDate	= document.getElementById("eventEndDate");
+	var startTime		= document.getElementById("start_time");
+	var endTime			= document.getElementById("end_time");
+	
+	var temp = eventStartDate.value.split("-");
+	startDateTime = new Date(temp[2]+"/"+temp[1]+"/"+temp[0]+" "+startTime.value);
+	
+	var temp = eventEndDate.value.split("-");
+	endDateTime = new Date(temp[2]+"/"+temp[1]+"/"+temp[0]+" "+endTime.value);
+	console.log(startDateTime + " || " + endDateTime);
+	if(startDateTime > endDateTime)
+	{
+		validDateRange = false;
+		showMessage("Incorrect selection - Please select appropriate date/timesss.","#E9573F");
+		document.getElementById("error_message").innerHTML = "Incorrect selection - Please select appropriate date/time.";
+		
+		$("#book_now").prop("disabled",true);
+		$("#booking_avalilable").val(0);
+		$("#error_message").show();
+	}
+	else
+	{
+		validDateRange = true;
+		document.getElementById("error_message").innerHTML = "&nbsp;";
+	}
+	
+	if(halls.value!="" && eventStartDate.value!="" && eventEndDate.value!="" && validDateRange == true)
+	{
+		var hallsJson = JSON.parse(halls.value);
+
+		$.ajax({
+			type	: "POST",
+			url		: base_url+"erp/ajax.php?Pg=checkAvailability",
+			data	: {
+						"halls"		: hallsJson,
+						"slot"		: slot.value,
+						"sdate"		: eventStartDate.value,
+						"edate"		: eventEndDate.value,
+						"stime"		: startTime.value,
+						"etime"		: endTime.value,
+						"bookingid" : bookingid
+					  },
+			success : function(response){
+							data = JSON.parse(response);
+							
+							if(data.available == 1)
+							{
+								document.getElementById("book_now").disabled = false;
+								document.getElementById("booking_avalilable").value = 1;
+								//document.getElementById("error_message").style.display = "none";
+								document.getElementById("error_message").innerHTML = "&nbsp;";
+							}
+							else
+							{
+								document.getElementById("book_now").disabled = true;
+								document.getElementById("booking_avalilable").value = 0;
+								//document.getElementById("error_message").style.display = "block";
+								document.getElementById("error_message").innerHTML = "Booking is not available for chosen date,time and banquets";
+								showMessage("Booking is not available for chosen date,time and banquets","#E9573F");
+							}
+						}
+		});
+	}
+}
+
+function checkAvailabilityQuot(bookingid=0)
+{
+	var halls			= document.getElementById("halls");
+	var slot			= document.getElementById("slot");
+	var eventStartDate	= document.getElementById("eventStartDate");
+	var eventEndDate	= document.getElementById("eventEndDate");
+	var startTime		= document.getElementById("start_time");
+	var endTime			= document.getElementById("end_time");
+	
+	var temp = eventStartDate.value.split("-");
+	startDateTime = new Date(temp[2]+"/"+temp[1]+"/"+temp[0]+" "+startTime.value);
+	
+	var temp = eventEndDate.value.split("-");
+	endDateTime = new Date(temp[2]+"/"+temp[1]+"/"+temp[0]+" "+endTime.value);
+	
+	if(startDateTime > endDateTime)
+	{
+		validDateRange = false;
+		showMessage("Incorrect selection - Please select appropriate date/time.","#E9573F");
+		document.getElementById("error_message").innerHTML = "Incorrect selection - Please select appropriate date/time.";
+		
+		$("#book_now").prop("disabled",true);
+		$("#booking_avalilable").val(0);
+		$("#error_message").show();
+	}
+	else
+	{
+		validDateRange = true;
+		document.getElementById("error_message").innerHTML = "&nbsp;";
+
+		$("#book_now").prop("disabled",false);
+		$("#error_message").hide();
+	}
+	//console.log("KKKK "+startTime);
+	if(halls.value!="" && eventStartDate.value!="" && eventEndDate.value!="" && startTime.value!="" && endTime.value!="" && validDateRange == true)
+	{
+		var hallsJson = JSON.parse(halls.value);
+
+		$.ajax({
+			type	: "POST",
+			url		: base_url+"erp/ajax.php?Pg=checkAvailability",
+			data	: {
+						"halls"		: hallsJson,
+						"slot"		: slot.value,
+						"sdate"		: eventStartDate.value,
+						"edate"		: eventEndDate.value,
+						"stime"		: startTime.value,
+						"etime"		: endTime.value,
+						"bookingid" : bookingid
+					  },
+			success : function(response){
+							data = JSON.parse(response);
+							
+							if(data.available == 1)
+							{
+								document.getElementById("booking_avalilable").value = 1;
+								//document.getElementById("error_message").style.display = "none";
+								document.getElementById("error_message").innerHTML = "&nbsp;";
+							}
+							else
+							{
+								document.getElementById("booking_avalilable").value = 0;
+								//document.getElementById("error_message").style.display = "block";
+								document.getElementById("error_message").innerHTML = "Warning: Booking with above combination is already present.";
+								showMessage("Booking with above combination is already present","#E9573F");
+							}
+						}
+		});
+	}
+}
+
+function mysms(contact,message,template)
+{
+	$.ajax({
+	type	: "POST",
+	url		: base_url+"erp/ajax.php?Pg=mysms",
+	data	: {
+				"contact" : contact,
+				"message" : message,
+				"template": template
+			  }
+	})
+}
+
+function testJdEmailConnection()
+{
+	//$("#testjdbtn").prop("disabled",true);
+	$("#btngroup").addClass("didabled-vrc2");
+	$("#testjdbtn").html("Please wait...");
+	//$("#testjdbtn").css({"background-image":"linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent)","background-size":"200% 200%","animation":"barberpole 10s linear infinite"});
+	
+	$.ajax({
+		type	: "POST",
+		url		: base_url+"erp/ajax.php?Pg=testJdEmailConnection",
+		data	: {
+					serviceprovider : $("input[type=radio]:checked").val(),
+					email			: $("input[type=email][name=email]").val(),
+					password		: $("input[type=password][name=password]").val(),
+					protocol		: $("input[type=radio][name=protocol]:checked").val(),
+					incomingserver	: $("input[name=incomingserver]").val(),
+					port			: $("input[name=port]").val()
+				  },
+		success : function(result){
+					$("#btngroup").removeClass("didabled-vrc2");
+					$("#testjdbtn").html("Activate JD Synch");
+					if(result == 1)
+					{
+						//$("#testjdbtn").hide();
+						//$("#savejdbtn").show();
+						showMessage("Connection was successful.","#8CC152");
+					}
+					else
+					{
+						
+						//$("#testjdbtn").prop("disabled",false);
+						//$("#testjdbtn").css({"background-image":"","background-size":"","animation":""});
+						showMessage("Connection was failed.","#E9573F");
+					}
+				  }
+	});
+}
+
+function listing_on_bandobash()
+{
+	$.ajax({
+			type	: "POST",
+			url		: base_url+"erp/ajax.php?Pg=listing_on_bandobash"
+	}).done(function(response){
+		if(response == "1")
+		{
+			toast("Banquet shotlisted successfully",'error',1000000);
+
+		}
+		else if(response == "2")
+		{
+			toast("Banquet cannot  shotlisted",'error',1000000);
+		}
+	});
+}
+
+function personalized_enquiries()
+{
+	$.ajax({
+		type	: "POST",
+		url		: base_url+"erp/ajax.php?Pg=personalized_enquiries",
+		success	: function(response){
+					if(response==1)
+						showMessage("The enquiries are made private to sub users.","#8CC152");
+					else
+						showMessage("The enquiries are open to all the users.","#E9573F");
+				}
+	});
+}
+
+function addOtherServive()
+{
+	var service = $("#service").val();
+
+	$.ajax({
+		"type"		: "POST",
+		"url"		: base_url+"erp/ajax.php?Pg=addOtherServive",
+		"data"		: { "service" : service },
+		"success"	: function(response){
+						if(response == 1)
+						{
+							var key = 0;
+
+							while($("input[type=checkbox][service="+key+"]").length)
+								key++;
+							
+							var str = '<div class="col-xs-12"><input type="checkbox" name="oil[]" value="'+service+'" service="'+key+'" onChange="changeOilStatus('+key+')">&nbsp;'+service+'<input type="text" name="oil_desc[]" service="'+key+'" disabled></div>';
+							$("#oil").append(str);
+							$("#service").val("");
+						}
+					  }
+	});
+}

@@ -1,0 +1,310 @@
+<?php include 'conn.php';
+
+include 'udf.php';
+
+
+
+if (!isset($_SESSION['groupid'])) { ?>
+
+	<script type="text/javascript">
+		window.parent.location = "login.php";
+	</script>
+
+<?php
+
+} else if (page_access("promocodes")) {
+	$date = $_GET['date'];
+	$roomname = $_GET['roomname'];
+
+?>
+
+
+	<!DOCTYPE html>
+
+	<html lang="en">
+
+	<head>
+		<script src="js/bookings.js?v=<?= time() ?>"></script>
+		<?php include("head.php"); ?>
+
+
+	</head>
+
+	<style>
+		a#booking-edit-add:hover,
+		a#booking-edit-add:focus {
+			color: #fff !important;
+		}
+
+		label {
+			margin-bottom: 0px;
+			font-weight: 500;
+			font-size: 14px;
+			color: black;
+			display: block;
+		}
+
+		/* Hide the default calendar icon in Chrome, Safari, and Edge */
+		input[type="date"]::-webkit-calendar-picker-indicator {
+			position: absolute;
+			top: 15;
+			left: -5;
+			color: red;
+			width: 18px;
+			height: 18px;
+		}
+
+		/* Change color of the calendar icon */
+		.input-group-text .fa-calendar {
+			color: red;
+			/* Change icon color to red */
+		}
+
+		/* Optional: Adjust size if needed */
+		.input-group-text .fa-calendar {
+			font-size: 18px;
+			/* Adjust icon size */
+		}
+
+		.fa {
+			width: 18px;
+			height: 18px;
+		}
+
+		/* Hide arrows for Chrome, Safari, Edge, and Opera */
+		input[type="number"]::-webkit-inner-spin-button,
+		input[type="number"]::-webkit-outer-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		/* Hide arrows for Firefox */
+		input[type="number"] {
+			-moz-appearance: textfield;
+		}
+	</style>
+
+
+	<body style="padding-top:0px;">
+
+		<!-- 1st modal for checking availability-->
+		<div id="1stModaldata" class="modal-body check-room-availibility" style="overflow-y: auto; width:100%; height: 100%">
+			<div class="olddetails">
+				<h1 style="font-weight:bold" class="page-heading">Check Room Availibility</h1>
+			</div>
+			<form class="row g-3 needs-validation" style="display: flex; flex-wrap: wrap; margin: 0px ; align-items: center; height: 85px; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; ">
+				<div class="col-md-2" style="flex: 1; border-right: 1px solid #dde2e8;  padding-right: 0px; padding-left: 7px;">
+					<label style="padding-left: 15px; " for="validationCustom01" class="form-label">Check In</label>
+					<input type="date" name="checkinDateBooking" class="form-control" id="validationCustom01" style="padding-left: 15px; border: none; width: 115px;" required>
+				</div>
+				<div class="col-md-2" style= "min-width: 50px; margin-right: 20px; border-right: 1px solid #dde2e8;  padding-right: 0px; padding-left: 7px">
+					<label style="padding-left: 15px; " for="validationCustom02" class="form-label">Check Out</label>
+					<input type="date" name="checkoutDateBooking" class="form-control" id="validationCustom02" style="padding-left: 15px; border: none; width: 115px;" required>
+				</div>
+				<i class="fa fa-users"></i>
+				<div class="col-md-1" style="flex: 1; min-width: 50px; margin-right: 20px; border-right: 1px solid #dde2e8;  padding-right: 0px; padding-left: 7px">
+					<label for="validationCustom05" class="form-label">Adult</label>
+					<input type="number" name="adultBooking" onkeydown="return filterInput(event)" class="form-control" id="validationCustom05" value="1" style="width: 14px; display: inline; border: none; padding: 0px; " required>
+					<span>adult(s)</span>
+				</div>
+				<i class="fa fa-child"></i>
+				<div class="col-md-1" style="flex: 1; min-width: 50px; margin-right: 20px; border-right: 1px solid #dde2e8;  padding-right: 0px; padding-left: 7px">
+					<label for="validationCustom04" class="form-label">Child</label>
+					<input type="number" name="childBooking" onkeydown="return filterInput(event)" class="form-control" id="validationCustom04" value="0" style="width: 14px; display: inline;
+					border: none; padding: 0px; " required>
+					<span>child(s)</span>
+				</div>
+				<i class="fa fa-home"></i>
+				<div class="col-md-1" style="flex: 1; min-width: 50px; margin-right: 5px;  padding-right: 0px; padding-left: 7px">
+					<label for="validationCustom05" class="form-label">No. of rooms</label>
+					<input type="number" name="noOfRooms" onkeydown="return filterInput(event)" class="form-control" id="validationCustom05" value="1" style="width: 14px; display: inline;
+					border: none; padding: 0px; " required>
+					<span>room(s)</span>
+				</div>
+				<div class="col-md-1" style="min-width: 50px; margin-right: 0px;">
+					<a class="btn btn-primary" onClick="updateRoomsOnInputChange()">Search</a>
+				</div>
+
+			</form>
+			<div style="display:flex; flex-direction:row; height:360px; gap: 25px">
+				<div class="custom-scrollba" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; padding: 8px; min-width: 212px; max-width: 212px; margin-top: 15px; height: 394px; overflow-y: auto;">
+					<h5 class="booked-text-border" style="margin-left: 2px; border-left: 2px solid; padding: 0px 7px; font-size: 15px; color: black; border-color: #fb3c3c">Room Types</h5>
+					<?php
+					$result = $conn->query("select fulldaytariff,cmroomid,roomtype,id from roomtypes where hotel='$_SESSION[hotel]';");
+					$i = 0;
+					while ($row = $result->fetch_assoc()) {
+						$roomResult = execute("select count(*) totalrooms from roomtypes r left join roomnumbers rn on rn.roomtype=r.id where r.id=$row[id] and r.active=1 and (r.adults+r.extraallowed)>=1 and r.children>=0");
+						$i++;
+					?>
+						<div class="col-md-2" style="min-width: 100%; display: flex; flex-direction: row; padding: 0px; border-bottom: 1px dotted #dde2e8; margin-bottom: 10px; padding-bottom: 5px; height: 35px; ">
+							<input
+								style="height: 11px; margin-right: 1px; width: 11px;"
+								class="form-check-input"
+								type="checkbox"
+								value=""
+								id="flexCheckDefault-<?= $i ?>"
+								data-roomid="<?= $row['id'] ?>"
+								data-roomtype="<?= $row['roomtype'] ?>"
+								data-cmroomid="<?= $row['cmroomid'] ?>"
+								data-tariff="<?= $row['fulldaytariff'] ?>"
+								data-totalrooms="<?= $roomResult['totalrooms'] ?>"
+								aria-label="<?= $row['roomtype'] ?>"
+								onClick="search_bookings(<?= $row['id'] ?>,this,'<?= $row['roomtype'] ?>','<?= $row['cmroomid'] ?>','<?= $row['fulldaytariff'] ?>','<?= $roomResult['totalrooms'] ?>')">
+							<small class="form-check-label" for="flexCheckDefault-<?= $i ?>">
+								<?= $row['roomtype'] ?>(<a style="color: #656D78;" id="<?= "1stmodalAvailibility-" . $row['id']; ?>"></a>/ <?= $roomResult['totalrooms'] ?>)
+							</small>
+						</div>
+
+					<?php } ?>
+				</div>
+
+				<div class="room-cards" style="display: flex; flex-wrap: wrap; margin: 15px 0px 0px 0px; height: 200px; justify-content: center;">
+					<div id="cardsContainer" class="row" style="display: flex;flex-wrap: wrap;align-content: flex-start;">
+						<script>
+							document.addEventListener('DOMContentLoaded', function() {
+								let roomname = "<?= $roomname ?>";
+
+								var checkboxes = document.querySelectorAll('.form-check-input');
+								let roomid, roomtype, cmroomid, tariff, totalrooms, check_box
+								let status = 0
+
+								// Loop through the checkboxes
+								checkboxes.forEach(function(checkbox) {
+									// Get the aria-label of the checkbox
+									var ariaLabel = checkbox.getAttribute('aria-label');
+
+									// Compare the aria-label with the roomname
+									if (ariaLabel === roomname && roomname !== "") {
+										roomid = checkbox.getAttribute('data-roomid');
+										roomtype = checkbox.getAttribute('data-roomtype');
+										cmroomid = checkbox.getAttribute('data-cmroomid');
+										tariff = checkbox.getAttribute('data-tariff');
+										totalrooms = checkbox.getAttribute('data-totalrooms');
+										check_box = checkbox;
+
+										checkbox.checked = true;
+										status = 1
+									}
+								})
+								if (status === 1) {
+									intialRoomLoad(roomid, roomtype, cmroomid, tariff, totalrooms)
+									console.log(roomid, roomtype, cmroomid, tariff, totalrooms, check_box);
+
+								} else {
+									<?php
+									$result = $conn->query("select fulldaytariff,cmroomid,roomtype,id from roomtypes where hotel='$_SESSION[hotel]';");
+									$i = 0;
+									while ($row = $result->fetch_assoc()) {
+										$roomResult = execute("select count(*)totalrooms from roomtypes r left join roomnumbers rn on rn.roomtype=r.id where r.id=$row[id] and r.active=1 and (r.adults+r.extraallowed)>=1 and r.children>=0");
+										$i++;
+									?>
+										intialRoomLoad(
+											'<?= $row['id'] ?>',
+											'<?= $row['roomtype'] ?>',
+											'<?= $row['cmroomid'] ?>',
+											'<?= $row['fulldaytariff'] ?>',
+											'<?= $roomResult['totalrooms'] ?>'
+										);
+									<?php } ?>
+								}
+							});
+
+							function filterInput(e) {
+								// Disallow: 'e', 'E', '+', '-'
+								if (["e", "E", "+", "-"].includes(e.key)) {
+									e.preventDefault();
+									return false;
+								}
+							}
+						</script>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php include("js.php"); ?>
+
+		</div>
+		</div>
+		</div>
+		<script>
+			// Get the check-in and check-out input elements
+			const checkinDate = document.getElementById('validationCustom01');
+			const checkoutDate = document.getElementById('validationCustom02');
+
+			// Function to update checkout date based on check-in date
+			checkinDate.addEventListener('change', function() {
+				// Get the selected check-in date
+				let checkin = new Date(checkinDate.value);
+
+				// Increment the check-in date by one day for checkout date
+				checkin.setDate(checkin.getDate() + 1);
+
+				// Format the new checkout date in the same format as input (YYYY-MM-DD)
+				let nextDay = checkin.toISOString().split('T')[0];
+
+				// Set the checkout date to the next day
+				checkoutDate.value = nextDay;
+			});
+		</script>
+		<script>
+			function updateRoomsOnInputChange() {
+				selectedRooms.forEach((roomData, roomtypeid) => {
+					intialRoomLoad(
+						roomtypeid,
+						roomData.roomtypename,
+						roomData.cmroomtypename,
+						roomData.fulldaytariff,
+						roomData.occupancy
+					);
+				});
+			}
+			var checkinInput = document.getElementById('validationCustom01');
+			var now
+			let date = "<?= $date ?>"; // Ensure that the date is treated as a string in JavaScript
+			let roomname = "<?= $roomname ?>";
+			console.log(document.getElementById("flexCheckDefault-1").ariaLabel);
+			console.log("djdjdj", roomname);
+
+
+			if (!date) { // Check if the date is empty or null
+				now = new Date(); // Use the current date if no date is provided
+			} else {
+				now = new Date(date); // Otherwise, use the provided date
+			}
+
+
+
+
+
+			var year = now.getFullYear();
+			var month = ('0' + (now.getMonth() + 1)).slice(-2);
+			var day = ('0' + now.getDate()).slice(-2);
+			var hours = ('0' + now.getHours()).slice(-2);
+			var minutes = ('0' + now.getMinutes()).slice(-2);
+			var formattedDateTime = `${year}-${month}-${day}`;
+			checkinInput.value = formattedDateTime;
+
+			// next day 
+			var nextDay = new Date(now);
+			nextDay.setDate(now.getDate() + 1);
+			var nextYear = nextDay.getFullYear();
+			var nextMonth = ('0' + (nextDay.getMonth() + 1)).slice(-2);
+			var nextDayOfMonth = ('0' + nextDay.getDate()).slice(-2);
+			var formattedNextDayDateTime = `${nextYear}-${nextMonth}-${nextDayOfMonth}`;
+
+			// Set check-out date and time
+			var checkoutInput = document.getElementById('validationCustom02');
+			checkoutInput.value = formattedNextDayDateTime;
+		</script>
+
+	</body>
+
+	<?php include("js.php"); ?>
+
+	</html>
+<?php
+
+}
+
+ob_end_flush(); ?>

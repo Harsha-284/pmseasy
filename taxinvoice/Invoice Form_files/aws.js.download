@@ -1,0 +1,2868 @@
+$(document).on("keyup","[type=number][min]",function(){
+	var min = parseInt($(this).attr("min"));
+
+	if(parseInt($(this).val()) < min)
+		$(this).val(min);
+});
+
+//========Calendar======
+// $('.fc-day:not(.fc-other-month)').click(function(){
+var already_grenated_a = [];
+
+$(document).on("click", ".fc-day" , function() {
+	var getdatev = $(this).attr("data-date");
+	// console.log("a[open_bb="+getdatev+"]");
+	if(already_grenated_a.includes(getdatev))
+	{
+		console.log('already exist');
+	}
+	else
+	{
+		$(".calendar_append").append("<a href='"+base_url+"erp/lightboxes/edit_mahurat.php?date="+getdatev+"' class='fancybox_450 fancybox.iframe set_click_open_lb' open_bb="+getdatev+">");
+		already_grenated_a.push(getdatev);
+	}
+	console.log(already_grenated_a);
+	$("a[open_bb="+getdatev+"]").click();
+});
+
+/*
+$(document).on("click", ".cal_next, .cal_prev" , function() {
+	$("#selected_month").val($(this).attr("date"));
+	document.month_selector.submit();
+});
+*/
+
+/*
+$(document).on("click", ".setfordelete_event_calv1" , function() {
+	console.log('.next_back_click[date="'+$(this).attr("date")+'"]');
+	$("#del_date").val($(this).attr("date"));
+	$('.next_back_click[date="'+$(this).attr("date")+'"]').click();
+});
+*/
+
+// ============Pushnoti id=pushnotiv2 Start=============
+	$('.callbanq').click(function(){
+      // var nexturl = i;
+      // console.log(''nexturl'');
+      // alert();
+      //console.log($(this).attr("bid"));
+      var bid = $(this).attr("bid");
+      var ajaxRequest;
+      
+      try
+      {
+        ajaxRequest = new XMLHttpRequest();
+      }
+      catch (e)
+      {
+        try
+        {
+          ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e)
+        {
+          try
+          {
+            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          catch (e)
+          {
+            alert("Your browser broke!");
+            return false;
+          }
+        }
+      }
+      
+      ajaxRequest.onreadystatechange = function()
+      {
+        if(ajaxRequest.readyState == 4)
+        {
+          var data = ajaxRequest.responseText;
+          
+          // document.getElementById('main').innerHTML += data;
+          // inview_refresh();
+        }
+      }
+      
+      ajaxRequest.open("GET","sendnoti.php?bid="+bid, true);
+      ajaxRequest.send(null);
+    });
+    $('.callbanq_fromclient').click(function(){
+      // var nexturl = i;
+      // console.log(''nexturl'');
+      // alert();
+      //console.log($(this).attr("bid"));
+      var bid = $(this).attr("bid");
+      var bname = $(this).attr("bname");
+      var ajaxRequest;
+      
+      try
+      {
+        ajaxRequest = new XMLHttpRequest();
+      }
+      catch (e)
+      {
+        try
+        {
+          ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e)
+        {
+          try
+          {
+            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          catch (e)
+          {
+            alert("Your browser broke!");
+            return false;
+          }
+        }
+      }
+      
+      ajaxRequest.onreadystatechange = function()
+      {
+        if(ajaxRequest.readyState == 4)
+        {
+          var data = ajaxRequest.responseText;
+          
+          // document.getElementById('main').innerHTML += data;
+          // inview_refresh();
+        }
+      }
+      
+      ajaxRequest.open("GET","sendnoti.php?bid_accepted="+bid+"&bname="+bname, true);
+      ajaxRequest.send(null);
+    });
+    $('.callbanq_fromclient_reject').click(function(){
+      // var nexturl = i;
+      // console.log(''nexturl'');
+      // alert();
+      // console.log($(this).attr("bid"));
+      var bid = $(this).attr("bid");
+      var bname = $(this).attr("bname");
+      var ajaxRequest;
+      
+      try
+      {
+        ajaxRequest = new XMLHttpRequest();
+      }
+      catch (e)
+      {
+        try
+        {
+          ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e)
+        {
+          try
+          {
+            ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          catch (e)
+          {
+            alert("Your browser broke!");
+            return false;
+          }
+        }
+      }
+      
+      ajaxRequest.onreadystatechange = function()
+      {
+        if(ajaxRequest.readyState == 4)
+        {
+          var data = ajaxRequest.responseText;
+          
+          // document.getElementById('main').innerHTML += data;
+          // inview_refresh();
+        }
+      }
+      
+      ajaxRequest.open("GET","sendnoti.php?bid_rejected="+bid+"&bname="+bname, true);
+      ajaxRequest.send(null);
+    });
+    $('.removeaccess_id').click(function(){
+    	$(".askfor_access, .askfor_accessv_admin, .askfor_accessv_admin2").removeClass('active');
+    });
+// ============Pushnoti id=pushnotiv2 End=============
+
+// ===========================Custom Textarea Counter Start===============================
+	$(".sms_edit_textarea").on("keyup",function(event){
+		var event = $(this).attr('setval');
+	  checkTextAreaMaxLength(this,event);
+		
+	});
+
+	/*
+	Checks the MaxLength of the Textarea
+	-----------------------------------------------------
+	@prerequisite:  textBox = textarea dom element
+	        e = textarea event
+	                length = Max length of characters
+	*/
+	function checkTextAreaMaxLength(textBox, e) { 
+	    var maxLength = parseInt($(textBox).data("length"));
+	    var currentvalue = $(textBox).val();
+	    var name = "#date";
+		var session = "#session";
+	    function count(string,char) {
+	     var re = new RegExp(char,"gi");
+	     return string.match(re).length;
+	    }
+	    if(currentvalue.indexOf(name) != -1){
+	        // console.log(name + " found");
+	        var countm = count(currentvalue,name);
+	        maxLength = maxLength - (16*countm) + (5*countm);
+	        // console.log(countm);
+	    }
+		if(currentvalue.indexOf(session) != -1){
+	        // console.log(session + " found");
+	        var countm = count(currentvalue,session);
+	        maxLength = maxLength - (9*countm) + (8*countm);
+	        // console.log(countm);
+	    }
+	    //console.log(maxLength);
+	    if (!checkSpecialKeys(e)) { 
+	        if (textBox.value.length > maxLength - 1) textBox.value = textBox.value.substring(0, maxLength); 
+	   } 
+	  
+	   $(".char-count").html(maxLength - textBox.value.length);
+	    // console.log(maxLength - textBox.value.length);
+		$("#"+e).html(maxLength - textBox.value.length);
+	    
+	    return true; 
+	} 
+	/*
+	Checks if the keyCode pressed is inside special chars
+	-------------------------------------------------------
+	@prerequisite:  e = e.keyCode object for the key pressed
+	*/
+	function checkSpecialKeys(e) { 
+	    if (e.keyCode != 8 && e.keyCode != 46 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) 
+	        return false; 
+	    else 
+	        return true; 
+	}
+// ===========================Custom Textarea Counter End===============================
+
+/*************************************To add new food item while booking ********************************************/
+var checkbox_dynamicloop = 1;
+$(document).on("click", ".create_cb" , function() {
+
+	// console.log("ZZZZZZZZZ");
+	var setname = $(this).attr('nameval');
+	var setvalue = $.trim($(this).prev().val());
+	var header = $(this).attr('fheader');
+	if(setvalue!="")
+	{
+		if($(this).attr("group")=="additional")
+			var chechboxstruct = "<li>"+"<input type='checkbox' id='foob-type-zz-"+checkbox_dynamicloop+"' class='ui-checkbox check-count xfp' name='"+setname+"' value='"+setvalue+"' checked>"+"<label for='foob-type-zz-"+checkbox_dynamicloop+"'>"+setvalue+"</label>"+"</li>";
+		else
+			var chechboxstruct = "<li>"+"<input type='checkbox' id='foob-type-zz-"+checkbox_dynamicloop+"' class='ui-checkbox check-count' name='"+setname+"' value='"+setvalue+"' checked>"+"<label for='foob-type-zz-"+checkbox_dynamicloop+"'>"+setvalue+"</label>"+"</li>";
+		
+		$( chechboxstruct ).insertBefore( $(this).parents('.preapend-dv1') );
+		checkbox_dynamicloop++;
+		$(this).prev().val('');
+		
+		add_new_fi(header,setvalue);
+	}
+	else
+	{
+		
+	}
+});
+
+$(document).on("click", ".create_cb_add_edit" , function() {
+
+	// console.log("ZZZZZZZZZ");
+	var setname = $(this).attr('nameval');
+	var setvalue = $.trim($(this).prev().val());
+	var header = $(this).attr('fheader');
+	if(setvalue!="")
+	{
+		if($(this).attr("group")=="additional")
+			var chechboxstruct = "<li>"+"<input type='checkbox' id='foob-type-zz-"+checkbox_dynamicloop+"' class='ui-checkbox check-count xfp' name='"+setname+"' value='"+setvalue+"' checked>"+"<label for='foob-type-zz-"+checkbox_dynamicloop+"'>"+setvalue+"</label>"+"</li>";
+		else
+			var chechboxstruct = "<li>"+"<input type='checkbox' id='foob-type-zz-"+checkbox_dynamicloop+"' class='ui-checkbox check-count' name='"+setname+"' value='"+setvalue+"' checked>"+"<label for='foob-type-zz-"+checkbox_dynamicloop+"'>"+setvalue+"</label>"+"</li>";
+		
+		$( chechboxstruct ).insertBefore( $(this).parents('.preapend-dv1') );
+		checkbox_dynamicloop++;
+		$(this).prev().val('');
+		
+		add_new_fi(header,setvalue);
+	}
+	else
+	{
+		
+	}
+});
+/************************************* // To add new food item while booking ********************************************/
+
+function set_amenity(aid)
+{
+	if(document.getElementById("amenity"+aid).checked)
+	{
+		document.getElementById("amenity"+aid).checked = false;
+	}
+	else
+	{
+		document.getElementById("amenity"+aid).checked = true;
+	}
+}
+
+function hide_slider(obj,slot)
+{
+	if(obj.checked)
+		document.getElementById(slot).style.display = "block";
+	else
+		document.getElementById(slot).style.display = "none";
+}
+
+function does_have_partition()
+{
+	var partition = document.getElementById("partition");
+	//console.log("A");
+	if(partition.checked)
+	{
+		document.getElementById('with_partition').style.display='block';
+		
+		if(document.getElementById('wp1'))
+			document.getElementById('wp1').required = true;
+		if(document.getElementById('wp2'))
+			document.getElementById('wp2').required = true;
+		if(document.getElementById('wp3'))
+			document.getElementById('wp3').required = true;
+		if(document.getElementById('wp4'))
+			document.getElementById('wp4').required = true;
+		if(document.getElementById('wp5'))
+			document.getElementById('wp5').required = true;
+		
+		document.getElementById('hr2').style.display = "block";
+		//console.log("B");
+	}
+	else
+	{
+		document.getElementById('with_partition').style.display='none';
+
+		if(document.getElementById('wp1'))
+			document.getElementById('wp1').required = false;
+		if(document.getElementById('wp2'))
+			document.getElementById('wp2').required = false;
+		if(document.getElementById('wp3'))
+			document.getElementById('wp3').required = false;
+		if(document.getElementById('wp4'))
+			document.getElementById('wp4').required = false;
+		if(document.getElementById('wp5'))
+			document.getElementById('wp5').required = false;
+		
+		document.getElementById('hr2').style.display = "none";
+		//console.log("C");
+	}
+}
+
+function change_monopoly(obj)
+{
+	if(obj.value=="monopoly")
+		document.getElementById('royalties').style.display	= 'block';
+	else if(obj.value=="nonmonopoly")
+		document.getElementById('royalties').style.display	= 'none';
+	else
+		document.getElementById('royalties').style.display	= 'block';
+}
+
+
+// function openPopup(el) {
+// 	$('.'+el).magnificPopup({
+//         type: 'inline',
+//         modal: false
+//     });
+// }
+
+// $(function () {
+	// $(document).on('click', '.ajax-call1', function (e) {
+	//     // openPopup(this.className);
+	//     // alert();
+	//     $('.'+this.className).magnificPopup({
+	//         type: 'inline',
+	//         modal: false
+	//     });
+	// });
+// });
+
+// $(document).on('click', '.ajax-call1', function (e) { 
+//   var hf = $(this).attr('href');
+//   // alert(hf);	
+  
+  
+// });
+
+function add_package(food_items)
+{
+	for(x in food_items);
+	
+	id = 1;
+	while(document.getElementById("p"+id))
+		id++;
+	
+	if(id <= 60)
+	{
+		var d0 = document.createElement("div");
+		d0.setAttribute("class","sec-arrange row col-xs-12 form-group mar-bottom-min food-pack-radio"+id+" food-pack-radios1");
+		d0.setAttribute("id","p"+id);
+			var d1 = document.createElement("div");
+			d1.setAttribute("class","col-xs-2");
+			d1.setAttribute("style","width:150px");
+				var d2 = document.createElement("div");
+				d2.setAttribute("class","width-100");
+					var d3 = document.createElement("div");
+						var r1 = document.createElement("input");
+						r1.setAttribute("type","radio");
+						r1.setAttribute("name","food_type"+id);
+						r1.setAttribute("id","sizeA_"+id);
+						r1.setAttribute("value","0");
+						r1.setAttribute("class","radiocb-lb radiocb-lb-2 chnage-name-foodr"+id+" chnage-name-foodrinpa"+id);
+						r1.setAttribute("checked","");
+					d3.appendChild(r1);
+					var l1 = document.createElement("label");
+						l1.setAttribute("for","sizeA_"+id);
+						l1.setAttribute("class","label-ch label-ch-2 chnage-name-foodrla"+id);
+						l1.innerHTML = "Veg";
+					d3.appendChild(l1);
+				d2.appendChild(d3);
+				
+				var d5 = document.createElement("div");
+					var r2 = document.createElement("input");
+					r2.setAttribute("type","radio");
+					r2.setAttribute("name","food_type"+id);
+					r2.setAttribute("id","sizeB_"+id);
+					r2.setAttribute("value","0");
+					r2.setAttribute("class","radiocb-lb radiocb-lb-2 chnage-name-foodr"+id+" chnage-name-foodrinpb"+id);
+				d5.appendChild(r2);
+				var l2 = document.createElement("label");
+					l2.setAttribute("for","sizeB_"+id);
+					l2.setAttribute("class","label-ch label-ch-2 chnage-name-foodrlb"+id);
+					l2.innerHTML = "Non Veg";
+				d5.appendChild(l2);
+				
+				d2.appendChild(d5);
+			d1.appendChild(d2);
+			
+			var d6 = document.createElement("div");
+			d6.setAttribute("class","col-xs-3");
+				var t1 = document.createElement("input");
+				t1.setAttribute("type","text");
+				t1.setAttribute("class","form-control");
+				t1.setAttribute("name","food[]");
+				t1.setAttribute("placeholder","Food Package");
+				t1.required = true;
+			d6.appendChild(t1);
+			
+			var d7 = document.createElement("div");
+			d7.setAttribute("class","col-xs-1");
+				var t2 = document.createElement("input");
+				t2.setAttribute("type","text");
+				t2.setAttribute("class","form-control");
+				t2.setAttribute("name","rate[]");
+				t2.setAttribute("placeholder","Rate");
+				t2.required = true;
+			d7.appendChild(t2);
+			
+			var d8 = document.createElement("div");
+			d8.setAttribute("class","col-xs-1 inline-popups incu-prt-d");
+				var a1 = document.createElement("span");
+				a1.setAttribute("href","#packagemenu"+id);
+				a1.setAttribute("class","ajax-call1");
+				a1.setAttribute("data-effect","mfp-zoom-in");
+					a1.innerHTML = "<button type='button' class='btn label-warning Inclusions-b'><span class='badge badge-danger icon-count inc-span'>0</span>Set</button>";
+			d8.appendChild(a1);
+			
+			var d9 = document.createElement("div");
+			d9.setAttribute("class","col-xs-4");
+				var d10 = document.createElement("div");
+				d10.setAttribute("class","input-group browser-food-i");
+					var t3 = document.createElement("input");
+					t3.setAttribute("type","text");
+					t3.setAttribute("class","form-control");
+					t3.setAttribute("id","vrbrowse"+id);
+					t3.setAttribute("readonly","");
+				d10.appendChild(t3);
+				
+				var s1 = document.createElement("span");
+				s1.setAttribute("class","input-group-btn");
+					var s2 = document.createElement("span");
+					s2.setAttribute("class","btn btn-default btn-file");
+					s2.setAttribute("data-attv","vrbrowse"+id);
+					s2.innerHTML = "Browse...<input type='file' name='menu[]'>";
+					s1.appendChild(s2);
+				d10.appendChild(s1);
+			d9.appendChild(d10);
+			
+			var d11 = document.createElement("div");
+				d11.setAttribute("class","img-food-item");
+				d11.innerHTML = "<a href='javascript:void(0)' onClick='alert(\"Menu image is not available.\")'><img src='images/food_menus/noimg-1.jpg'></a>";
+			d9.appendChild(d11);
+			
+			var d12 = document.createElement("div");
+			d12.setAttribute("class","col-xs-1");	
+			d12.setAttribute("style","width:50px");
+			d12.innerHTML = "<a href='javascript:void(0)' class='dynamic_close_button' onclick='remove_package("+id+")'><i class='fa fa-trash-o rightarrows2'></i></a>";
+			
+			var d13 = document.createElement("div");
+			d13.setAttribute("id","packagemenu"+id);
+			d13.setAttribute("class","white-popup mfp-with-anim mfp-hide");
+				var h = document.createElement("h4");
+				h.setAttribute("class","small-title");
+				h.setAttribute("style","margin-bottom:30px");
+				h.innerHTML = "Set package inclusions";
+				d13.appendChild(h);
+				
+				var dd1 = document.createElement("div");
+				dd1.setAttribute("class","row form-group");
+				
+				for(i=0; i<=x; i++)
+				{
+					var dd2 = document.createElement("div");
+					dd2.setAttribute("class","col-xs-6");
+					dd2.setAttribute("style","margin-bottom:10px");
+						var dd2a = document.createElement("div");
+						dd2a.setAttribute("class","col-xs-8 padd-zero");							
+							var tt1 = document.createElement("input");
+							tt1.setAttribute("type","checkbox");
+							tt1.setAttribute("id","m"+id+"_"+i);
+							tt1.setAttribute("class","ui-checkbox");
+							tt1.setAttribute("name","course"+(id-1)+"[]");
+							tt1.setAttribute("value",food_items[i].course_name);
+							tt1.setAttribute("onChange","toggle_qty(this,'qty"+(id-1)+"_"+i+"')");
+							dd2a.appendChild(tt1);
+							
+							var ll1 = document.createElement("label");
+							ll1.setAttribute("for","m"+id+"_"+i);
+							ll1.innerHTML = food_items[i].course_name;
+							dd2a.appendChild(ll1);
+					dd2.appendChild(dd2a);
+					dd1.appendChild(dd2);
+					
+					var dd4 = document.createElement("div");
+					dd4.setAttribute("class","col-xs-4 padd-zero");
+						var sl1 = document.createElement("select");
+						sl1.setAttribute("class","form-control");
+						sl1.setAttribute("name","qty"+(id-1)+"[]");
+						sl1.setAttribute("id","qty"+(id-1)+"_"+i);
+						sl1.setAttribute("disabled","");
+						sl1.setAttribute("max",food_items[i].food_items.length);
+						dd4.appendChild(sl1);
+						
+						for(g=1; g<=food_items[i].food_items.length; g++)
+							sl1.innerHTML += "<option value='"+g+"'>"+g+"</option>";
+					dd2.appendChild(dd4);
+					dd1.appendChild(dd2);
+				}
+				
+				d13.appendChild(dd1);
+				var d14 = document.createElement("div");
+				d14.setAttribute("class","row");
+					d14.innerHTML = "<div class='col-xs-12'><button type='button' class='mfp-close btn-imp btn-primary-imp'>OK</button></div>";
+				d13.appendChild(d14);
+			
+			d0.appendChild(d1);			
+			d0.appendChild(d6);
+			d0.appendChild(d7);
+			d0.appendChild(d8);
+			d0.appendChild(d9);
+			d0.appendChild(d12);
+			d0.appendChild(d13);
+			
+		document.getElementById("packages").appendChild(d0);
+	}
+}
+
+function remove_package(pid)
+{
+	id = 1;
+	while(document.getElementById("p"+id) && id!=pid)
+		id++;
+
+	if(id > 1)
+		document.getElementById('packages').removeChild(document.getElementById("p"+pid))
+}
+
+function calcPerHeadCharges(mid)
+{
+	var rate		= $(".monopoly[mid="+mid+"]").val();
+	var pax			= $(".pax[mid="+mid+"]").val();
+	var gst			= $(".monopoly[mid="+mid+"]").attr("gst");
+	var accept_gst	= document.getElementById("accept_gst").checked?1:0;
+	//var phtotal = $("input[mid="+mid+"][name=phtotal]").val();
+	
+	rate	= rate==""?0:rate;
+	pax		= pax==""?0:pax;
+	phtotal = rate * pax;
+	//console.log(gst);
+	$(".phtotal[mid="+mid+"]").val(phtotal);
+	$("#phgst"+mid).val(Math.round(phtotal * gst * accept_gst) * 0.01);
+}
+
+function calcPerHeadChargesAll()
+{
+	$(".monopoly").each(function(k,v){
+		var mid = $(this).attr("mid");
+		calcPerHeadCharges(mid);
+	});
+}
+
+function ocfixedgst()
+{
+	var accept_gst	= document.getElementById("accept_gst").checked?1:0;
+	var pax			= document.getElementById("prax").value;
+	//console.log("Hello");
+	pax = pax==""?0:pax;
+	
+	$(".ocfixed").each(function(k,v){
+		mid = $(this).attr("mid");
+		gst = $(this).attr("gst");
+		
+		charges = $(this).val();
+		//console.log(mid);
+		if(mid==1)
+		{
+			gstval = Math.round(charges * gst * accept_gst * pax) * 0.01;
+			$("#totalfoodcharges").val(charges * pax);
+		}
+		else
+			gstval = Math.round(charges * gst * accept_gst) * 0.01;
+		
+		$("#gst"+mid).val(gstval);
+	});
+}
+
+function calc()
+{	
+	var subtotal= 0;
+	
+	var pax = document.getElementById("prax").value;
+	pax = pax==""?0:parseInt(pax);
+	
+	if(document.getElementById("rate1"))
+		var foodCharge = pax * (document.getElementById("rate1").value==""?0:parseInt(document.getElementById("rate1").value));
+	else
+		var foodCharge = 0;
+
+	if(document.getElementById("totalfoodcharges"))
+		document.getElementById("totalfoodcharges").value = foodCharge;
+	
+	var rent = document.getElementById("rent").value;
+	rent = rent==""?0:parseInt(rent);
+	
+	var accept_gst = document.getElementById("accept_gst").checked?1:0;
+	
+	var igstCase = document.getElementById("clientstate").value == document.getElementById("companystate").value?false:true;
+	//console.log("[["+foodCharge+"]]");
+	var cgst = sgst = igst = 0;
+	//console.log(document.getElementById("accept_gst").valu);
+	var rentgst = Math.round(Math.floor(parseInt(document.getElementById("accept_gst").value) * rent * accept_gst) * 0.01);
+	
+	if(document.getElementById("rate1")){
+		var rate1gstSlab = parseInt(document.getElementById("rate1").getAttribute("gst"));
+		var defFoodTotal = foodCharge + parseInt(document.getElementById("fp_addon").value);
+		var foodgst = rate1gstSlab * defFoodTotal * accept_gst;
+		var foodgst = Math.round(foodgst) * 0.01;
+	}
+	else
+		var foodgst = 0;
+
+	if(document.getElementById("fptotal_0"))
+		document.getElementById("fptotal_0").innerHTML = foodgst + foodCharge + parseInt(document.getElementById("fp_addon").value);
+	
+	subtotal += rent;
+
+	if(document.getElementById("fp_addon"))
+		subtotal += parseInt(document.getElementById("fp_addon").value) + foodCharge;
+
+	if(igstCase)
+	{
+		igst += rentgst;
+		igst += foodgst;
+	}
+	else
+	{
+		cgst += rentgst/2;
+
+		foodCgst = foodgst/2;
+		foodCgst = Math.round(foodCgst*100) * 0.01;
+
+		cgst += foodCgst;
+		sgst = cgst;
+	}
+	//console.log(sgst);
+	if(document.getElementById("gst1"))
+		document.getElementById("gst1").value = foodgst;
+	//document.getElementById("fptotal_"+pkg).innerHTML;
+	
+	$(".ocfixed").each(function(){
+		mid = $(this).attr("mid");
+		
+		if(mid != "")
+		{
+			gst = parseFloat($("#gst"+mid).val());
+			charges = $("#rate"+mid).val();
+			//console.log("{"+mid+","+charges+"}");
+			charges = charges==""?0:parseFloat(charges);
+			
+			if(igstCase)
+				igst += gst;
+			else
+			{
+				cgst += gst/2;
+				sgst = cgst;
+			}
+			//console.log(sgst);
+			if(mid==1)
+				subtotal += charges * pax;
+			else
+				subtotal += charges;
+		}
+	});
+	
+	$(".monopoly").each(function(){
+		mid = $(this).attr("mid");
+		
+		if(mid != "")
+		{
+			gst = parseFloat($("#phgst"+mid).val());
+			charges = $("#monopoly"+mid).val();
+			charges = charges==""?0:parseFloat(charges);
+			thispax = $("#pax"+mid).val();
+			thispax = thispax==""?0:parseFloat(thispax);
+			
+			if(igstCase)
+				igst += gst;
+			else
+			{
+				cgst += gst/2;
+				sgst = cgst = Math.round(cgst*100)*0.01;
+			}
+			//console.log(sgst);
+			subtotal += charges * thispax;
+		}
+	});
+
+	$("[name='fp_pkgnames[]']").each(function(){
+		//console.log("PKGCOST:");
+		var pkg = $(this).attr("pkg");
+		var pkgcost = $("[name='fp_pkgcosts[]'][pkg="+pkg+"]").val();
+		
+		pkgcost = pkgcost==""?0:parseInt(pkgcost);
+		//console.log("PKGCOST:"+pkgcost);
+		subtotal += pkgcost;
+
+		var addoncost = $("[name='fp_addons[]'][pkg="+pkg+"]").val();
+		addoncost = addoncost==""?0:parseInt(addoncost);
+		subtotal += addoncost;
+
+		var gstv = $("[name='fp_gsts[]'][pkg="+pkg+"]").val();
+		gst = gstv==""?0:parseFloat(gstv);
+		
+		if(igstCase)
+			igst += gst;
+		else
+		{
+			//gst = Math.round(gst/2) * 2;
+			cgst += gst/2;
+			sgst = cgst = Math.round(cgst*100)*0.01;
+		}
+
+		//console.log(sgst);
+	});
+
+	//console.log("GST: "+gst);
+	document.getElementById("hallgst").value	= rentgst;
+	document.getElementById("cgst").value		= document.getElementById("sgst").value = cgst.toFixed(2);
+	document.getElementById("igst").value		= igst.toFixed(2);
+	var subtotal								= Math.round(subtotal);
+	document.getElementById("subtotal").value	= subtotal;
+	
+	var total = Math.round(subtotal + cgst + sgst + igst);
+	console.log(total);
+	if(document.getElementById("total"))
+		document.getElementById("total").value = total;
+	
+	if(document.getElementById("discount"))
+		var discount = document.getElementById("discount").value==""?0:document.getElementById("discount").value;
+	else
+		var discount = 0;
+	
+	if(document.getElementById("disctype"))
+	{
+		if(document.getElementById("disctype").value == "Flat")
+			discount = parseInt(discount);
+		else
+		{
+			discount = parseFloat(discount);
+			discount = total * discount * 0.01;
+		}
+	}
+	else
+		discount = 0;
+	
+	if(document.getElementById("discountv"))
+		document.getElementById("discountv").value = discount;
+	
+	/*if(igstCase)
+		igst = ;
+	else
+		sgst = cgst;*/
+	
+	document.getElementById("grand_total").value= total - discount;
+
+	var cv = $("[name=commvalue]").val();
+	
+	if($("[name=commtype]").val() == "Percent")
+	{
+		$("[name=commvalue]").prop("max",100);
+		//$("[name=commamount]").val(Math.round((total - discount) * cv * 0.01));
+	}
+	else
+	{
+		$("[name=commvalue]").prop("max",10000000);
+		//$("[name=commamount]").val($("[name=commvalue]").val());
+	}
+}
+
+$(document).on("click",".chargeable-food-items",function(){
+	
+});
+
+function validate_checkboxes(nm)
+{
+	var x = document.getElementsByName(nm+"[]");
+	var flag = false;
+	
+	for(i=0; i<x.length; i++)
+	{
+		if(x[i].checked)
+		{
+			flag = true;
+			break;
+		}
+	}
+	return flag;
+}
+
+function toggle_expansion()
+{
+	if(localStorage.getItem("page_expanded"))
+	{
+		if(localStorage.getItem("page_expanded")==1)
+			localStorage.setItem("page_expanded",0);
+		else
+			localStorage.setItem("page_expanded",1);
+	}
+	else
+		localStorage.setItem("page_expanded",1);
+}
+
+function get_expansion()
+{
+	if(localStorage.getItem("page_expanded"))
+	{
+		if(localStorage.getItem("page_expanded")==1)
+		{
+			document.getElementById("sbmenu1").setAttribute("class","top-navbar toggle");
+			document.getElementById("sbmenu2").setAttribute("class","sidebar-left sidebar-nicescroller toggle");
+			document.getElementById("sbmenu3").setAttribute("class","page-content toggle");
+		}
+		else
+		{
+			document.getElementById("sbmenu1").setAttribute("class","top-navbar");
+			document.getElementById("sbmenu2").setAttribute("class","sidebar-left sidebar-nicescroller");
+			document.getElementById("sbmenu3").setAttribute("class","page-content");
+		}
+	}
+	else
+	{
+		document.getElementById("sbmenu1").setAttribute("class","top-navbar");
+		document.getElementById("sbmenu2").setAttribute("class","sidebar-left sidebar-nicescroller");
+		document.getElementById("sbmenu3").setAttribute("class","page-content");
+	}
+}
+
+/**********************************************************************/
+	var txnidvar = document.getElementById("txnid");
+	var cheque_bank = document.getElementById("cheque_bank");
+	var cheque_no = document.getElementById("cheque_no");
+	var cheque_date = document.getElementById("cheque_date");
+	
+	$(document).ready(function() {
+		if(txnidvar)
+			txnidvar.parentNode.parentNode.style.display	= "none";
+		if(cheque_bank)
+			cheque_bank.parentNode.parentNode.style.display	= "none";
+		if(cheque_no)
+			cheque_no.parentNode.parentNode.style.display	= "none";
+		if(cheque_date)
+			cheque_date.parentNode.parentNode.style.display	= "none";
+	});
+	
+	/*
+	window.onload({
+		txnidvar.parentNode.parentNode.style.display	= "none";
+		cheque_bank.parentNode.parentNode.style.display	= "none";
+		cheque_no.parentNode.parentNode.style.display	= "none";
+		cheque_date.parentNode.parentNode.style.display	= "none";
+	}));
+	*/
+	
+	/*
+	$( document ).ready(function() {
+		txnidvar.parentNode.parentNode.style.display	= "none";
+		cheque_bank.parentNode.parentNode.style.display	= "none";
+		cheque_no.parentNode.parentNode.style.display	= "none";
+		cheque_date.parentNode.parentNode.style.display	= "none";
+	});
+	*/
+
+	function payment(mode)
+	{	
+		if(mode=="Cheque")
+		{
+			//console.log('a');
+			txnidvar.disabled		= true;
+			cheque_bank.disabled	= false;
+			cheque_no.disabled		= false;
+			cheque_date.disabled	= false;
+			
+			txnidvar.parentNode.parentNode.style.display	= "none";
+			cheque_bank.parentNode.parentNode.style.display	= "block";
+			cheque_no.parentNode.parentNode.style.display	= "block";
+			cheque_date.parentNode.parentNode.style.display	= "block";
+		}
+		else if(mode=="Online")
+		{
+			//console.log('b');
+			txnidvar.disabled		= false;
+			cheque_bank.disabled	= true;
+			cheque_no.disabled		= true;
+			cheque_date.disabled	= true;
+
+			txnidvar.parentNode.parentNode.style.display	= "block";
+			cheque_bank.parentNode.parentNode.style.display	= "none";
+			cheque_no.parentNode.parentNode.style.display	= "none";
+			cheque_date.parentNode.parentNode.style.display	= "none";
+		}
+		else if(mode=="Card")
+		{
+			//console.log('c');
+			txnidvar.disabled		= false;
+			cheque_bank.disabled	= true;
+			cheque_no.disabled		= true;
+			cheque_date.disabled	= true;
+
+			txnidvar.parentNode.parentNode.style.display	= "block";
+			cheque_bank.parentNode.parentNode.style.display	= "none";
+			cheque_no.parentNode.parentNode.style.display	= "none";
+			cheque_date.parentNode.parentNode.style.display	= "none";
+		}
+		else if(mode=="Cash" || mode=="Discount")
+		{
+			//console.log('d');
+			txnidvar.disabled		= true;
+			cheque_bank.disabled	= true;
+			cheque_no.disabled		= true;
+			cheque_date.disabled	= true;
+			
+
+			txnidvar.parentNode.parentNode.style.display	= "none";
+			cheque_bank.parentNode.parentNode.style.display	= "none";
+			cheque_no.parentNode.parentNode.style.display	= "none";
+			cheque_date.parentNode.parentNode.style.display	= "none";
+		}
+
+		// if(mode=="Cheque")
+		// {
+		// 	document.getElementById("txnid").disabled		= true;
+		// 	document.getElementById("cheque_bank").disabled	= false;
+		// 	document.getElementById("cheque_no").disabled	= false;
+		// 	document.getElementById("cheque_date").disabled = false;
+		// }
+		// else if(mode=="Online")
+		// {
+		// 	document.getElementById("txnid").disabled		= false;
+		// 	document.getElementById("cheque_bank").disabled	= true;
+		// 	document.getElementById("cheque_no").disabled	= true;
+		// 	document.getElementById("cheque_date").disabled = true;
+		// }
+		// else if(mode=="Card")
+		// {
+		// 	document.getElementById("txnid").disabled		= false;
+		// 	document.getElementById("cheque_bank").disabled	= true;
+		// 	document.getElementById("cheque_no").disabled	= true;
+		// 	document.getElementById("cheque_date").disabled = true;
+		// }
+		// else
+		// {
+		// 	document.getElementById("txnid").disabled		= true;
+		// 	document.getElementById("chqeue_bank").disabled	= true;
+		// 	document.getElementById("cheque_no").disabled	= true;
+		// 	document.getElementById("cheque_date").disabled = true;
+		// }
+		// alert('');
+
+
+		// if(mode=="Cheque")
+		// {
+		// 	
+		// }
+		// else if(mode=="Online")
+		// {
+		// 	
+		// }
+		// else if(mode=="Card")
+		// {
+		// 	
+		// }
+		// else if(mode=="Cash")
+		// {
+		// 	console.log('asd');
+		// 	
+		// }
+		// else
+		// {
+
+		// }
+	}
+/**********************************************************************/
+function show_password(obj,id)
+{
+	var password = document.getElementById(id);
+	if(password.type=="password")
+	{
+		password.type = "text";
+		obj.setAttribute("class","fa fa-eye-slash");
+	}
+	else
+	{
+		password.type = "password";
+		obj.setAttribute("class","fa fa-eye");
+	}
+}
+
+function set_due_date() //// low cohesion
+{
+	if(document.getElementById("amount").value=="")
+		var amount = 0;
+	else
+	{
+		var amount = document.getElementById("amount").value;
+		
+		amount = amount.replace("-","");
+		amount = amount.replace(".","");
+		
+		if(isNaN(amount))
+		{
+			document.getElementById("amount").value = "";
+		}
+		else
+		{
+			document.getElementById("amount").value = amount;
+			
+			if(amount=="")
+				amount = 0;
+		}
+	}
+	
+	var amount = parseInt(amount);
+	
+	var grand_total = parseInt(document.getElementById("grand_total").value);
+	
+	if(amount < grand_total)
+	{
+		document.getElementById("due_date").value = document.getElementById("bdate").value;
+		document.getElementById("due_date").disabled = false;
+	}
+	else if(amount > grand_total)
+	{
+		var str = document.getElementById("amount").value;
+		var length = str.length;
+		document.getElementById("amount").value = str.substring(0, str.length-1);
+	}
+	else
+	{
+		document.getElementById("due_date").value = "";
+		document.getElementById("due_date").disabled = true;
+	}
+}
+
+function get_refund_balance(bal,amt)
+{
+	
+	var amount = amt!=""?parseInt(amt):0;
+	var balance= parseInt(bal);
+	
+	if(amount>balance)
+	{
+		var str = document.getElementById("amount").value;
+		var length = str.length;
+		document.getElementById("amount").value = str.substring(0, str.length-1);
+		amount = parseInt(document.getElementById("amount").value);
+	}
+	
+	document.getElementById("refund_balance").value = balance-amount;
+}
+
+function set_otp_cell(id,event)
+{
+	if(event == "F")
+		document.getElementById("id"+id).value = "";
+	else if(event == "K")
+	{
+		document.getElementById("id"+id).value = "";
+		document.getElementById("id"+id).focus();
+	}
+}
+
+function add_description______xxxxx(igst_flag,cp,sp,ip) //// Function structure changed
+{
+	var i = 2;
+	while(document.getElementById("row"+i))
+		i++;
+	
+	var d1 = document.createElement("div");
+	d1.setAttribute("class","row");
+	d1.setAttribute("id","row"+i);
+		var d2 = document.createElement("div");
+		d2.setAttribute("class","col-xs-6");
+			var d3 = document.createElement("div");
+			d3.setAttribute("class","form-group");
+				var a1 = document.createElement("a");
+				a1.setAttribute("href","javascript:void(0)");
+				a1.setAttribute("class","text-danger invoice_close_btn");
+				a1.setAttribute("title","Cancel");
+				a1.setAttribute("onClick","cancel_invoice_row("+i+");invoice_calc("+igst_flag+","+cp+","+sp+","+ip+")");
+				a1.innerHTML = "X";
+				var t1 = document.createElement("input");
+				t1.setAttribute("class","form-control");
+				t1.setAttribute("type","text");
+				t1.setAttribute("name","description[]");
+				t1.setAttribute("style","width:95%; float:left");
+			d3.appendChild(a1);
+			d3.appendChild(t1);
+		d2.appendChild(d3);
+		
+		var d4 = document.createElement("div");
+		d4.setAttribute("class","col-xs-2");
+			var d5 = document.createElement("div");
+			d5.setAttribute("class","form-group");
+				var t2 = document.createElement("input");
+				t2.setAttribute("class","form-control");
+				t2.setAttribute("type","number");
+				t2.setAttribute("min","1");
+				t2.setAttribute("step","1");
+				t2.setAttribute("name","rate[]");
+				t2.setAttribute("id","rate"+i);
+				t2.setAttribute("onKeyup","invoice_calc("+igst_flag+","+cp+","+sp+","+ip+")");
+			d5.appendChild(t2);
+		d4.appendChild(d5);
+		
+		var d6 = document.createElement("div");
+		d6.setAttribute("class","col-xs-2");
+			var d7 = document.createElement("div");
+			d7.setAttribute("class","form-group");
+				var t3 = document.createElement("input");
+				t3.setAttribute("class","form-control");
+				t3.setAttribute("type","number");
+				t3.setAttribute("min","1");
+				t3.setAttribute("step","1");
+				t3.setAttribute("name","qty[]");
+				t3.setAttribute("id","qty"+i);
+				t3.setAttribute("value","1");
+				t3.setAttribute("onKeyup","invoice_calc("+igst_flag+","+cp+","+sp+","+ip+")");
+			d7.appendChild(t3);
+		d6.appendChild(d7);
+		
+		var d8 = document.createElement("div");
+		d8.setAttribute("class","col-xs-2");
+			var d9 = document.createElement("div");
+			d9.setAttribute("class","form-group");
+				var t4 = document.createElement("input");
+				t4.setAttribute("class","form-control");
+				t4.setAttribute("type","text");
+				t4.setAttribute("name","subtotal[]");
+				t4.setAttribute("id","total"+i);
+				t4.setAttribute("readonly","readonly");
+			d9.appendChild(t4);
+		d8.appendChild(d9);
+		
+	d1.appendChild(d2);
+	d1.appendChild(d4);
+	d1.appendChild(d6);
+	d1.appendChild(d8);
+	
+	document.getElementById("description").appendChild(d1);
+
+	//document.getElementById("part_cnt").value = parseInt(document.getElementById("part_cnt").value)+1;
+}
+
+function addInvoiceDescription()
+{
+	
+}
+
+function cancel_invoice_row(row)
+{
+	//var part_cnt = parseInt(document.getElementById("part_cnt").value);
+	
+	var part_cnt = $("input[name='description[]']").length;
+	
+	if(part_cnt>1)
+	{
+		var row	= document.getElementById("row"+row);
+		//var description = document.getElementById("description");
+		
+		description.removeChild(row);
+		
+		//document.getElementById("part_cnt").value = parseInt(document.getElementById("part_cnt").value)-1;
+		
+		invCalc();
+	}
+}
+
+function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
+{
+	var total = 0;
+	
+	for(j=1; j<12; j++)
+	{
+		if(document.getElementById("row"+j))
+		{
+			qty	= document.getElementById("qty"+j).value==""?0:document.getElementById("qty"+j).value;
+			qty	= parseInt(qty);
+			
+			rate= document.getElementById("rate"+j).value==""?0:document.getElementById("rate"+j).value;
+			rate= parseInt(rate);
+			
+			subtotal = qty * rate;
+			
+			document.getElementById("total"+j).value = subtotal;
+			
+			total += subtotal;
+		}
+	}
+	
+	document.getElementById("total").value = total;
+	
+	var discount = document.getElementById("discount").value==""?0:document.getElementById("discount").value;
+	discount = parseInt(discount);
+	
+	var taxable_total = total - discount;
+	
+	var gstslab = parseFloat(document.getElementById("gstslab").value)/100;
+	
+	cgst_p = sgst_p = gstslab/2
+	igst_p = gstslab;
+	
+	if(igst_flag > 0)
+	{
+		cgst = sgst = 0;
+		igst = Math.round(taxable_total * igst_p);
+	}
+	else
+	{
+		cgst = sgst = parseFloat((taxable_total * cgst_p).toFixed(2));
+		igst = 0
+	}
+	//console.log(cgst_p);
+	document.getElementById("cgst").value = cgst;
+	document.getElementById("sgst").value = sgst;
+	document.getElementById("igst").value = igst;
+	document.getElementById("grand_total").value = taxable_total + cgst + sgst + igst;
+	//console.log("B");
+}
+
+/**************************** INVOICE **********************************/
+	$(document).on("click", "[name='description[]']", function() {
+		$(this).autocomplete({
+			source : monopolyNames
+		});
+	});
+	
+	$(document).on("change","[name='description[]']",function(){
+		var mono = $(this).val();
+		var id = $(this).prop("id").replace("desc","");
+
+		monopolies.forEach(function(v,k){
+			if(v.monopoly == mono)
+			{
+				document.getElementById("hsn"+id).value	= v.hsn;
+				document.getElementById("rate"+id).value= v.rate;
+				document.getElementById("slab"+id).value= v.slab;
+				
+				invCalc();
+			}
+		});
+	});
+	
+	$(document).on("change","select[name='dtype[]']",function(){
+		var id = $(this).prop("id").replace("dtype","");
+		$("#discper"+id).val(0);
+		invCalc();
+	});
+
+	function invCalc()
+	{
+		var state = document.getElementById("state").value;
+		
+		if(state == banq_state)
+		{
+			cm = sm = 1;
+			im = 0;
+		}
+		else
+		{
+			cm = sm = 0;
+			im = 1;
+		}
+		
+		var total = totaldiscount = subtotal = totalgst = totalvat = 0;
+
+		if(im == 1)
+		{
+			$(".cls-csgst").hide();
+			$(".cls-igst").show();
+		}
+		else
+		{
+			$(".cls-csgst").show();
+			$(".cls-igst").hide();
+		}
+		
+		$("[name='description[]']").each(function(k,v){
+			var id = $(this).prop("id").replace("desc","");
+			var dtype = document.getElementById("dtype"+id).value;
+			
+			if(document.getElementById("rate"+id).value=="")
+				rate = 0;
+			else if(isNaN(document.getElementById("rate"+id).value))
+				rate = 0;
+			else
+				rate = parseFloat(document.getElementById("rate"+id).value);
+
+			rate = Math.round(rate * 100) * 0.01;
+
+			var discper = document.getElementById("discper"+id).value;
+			discper = discper==""?0:parseFloat(discper);
+
+			if(document.getElementById("qty"+id).value=="")
+				qty = 1;
+			else if(isNaN(document.getElementById("qty"+id).value))
+				qty = 0;
+			else
+				qty = parseInt(document.getElementById("qty"+id).value);
+
+			var subtot = Math.round(rate * qty * 100) * 0.01;
+			document.getElementById("subtot"+id).value = subtot;
+
+			if(dtype == "Flat")
+				var discount = discper;
+			else
+				var discount = Math.round(discper * subtot * 0.01);
+			
+			document.getElementById("discount"+id).value = discount;
+			
+			var taxable = Math.round((subtot - discount)*100) * 0.01;
+			document.getElementById("taxable"+id).value = taxable;
+
+			var isvat = $("#isvat"+id).is(":checked");
+			
+			slab = parseFloat(document.getElementById("slab"+id).value);
+			slab = slab?slab:0;
+			
+			var vat	 = 0;
+
+			if(!isvat)
+			{
+				cgstm = sgstm = (slab/2)*cm;
+				igstm = slab * im;
+				
+				var cgst = taxable * cgstm * 0.01;
+				var sgst = taxable * sgstm * 0.01;
+				var igst = taxable * igstm * 0.01;
+			}
+			else
+			{
+				var cgst = sgst = igst = 0;
+				vat	 = (slab/100) * taxable;
+			}
+
+			cgst = sgst = Math.round(sgst*100)*0.01;
+			igst = Math.round(igst*100)*0.01;
+
+			cgst = cgst.toFixed(2);
+			igst = igst.toFixed(2);
+			
+			cgst = sgst = parseFloat(cgst);
+			igst = parseFloat(igst);
+			
+			document.getElementById("cgst"+id).value = cgst;
+			document.getElementById("sgst"+id).value = sgst;
+			document.getElementById("igst"+id).value = igst;
+
+			if(document.getElementById("vat"+id))
+				document.getElementById("vat"+id).value	 = vat;
+			
+			subtotal += taxable;
+			stotal = Math.floor((taxable + cgst + sgst + igst + vat) * 100) * 0.01;
+			//console.log(stotal);
+			document.getElementById("total"+id).value = stotal.toFixed(2);
+
+			totalgst	+= cgst + sgst + igst;
+			totalvat	+= vat;
+			total		+= stotal;
+
+			totaldiscount += discount;
+		});
+		//console.log("A:"+totaldiscount);
+		if($("[name=adjust_discount]:checked").length)
+			var cashDisc = parseFloat($("[name=adjust_discount]:checked").val());
+		else
+			var cashDisc = 0;
+		
+		totaldiscount += cashDisc;
+		totalgst = parseFloat(totalgst.toFixed(2));
+		
+		document.getElementById("subtotal").value = subtotal;
+		document.getElementById("totdisc").value  = totaldiscount;
+		document.getElementById("gsttotal").value = totalgst;
+		document.getElementById("vattotal").value = totalvat;
+		var discount = totaldiscount;//parseInt(document.getElementById("discount").value);
+		balanceAmt = Math.round(total - discount) - parseInt(document.getElementById("total_paid").value);
+		
+		document.getElementById("grand_total").value = (total - discount).toFixed(2);
+		document.getElementById("gt_round").value = Math.round(total - discount);
+		document.getElementById("balance_amt").value = balanceAmt;
+	}
+
+	$(document).on('change','[id^=isvat]',function(){
+		var isvat = $(this).is(":checked")?1:0;
+		var id = $(this).attr('id').replace('isvat','');
+
+		if(isvat){
+			$('#hsn'+id).val('').prop('readOnly',true);
+		}else{
+			$('#hsn'+id).val('').prop('readOnly',false);
+		}
+		
+		invCalc();
+	});
+	
+	$(document).on("click","#addInvDescRow",function(){
+		var i = 1;
+
+		while(document.getElementById("desc"+i))
+			i++;
+		
+		var str = '<div class="row" id="row'+i+'" style="margin-left: 0;"><div class="inv-desc"><div class="form-group d-flex"><a href="javascript:void(0)" class="text-danger invoice_close_btn cross-icon-invocre" onClick="cancel_invoice_row('+i+');" title="Cancel" style="position: relative;top: 5px;">X</a><input type="text" style="width:90%; float:left" class="form-control" id="desc'+i+'" name="description[]" value=""></div></div><input type="checkbox" <?= $vatChecked ?> class="form-control" id="isvat${i}" name="isvat${i}" value="1" disabled style="display:none;"><div class="inv-hsn"><div class="form-group"><input type="text" class="form-control" id="hsn'+i+'" name="hsn[]" value=""></div></div><div class="inv-rate"><div class="form-group"><input type="number" min="0" step="1" class="form-control nonnegative" id="rate'+i+'" name="rate[]" onKeyup="invCalc()" value="0"></div></div><div class="inv-qty"><div class="form-group"><input type="number" min="1" step="1" class="form-control nonnegative" id="qty'+i+'" name="qty[]" onKeyup="invCalc()" value="1"></div></div><div class="inv-qty"><div class="form-group"><input type="number" min="0" step="1" class="form-control" id="subtot'+i+'" name="subtot[]" value="0" readonly></div></div><div class="inv-disctype"><div class="form-group d-flex"><input type="number" min="0" step="1" class="form-control width-50 nonnegative" id="discper'+i+'" name="discper[]" onKeyup="invCalc()" value="0"><select class="form-control width-50" id="dtype'+i+'" name="dtype[]"><option>Flat</option><option>%</option></select></div></div><div class="inv-qty"><div class="form-group"><input type="number" class="form-control" id="discount'+i+'" name="discount[]" value="0" readonly></div></div><div class="inv-qty"><div class="form-group"><input type="number" class="form-control" id="taxable'+i+'" name="taxable[]" value="0" readonly></div></div><div class="inv-slab"><div class="form-group"><input type="number" step="1" min="0" class="form-control nonnegative" name="slab[]" onkeyup="invCalc()" id="slab'+i+'" value="0"></div></div><div class="inv-gst"><div class="form-group"><input type="text" class="form-control" id="cgst'+i+'" name="cgst[]" value="0" readonly></div></div><div class="inv-gst cls-csgst"><div class="form-group"><input type="text" class="form-control" id="sgst'+i+'" name="sgst[]" value="0" readonly></div></div><div class="inv-gst cls-igst"><div class="form-group"><input type="text" class="form-control" id="igst'+i+'" name="igst[]" value="0" readonly></div></div><div class="inv-total"><div class="form-group"><input type="text" class="form-control" id="total'+i+'" name="total[]" value="0" readonly></div></div></div>';
+
+		$("#description").append(str);
+
+		var state = document.getElementById("state").value;
+		
+		if(state == banq_state)
+		{
+			$(".cls-csgst").show();
+			$(".cls-igst").hide();
+		}
+		else
+		{
+			$(".cls-csgst").hide();
+			$(".cls-igst").show();
+		}
+	});
+/**************************** INVOICE **********************************/
+
+function set_food_package()
+{
+	if(document.getElementById("rate1"))
+	{
+		var type = $("input[type=radio]:checked").val();
+
+		if(type == "booking")
+		{
+			var package_data = $("select[name=package]").val();
+			var fp = JSON.parse(package_data);
+			
+			$("div[uid=u1]").show();
+			$("#booking-fp").show();
+			$("#payment-summary").show();
+			document.getElementById("rate1").value = fp.rate?fp.rate:0;
+		}
+		else
+		{
+			$("div[uid=u1]").hide();
+			$("#booking-fp").hide();
+			$("#payment-summary").hide();
+			document.getElementById("rate1").value = 0;
+		}
+	}
+}
+
+function set_rate_royalty(type,id)
+{
+	//console.log(document.getElementById("royalty"+id).value);
+	if(type=='rate')
+	{
+		if(document.getElementById("royalty"+id))
+			document.getElementById("royalty"+id).value = 0;
+	}
+	else
+	{
+		if(document.getElementById("rate"+id))
+			document.getElementById("rate"+id).value = 0;
+	}
+}
+
+function get_activity(bkid,obj)
+{
+	var a = Array("Cleaning / Housekeeping","Setup","Guests Arrived","Function Started","Meal Serving","Packup Started","Packup Completed");
+	document.getElementById('activity_'+bkid+'_1').innerHTML = document.getElementById('activity_'+bkid+'_2').innerHTML = a[obj.value];
+}
+
+function is_delayed(obj)
+{
+	if(obj.value == "1")
+		document.getElementById("delay").disabled = 0;
+	else
+	{
+		document.getElementById("delay").value = "";
+		document.getElementById("delay").disabled = 1;
+	}
+}
+
+function add_new_item(courseid)
+{
+	var i = 0;
+	
+	while(document.getElementById("item"+courseid+"_"+i))
+		i++;
+	
+	/*
+	var d1 = document.createElement("div");
+	d1.setAttribute("class","reapetecb1");
+	d1.setAttribute("id","item"+courseid+"_"+i);
+		
+		var d2 = document.createElement("div");
+		d2.setAttribute("class","col-xs-1");
+		d2.setAttribute("style","width:32px");
+		d2.innerHTML = "<i class='fa fa-chevron-right rightarrows'></i>";
+		
+		var d3 = document.createElement("div");
+		d3.setAttribute("class","col-xs-10 center-food-d");
+		d3.setAttribute("style","padding-right:10px");
+			var t1 = document.createElement("input");
+			t1.setAttribute("type","text");
+			t1.setAttribute("class","form-control asccm"+(courseid+1));
+			t1.setAttribute("name","food_item"+courseid+"[]");
+		d3.appendChild(t1);
+		
+		var d4 = document.createElement("div");
+		d4.setAttribute("class","col-xs-1 removers-s");
+			var a1 = document.createElement("a");
+			a1.setAttribute("href","javascript:void(0)");
+			a1.setAttribute("class","dynamic_close_button");
+			a1.setAttribute("onClick","remove_food_item("+courseid+","+i+")");
+			a1.innerHTML = "<i class='fa fa-trash-o rightarrows2'></i>";
+		d4.appendChild(a1);
+		
+	d1.appendChild(d2);
+	d1.appendChild(d3);
+	d1.appendChild(d4);
+
+	document.getElementById("item_block"+courseid).appendChild(d1);
+	*/
+
+	var d1 = '<div id="item'+courseid+'_'+i+'" class="reapetecb1"><div class="col-xs-1" style="width:32px"> <i class="fa fa-chevron-right rightarrows"></i> </div><div class="col-xs-10 center-food-d foodpack-input-parent" style="padding-right:10px"><input type="text" class="form-control asccm'+(courseid+1)+'" name="food_item'+courseid+'[]" placeholder="Food item name eg. Paneer Chilly" descid="'+courseid+'_'+i+'" onKeyup="setDescLabel(\''+courseid+'_'+i+'\')"><span class="openlight-food" descid="'+courseid+'_'+i+'"><span>+</span>Add Description</span></div><div class="col-xs-1 removers-s"><a href="javascript:void(0)" class="dynamic_close_button" onClick="remove_food_item('+courseid+','+i+')"><i class="fa fa-trash-o rightarrows2"></i></a></div><div class="foodsslider" descid="'+courseid+'_'+i+'"><div class="width-100 fl"><span class="close-foodslider"><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="width-100 fl"><span class="desclabel" descid="'+courseid+'_'+i+'"></span></div><textarea class="/*summernote-sm*/ foods-textarea" name="desc_'+courseid+'[]"></textarea></div></div>';
+
+	//console.log('"food_item'+courseid+'[]"');
+
+	$("#item_block"+courseid).append(d1);
+}
+
+function remove_food_item(courseid,itemid)
+{
+	if(itemid > 0)
+		document.getElementById("item_block"+courseid).removeChild(document.getElementById("item"+courseid+"_"+itemid));
+}
+
+function add_course()
+{
+	var i = 0;
+	
+	while(document.getElementById("course"+i))
+		i++;
+	/*
+	var d1 = document.createElement("div");
+	d1.setAttribute("class","panel panel-info draggable-item as"+(i+1)+" ui-sortable-handle");
+	d1.setAttribute("data-position2",i);
+		var d2 = document.createElement("div");
+		d2.setAttribute("class","panel-heading");
+		d2.setAttribute("style","margin-bottom:10px");
+			var h1 = document.createElement("h3");
+			h1.setAttribute("class","panel-title");
+				var a1 = document.createElement("a");
+				a1.setAttribute("href","#course"+i);
+				a1.setAttribute("class","block-collapse");
+				a1.setAttribute("data-parent","#accordion-1");
+				a1.setAttribute("data-toggle","collapse");
+					a1.innerHTML = "<span sid='course"+i+"'>New header</span><span class='delete-item-d'><span class=''><i class='fa fa-trash-o'></i></span></span>";
+					var s1 = document.createElement("span");
+					s1.setAttribute("class","right-content");
+						var s2 = document.createElement("span");
+						s2.setAttribute("class","right-icon");
+							var i1 = document.createElement("i");
+							i1.setAttribute("class","glyphicon glyphicon-minus icon-collapse icon_pos");
+							s2.appendChild(i1);
+						s1.appendChild(s2);
+					a1.appendChild(s1);
+				h1.appendChild(a1);
+			d2.appendChild(h1);
+		d1.appendChild(d2);
+		
+		var d3 = document.createElement("div");
+		d3.setAttribute("class","collapse");
+		d3.setAttribute("id","course"+i);
+			var d4 = document.createElement("div");
+			d4.setAttribute("class","panel-body");
+				var d5 = document.createElement("div");
+				d5.setAttribute("class","panel-bodycb2");
+				d5.setAttribute("style","padding-right:10px");
+					var t1 = document.createElement("input");
+					t1.setAttribute("class","form-control check-val");
+					t1.setAttribute("type","text");
+					t1.setAttribute("name","course_name[]");
+					t1.setAttribute("id","course-vsp"+i);
+					t1.setAttribute("placeholder","Set food header");
+					t1.setAttribute("svmid","course"+i);
+					t1.setAttribute("required","true");
+					d5.appendChild(t1);
+				d4.appendChild(d5);
+				var d5a = document.createElement("div");
+				d5a.setAttribute("class","item_blockc1");
+				d5a.setAttribute("id","item_block"+i);
+					var d6 = document.createElement("div");
+					d6.setAttribute("class","reapetecb1");
+					d6.setAttribute("id","item"+i+"_0");
+						var d7 = document.createElement("div");
+						d7.setAttribute("class","col-xs-1");
+						d7.setAttribute("style","width:32px");
+						d7.innerHTML = "<i class='fa fa-chevron-right rightarrows'></i>";
+						d6.appendChild(d7);
+						
+						var d8 = document.createElement("div");
+						d8.setAttribute("class","col-xs-10 center-food-d");
+						d8.setAttribute("style","padding-right:10px");
+							var t2 = document.createElement("input");
+							t2.setAttribute("type","text");
+							t2.setAttribute("class","form-control asccm"+(i+1));
+							t2.setAttribute("name","food_item"+i+"[]");
+							d8.appendChild(t2);
+						d6.appendChild(d8);
+						
+						var d9 = document.createElement("div");
+						d9.setAttribute("class","col-xs-1 removers-s");
+							var a1 = document.createElement("a");
+							a1.setAttribute("class","dynamic_close_button");
+							a1.setAttribute("href","javascript:void(0)");
+							a1.setAttribute("onClick","remove_food_item("+i+",0)");
+							a1.innerHTML = "<i class='fa fa-trash-o rightarrows2'></i>";
+							d9.appendChild(a1);
+						d6.appendChild(d9);
+					d5a.appendChild(d6);
+				d4.appendChild(d5a);
+				var d10 = document.createElement("div");
+				d10.setAttribute("class","panel-bodycb2");
+				d10.setAttribute("style","margin-bottom:0px");
+					var a2 = document.createElement("a");
+					a2.setAttribute("href","javascript:void(0)");
+					a2.setAttribute("onClick","add_new_item("+i+")");
+					a2.innerHTML = "<span class='label label-success'>+ Add more</span>";
+					d10.appendChild(a2);
+				d4.appendChild(d10);
+			d3.appendChild(d4);
+		d1.appendChild(d3);
+	document.getElementById("accordion-1").appendChild(d1);
+	*/
+	
+	var d1 = '<div class="panel panel-info draggable-item as'+(i+1)+'"><div class="panel-heading" style="margin-bottom:10px"><h3 class="panel-title"><a class="block-collapse" data-parent="#accordion-1" data-toggle="collapse" href="#course'+i+'"><span sid="course'+i+'">New header</span><span class="right-content"><span class="right-icon"><i class="glyphicon glyphicon-plus icon-collapse icon_pos"></i></span></span></a></h3></div><div id="course'+i+'" class="collapse"><div class="panel-body"><div class="panel-bodycb2 heading-input" style="padding-right:10px"><input type="text" class="form-control check-val" name="course_name[]" id="course-vsp'+i+'" placeholder="Set food header" svmid="course'+i+'" required><span class="openlight-food" descid="'+i+'"><span>+</span>Description (Optional)</span></div><div id="item_block'+i+'" class="item_blockc1"><div id="item'+i+'_0" class="reapetecb1"><div class="col-xs-1" style="width:32px"> <i class="fa fa-chevron-right rightarrows"></i> </div><div class="col-xs-10 center-food-d foodpack-input-parent" style="padding-right:10px"><input type="text" class="form-control asccm'+(i+1)+'" name="food_item'+i+'[]" placeholder="Food item name eg. Paneer Chilly" descid="'+i+'_0" onKeyup=setDescLabel("'+i+'_0")><span class="openlight-food" descid="'+i+'_0"><span>+</span>Add Description</span></div><div class="col-xs-1 removers-s"><a href="javascript:void(0)" class="dynamic_close_button" onClick="remove_food_item('+i+',0)"><i class="fa fa-trash-o rightarrows2"></i></a></div><div class="foodsslider" descid="'+i+'_0"><div class="width-100 fl"><span class="close-foodslider"><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="width-100 fl"><span class="desclabel" descid="'+i+'_0"></span></div><textarea class="foods-textarea" name="desc_'+i+'[]"></textarea></div></div><div class="foodsslider" descid="'+i+'"><div class="width-100 fl"><span class="close-foodslider"><i class="fa fa-times" aria-hidden="true"></i></span></div><div class="width-100 fl"><span class="desclabel" descid="'+i+'"></span></div><textarea class="foods-textarea" name="fc_desc_'+i+'"></textarea></div></div><div class="panel-bodycb2" style="margin-bottom:0px"><a href="javascript:void(0)" onClick="add_new_item('+i+')"><span class="label label-success">+ Add more</span></a></div></div></div></div>';
+	
+	$("#accordion-1").append(d1);
+}
+
+function toggle_qty(obj,qtyid)
+{
+	if(obj.checked)
+	{
+		document.getElementById(qtyid).disabled = false;
+	}
+	else
+	{
+		document.getElementById(qtyid).value = "";
+		document.getElementById(qtyid).disabled = true;
+	}
+}
+
+function change_hall()
+{
+	var h = document.getElementById("halls").value;
+	
+	if(h != "")
+	{
+		var hall = JSON.parse(h);
+		document.getElementById("rent").value = hall.rent;
+	}
+}
+
+// ----------------------Food Items Validations Start----------------------
+	// $(document).on('click', '.save-food-item-b', function (){
+	// 	if($('.check-val').val() == '')
+	// 	{
+	// 		alert($(this).attr('valsp'));
+	// 	}
+		// if($('.check-val').val() == '')
+		// 	{
+		// 		$(this).parent().parent().parent().addClass('invalid-acr');
+		// 		// alert($(this).parent().parent().parent().attr('id'));
+		// 		var spl1 = $(this).parent().parent().parent().attr('id');
+		// 		// alert(spl1);
+		// 		// $( 'a[ href=#' + spl1 + ']' ).addClass('asdf');
+		// 		$( 'a[ href=#' + spl1 + ']' ).attr('data-toggle', 'none');
+		// 		$( 'a[ href=#' + spl1 + ']' ).attr('data-parent', 'none ');
+		// 		$('selector').click(function(){return false;});
+		// 	}
+		// 	else
+		// 	{
+		// 		$('.collapse.in').removeClass('invalid-acr');
+		// 		$(this).parent().parent().parent().addClass('in');
+		// 		$(this).parent().parent().parent().removeClass('invalid-acr');
+		// 		// alert($(this).parent().parent().parent().attr('id'));
+		// 		var spl1 = $(this).parent().parent().parent().attr('id');
+		// 		// alert(spl1);	
+		// 		// $( 'a[ href=#' + spl1 + ']' ).removeClass('asdf');
+		// 		$( 'a[ href=#' + spl1 + ']' ).attr('data-toggle', 'collapse');
+		// 		$( 'a[ href=#' + spl1 + ']' ).attr('data-parent', '#accordion-1');
+		// 		$('selector').click(function(){return false;});
+		// 	}
+
+	// });
+	$(document).on('click', '.check-val', function (e) {
+		if($(this).val() == '' && false)
+		{
+			$(this).parent().parent().parent().parent().addClass('readmark');
+			$(this).addClass('readmark');
+			// alert(arrtic);
+			var str = $( this ).val();
+			// alert(str);
+			$( '[ sid=' + arrtic + ']' ).text('Please Enter Header');
+			$( '[ sid=' + arrtic + ']' ).addClass('readmark-t');
+			// var arrtic = $(this).attr('svmid');
+			// // alert($(this).parent().parent().parent().attr('id'));
+			// var spl1 = $(this).parent().parent().parent().attr('id');
+			// // alert(spl1);
+			// // $( 'a[ href=#' + spl1 + ']' ).addClass('asdf');
+			// $( 'a[ href=#' + spl1 + ']' ).attr('data-toggle', 'none');
+			// $( 'a[ href=#' + spl1 + ']' ).attr('data-parent', 'none ');
+			// $('selector').click(function(){return false;});
+		}
+		else
+		{
+			$(this).parent().parent().parent().parent().removeClass('readmark');
+			$(this).removeClass('readmark');
+			var arrtic = $(this).attr('svmid');
+			// alert(arrtic);
+			var str = $( this ).val();
+			// alert(str);
+			$( '[ sid=' + arrtic + ']' ).text(str);
+			$( '[ sid=' + arrtic + ']' ).removeClass('readmark-t');
+			// var arrtic = $(this).attr('svmid');
+			// $(this).parent().parent().parent().removeClass('invalid-acr');
+			// // alert($(this).parent().parent().parent().attr('id'));
+			// var spl1 = $(this).parent().parent().parent().attr('id');
+			// // alert(spl1);	
+			// // $( 'a[ href=#' + spl1 + ']' ).removeClass('asdf');
+			// $( 'a[ href=#' + spl1 + ']' ).attr('data-toggle', 'collapse');
+			// $( 'a[ href=#' + spl1 + ']' ).attr('data-parent', '#accordion-1');
+			// $('selector').click(function(){return false;});
+		}
+	});
+
+	
+	$(document).on('keyup', '.check-val', function (e) {
+		// alert();
+	    if($(this).val() == '' && false)
+		{
+			// $(this).parent().parent().parent().parent().addClass('readmark');
+			// $(this).addClass('readmark');
+			var arrtic = $(this).attr('svmid');
+			// alert(arrtic);
+			var str = $( this ).val();
+			// alert(str);
+			$( '[ sid=' + arrtic + ']' ).text('Please Enter Header');
+			$( '[ sid=' + arrtic + ']' ).addClass('readmark-t');
+		}
+		else
+		{
+			$(this).parent().parent().parent().parent().removeClass('readmark');
+			$(this).removeClass('readmark');
+			var arrtic = $(this).attr('svmid');
+			// alert(arrtic);
+			var str = $( this ).val();
+			// alert(str);
+			$( '[ sid=' + arrtic + ']' ).text(str);
+			$( '[ sid=' + arrtic + ']' ).removeClass('readmark-t');
+		}
+	});
+	$(document).on('click', '.delete-item-d', function (e) {
+		$(this).parent().parent().parent().parent().remove();
+	});
+
+	$('.save-food-item-b').on("click", function(){
+		$('.check-val').click();
+	});
+
+
+// ----------------------Food Items Validations End----------------------
+
+
+// =======================Drag and sort Start=======================
+	//$( init2 );
+	/*  COMMENT1 THIS MODULE IS TEMPORARILY DISABLED DUE TO DESCRIPTION ID CROSS LINKING PROBLEM 
+	function init2() {
+	
+	  $( ".droppable-area1, .droppable-area2" ).sortable({
+	      connectWith: ".connected-sortable",
+	      stack: '.connected-sortable ul'
+	    }).disableSelection();
+	}
+	
+	
+	// $(document).ready(function () {
+	//    $(function() {
+	//       $(".connected-sortable .draggable-item").sort(sort_li).appendTo('.connected-sortable');
+	//       function sort_li(a, b) {
+	//         return ($(b).data('position')) < ($(a).data('position')) ? 1 : -1;
+	//       }
+	//     });
+	//  });
+
+
+	var d1 =document.getElementsByName('rate[]').length;
+
+	
+	var static1 =  $('.food-pack-radios1').length;
+	$( ".draggable-item" ).mouseout(function() {
+		var numItems = $('.draggable-item').length;
+	  for(var i=0; i<=30; i++) {
+	    var isvp = $( ".as"+ i ).index();
+	    $(".as"+ i).attr('data-position2', isvp);
+		$(".asccm"+ i).attr('name', "food_item"+ isvp +"[]");
+	  } 
+	});COMMENT1 END*/
+// =======================Drag and sort End=========================
+
+// =====================Setup food package Start=====================
+
+	$( ".sec-arrange" ).mouseout(function() {
+		
+		var foodset1 = $('.food-pack-radios1').length;
+		 	for(var i=1; i<=30; i++) {
+		  	
+			// alert(foodset1);
+		    var isvp1 = $( ".food-pack-radio"+ i ).index();
+
+		    $(".food-pack-radio"+ i).attr('name', "food_type"+isvp1);
+
+		    $(".chnage-name-foodr"+ i).attr('name', "food_type"+isvp1);
+		    $(".chnage-name-foodrinpa"+ i).attr('id', "sizeA_"+isvp1);
+		    $(".chnage-name-foodrinpb"+ i).attr('id', "sizeB_"+isvp1);
+
+		    $(".chnage-name-foodrla"+ i).attr('for', "sizeA_"+isvp1);
+		    $(".chnage-name-foodrlb"+ i).attr('for', "sizeB_"+isvp1);
+		  }
+	});
+
+
+// =====================Setup food package Ens=====================
+
+// window.onload = function() {
+//   alert('asd');
+// };
+
+var _URL = window.URL || window.webkitURL;
+
+$(".hallimgscript input[type='file']").change(function(e) {
+    var file, img;
+    var checkthis;
+    var input = $(this).parents('.input-group').find(':text');
+
+    if ((file = this.files[0])) {
+        img = new Image();
+        img.onload = function() {
+           if (this.width >= 800 && this.height >= 400) {
+           		input.removeClass('remove-dtv');
+            } else { 
+                showMessage('The image resolution should be atlist 800px.','#E9573F');
+            	input.addClass('remove-dtv');
+            }
+        };
+       
+        img.onerror = function() {
+            showMessage("Please select valid image file",'#E9573F');
+        };
+        img.src = _URL.createObjectURL(file);
+        input.addClass('remove-dtv');
+    };
+});
+
+function addhallcheck()
+{
+	if ($(".hallimgscript input").hasClass("remove-dtv"))
+	{
+		showMessage("Please select valid image file",'#E9573F');
+		return false;
+	}
+}
+
+function sort_report(order)
+{
+	document.getElementById('order').value = order;
+	document.filter_form.submit();
+}
+
+function select_usertype(value)
+{
+	if(value==4 || value==7)
+	{
+		$("#halls").removeAttr("required multiple");
+		$("#modules").removeAttr("required multiple");
+		$("#modules_block").css("display", "none");
+	}
+	else
+	{
+		$("#halls").attr("required","required");
+		$("#halls").attr("multiple","multiple");
+		$("#modules").attr("required","required");
+		$("#modules").attr("multiple","multiple");
+		$("#modules_block").css("display", "block");	
+	}
+}
+
+function new_password()
+{
+	var pwd = document.getElementById("pwd");
+	
+	if(pwd.value=="")
+	{
+		alert("Password field can not be blank.");
+		return false;
+	}
+	else if(pwd.value.length < 8)
+	{
+		alert("Password must be at least 8 characters long.");
+		return false;
+	}
+	else
+		return true;
+}
+
+$(document).on("click", ".select_end_date" , function() {
+	$('.show_select_date_click').addClass('active');
+	$('.show_select_date').addClass('active');
+});
+
+$("#daybookXport").click(function(){
+	if($("#dbdf").val()=="" || $("#dbdt").val()==""){
+		showMessage("To export day book, you must select the date range.","#E9573F");
+		return false;
+	}else{
+		var href = base_url+"erp/exports/daybook.php?sdate="+$("#dbdf").val()+"&edate="+$("#dbdt").val();
+		$("#daybookXport").prop("href",href);
+		return true;
+	}
+});
+// $('.show_select_date')
+
+function check_existing_enquiry()
+{
+	var edate = $("#doe").val();
+	var mobile= $("#contact").val();
+	
+	if(edate!="" && mobile.length>=10)
+	{
+		$.ajax({
+			type	: "POST",
+			url		: base_url+"erp/ajax.php?Pg=check_existing_enquiry",
+			data	: {
+						"edate" : edate,
+						"mobile": mobile
+					  },
+			success	: function(response){
+						if(response==1)
+							showMessage("This enquirer has previously enquired for the same date.","#D8482C");
+					}
+		});
+	}
+}
+
+$("input[group=1]").on("change keyup paste",function(){
+	//console.log("AAA");
+	check_existing_enquiry();
+});
+
+$("#enquiry_halls").change(function(){
+	var halls = $(this).val();
+	
+	if(halls == "-1|-1|-1")
+		var optionString = '<option value="">--Select--</option><option value="BF">Breakfast</option><option value="LN">Lunch</option><option value="HT">High Tea</option><option value="DN">Dinner</option><option value="FD">Fullday</option>';
+	else
+		var optionString = '<option value="">--Select--</option><option value="FD">Fullday</option><option value="MO">Morning</option><option value="AF">Afternoon</option><option value="EV">Evening</option><option value="ON">Overnight</option>';
+	
+	$("#slot").html(optionString);
+});
+
+function checkFoodItem(obj,index)
+{
+	if(!obj.checked)
+	{
+		$("input[index="+index+"]").prop("disabled",true);
+		$("select[index="+index+"]").prop("disabled",true);
+	}
+	else
+	{
+		$("input[index="+index+"]").prop("disabled",false);
+		$("select[index="+index+"]").prop("disabled",false);
+	}
+}
+
+function changeOilStatus(service)
+{
+	var checked = $("input[type=checkbox][service="+service+"]").prop("checked");
+	
+	if(checked)
+		$("input[type=text][service="+service+"]").prop("disabled",false);
+	else
+		$("input[type=text][service="+service+"]").prop("disabled",true);
+}
+
+function toggleFp(obj,group)
+{
+	if(obj.checked)
+		$("input[type=number][group="+group+"]").prop("disabled",false);
+	else
+		$("input[type=number][group="+group+"]").prop("disabled",true);
+}
+
+function toggleQrBox(rid)
+{
+	$(".quot-rev-box[uid="+rid+"]").toggle(500);
+}
+
+$(document).on("change",".max-allowed-food-items",function(){
+	var group		= $(this).attr("group");
+	var maxallowed	= $(this).attr("maxallowed");
+	
+	var checked		= $(".max-allowed-food-items[group="+group+"]:checked").length;
+
+	if(checked > maxallowed)
+		showMessage("Only "+maxallowed+" items are allowed for this group.","#E9573F");
+});
+
+function addPBFollowup(bookingid)
+{
+	var callDate	= document.getElementById("callDate").value;
+	var followupFor	= document.getElementById("followupFor").value;
+	var mood		= document.getElementById("mood").value;
+	var nextCall	= document.getElementById("nextCall").value;
+	var comment		= document.getElementById("comment").value;
+	
+	$.ajax({
+		"type"		:	"POST",
+		"url"		:	base_url+"erp/ajax.php?Pg=addPBFollowup",
+		"data"		:	{
+							"bookingid"		: bookingid,
+							"callDate"		: callDate,
+							"followupFor"	: followupFor,
+							"mood"			: mood,
+							"nextCall"		: nextCall,
+							"comment"		: comment
+						},
+		"success"	:	function(response){
+							var data = JSON.parse(response);
+							var comms= data.length;
+							
+							var str = '<h4 class="small-title">Booking Followup Trail</h4><div class="table-responsive form-group"><table class="table table-th-block table-hover"><thead><tr><th class="pbf-th">Sr#</th><th class="pbf-th">Call Date</th><th class="pbf-th">Followup For</th><th class="pbf-th">Mood</th><th class="pbf-th">Next Call</th><th class="pbf-th">Comment</th></tr></thead><tbody>';
+							
+							data.forEach(function(val,index){
+								str += '<tr><td>'+(index+1)+'</td><td>'+val.callDate+'</td><td>'+val.followupFor+'</td><td>'+val.mood+'</td><td>'+ val.nextCall+'</td><td>'+val.comment+'</td></tr>';
+							});
+							
+							str += '</tbody></table></div>';
+							
+							document.getElementById("pbftrail").innerHTML = str;
+							document.getElementById("pbfcount").innerHTML = comms;
+						}
+	});
+}
+
+/************************************* FOOD ITEM AUTOCOMPLETE ************************************/
+var itemList= [];
+var flist	= [];
+$(function(){
+	$(document).on("keyup","#searchItem",function(){
+		$(this).autocomplete({
+			source : itemList,
+			minLength: 2
+		}).autocomplete( "instance" )._renderItem = function( ul, item ) {
+		  return $( "<li>" )
+			.append( "<div class='ac-div' onClick='checkItem(\"" + item.label + "\")'>" + item.label + "</div>" )
+			.appendTo( ul );
+		};
+	});
+});
+
+function checkItem(fi)
+{
+	var fitem = fi.split(" (");
+	
+	var id = "";
+	flist.forEach(function(v,i){
+		//console.log(v.fi);
+		if(v.fi==fi)
+			id = v.id;
+	});
+	//console.log(id);
+	document.getElementById(id).checked = true;
+	showMessage(fitem[0]+" has been selected.","#8CC152");
+}
+
+function clearSearchBox()
+{
+	document.getElementById("searchItem").value = "";
+}
+/************************************* FOOD ITEM AUTOCOMPLETE ************************************/
+
+function addXtraService()
+{
+	var service = '<div class="col-xs-2"><div class="form-group"><input type="text" name="others[]" class="form-control"></div></div>';
+	$("#xtraservices").append(service);
+}
+
+$(document).ready(function(){
+	$("select[name=service]").change(function(){
+		var vendors = $("option:selected",this).attr("vendors");
+		vendors = JSON.parse(vendors);
+		
+		var vendorOpts = '<option value="">Select Vendor</option>';
+		vendors.forEach(function(v,k){
+			vendorOpts += '<option value="'+v.id+'" concernperson="'+v.concernperson+'">'+v.vendor+'</option>'
+		});
+		
+		$("select[name=vendor]").html(vendorOpts);
+		//console.log(vendors);
+	});
+
+	$("select[name=vendor]").change(function(){
+		var conper = $("option:selected",this).attr("concernperson");
+		$("input[name=concernperson]").val(conper);
+	});
+
+	$(document).on("keyup change","[name='amounts[]'],[name='qtys[]']",function(){
+		total = 0;
+		$("[name='amounts[]']").each(function(){
+			index = $(this).attr("index");
+			amount = $(this).val();
+			amount = amount==""?0:parseInt(amount);
+			
+			qty = $("[name='qtys[]'][index="+index+"]").val();
+			qty = qty==""?0:parseInt(qty);
+			
+			subtotal = amount * qty;
+			$("[name='subtotals[]'][index="+index+"]").val(subtotal);
+			
+			total += subtotal;
+		});
+
+		$("[name=grandtotal]").val(total);
+	});
+});
+
+function addPoParticulars()
+{
+	var index = 0;
+	
+	while(document.getElementsByName("amounts[]")[index])
+		index++;
+
+	var str = '<div class="row"><div class="col-xs-5"><div class="form-group"><input type="text" name="services[]" class="form-control"></div></div><div class="col-xs-2"><div class="form-group"><input type="number" step="1" min="1" name="amounts[]" class="form-control" index="'+index+'"></div></div><div class="col-xs-2"><div class="form-group"><input type="number" step="1" min="1" name="qtys[]" class="form-control" value="1" index="'+index+'"></div></div><div class="col-xs-2"><div class="form-group"><input type="text" name="subtotals[]" class="form-control" index="'+index+'" value="0" readonly></div></div><div class="col-xs-5"><div class="form-group"><textarea type="text" name="descriptions[]" class="form-control" placeholder="Service Description" index="'+index+'" style="display:none"></textarea></div></div><div class="col-xs-1"><div class="form-group" style="position:absolute; top:-41px; left:-89px"><span class="label label-info pointer" onClick="toggleDescription('+index+',this)" style="padding: 5px 7px;">+ Description</span></div></div></div>';
+	
+	$("#partuculars").append(str);
+}
+
+function toggleDescription(i,This)
+{
+	var s = $("[name='descriptions[]'][index="+i+"]").css("display");
+
+	if(s == "none")
+	{
+		$("[name='descriptions[]'][index="+i+"]").show();
+		This.innerHTML = "- Description";
+	}
+	else
+	{
+		$("[name='descriptions[]'][index="+i+"]").hide();
+		This.innerHTML = "+ Description";
+	}
+}
+
+function calcPHC(mid)
+{
+	var rate = document.getElementById("rate"+mid).value;
+	rate = rate==""?0:parseInt(rate);
+
+	var pax = document.getElementById("pax"+mid).value;
+	pax = pax==""?0:parseInt(pax);
+
+	document.getElementById("subtotal"+mid).value = rate * pax;
+}
+
+function toggleGST(checked)
+{
+	if(checked)
+	{
+		document.getElementById("row-discount").style.display = "none";
+	}
+	else
+	{
+		document.getElementById("row-discount").style.display = "block";
+	}
+
+	document.getElementById("discountv").value = document.getElementById("discount").value = 0;
+	
+	$("[name='fp_gsts[]']").each(function(){
+		if(checked)
+		{
+			var gstp = $("#rate1").attr("gst");
+			gstp = gstp==""?0:parseInt(gstp);
+		}
+		else
+			var gstp = 0;
+		
+		var pkg = $(this).attr("pkg");
+		
+		var pkgcost = $("[name='fp_pkgcosts[]'][pkg="+pkg+"]").val();
+		pkgcost = pkgcost==""?0:parseInt(pkgcost);
+		
+		var adn = $("[name='fp_addons[]'][pkg="+pkg+"]").val();
+		adn = adn==""?0:parseInt(adn);
+
+		var taxable = pkgcost + adn;
+		var gstv = taxable * gstp * 0.01;
+		gstv = Math.round(gstv);
+		
+		$(this).val(gstv);
+	});
+	
+	calcPerHeadChargesAll();
+	ocfixedgst();
+	calc();
+}
+
+$(".twinkling-btn").click(function(){
+	if($(".tform").hasClass("collapsed"))
+	{
+		$(".tform").removeClass("collapsed");
+		$(".tform").addClass("expanded");
+		$(".tform").css("overflow","revert");
+		$(this).children().removeClass("fa-plus");
+		$(this).children().addClass("fa-minus");
+	}
+	else
+	{
+		$(".tform").removeClass("expanded");
+		$(".tform").addClass("collapsed");
+		$(".tform").css("overflow","hidden");
+		$(this).children().addClass("fa-plus");
+		$(this).children().removeClass("fa-minus");
+	}
+});
+
+$("select#disctype").change(function(){
+	$("#discount").val("");
+	calc();
+});
+
+$(document).on("keyup","input[name='discper[]'],[name='rate[]'],[name='qty[]']",function(){
+	var id = $(this).prop("id").replace("discper","").replace("rate","").replace("qty","");
+	
+	if($("#dtype"+id).val() == "%")
+		var max = 100;
+	else
+		var max = parseInt($("#subtot"+id).val());
+	
+	var per = parseFloat($("#discper"+id).val());
+	//console.log("A" + max);
+	while(per > max)
+	{
+		$("#discper"+id).val($("#discper"+id).val().slice(0,-1));
+		per = parseFloat($("#discper"+id).val());
+	}
+	
+	invCalc();
+});
+
+$(document).on("keyup",".nonnegative",function(){
+	if(parseFloat($(this).val()) < 0)
+	{
+		$(this).val("");
+		invCalc();
+	}
+});
+
+$(document).on("keyup mousedown","#discount",function(){
+	var d = $(this).val();
+	d = d==""?0:parseFloat(d);
+
+	if($("select#disctype").val()=="%")
+	{
+		if(d>100)
+		{
+			while(d > 100)
+			{
+				$("#discount").val($("#discount").val().slice(0,-1));
+				d = $("#discount").val();
+			}
+		}
+	}
+	else
+	{
+		var total = parseInt($("#total").val());
+
+		if(d > total)
+		{
+			while(d > total)
+			{
+				$("#discount").val($("#discount").val().slice(0,-1));
+				d = $("#discount").val();
+			}
+		}
+	}
+
+	calc();
+});
+
+$(document).on("keyup",".af",function(){
+	var p = $(this).attr("pkg");
+	var c = $(this).attr("cat");
+	var f = $(this).attr("food");
+	var category = $(".aft[pkg="+p+"][cat="+c+"][food="+f+"]").attr("category");
+	
+	calc_addon_food_rates(p,c,f,category);
+});
+
+function calc_addon_food_rates(p,c,f,category)
+{
+	var rate = $("[name='afrates_"+p+"_"+c+"[]'][pkg="+p+"][cat="+c+"][food="+f+"]").val();
+	var pax = $("[name='afpax_"+p+"_"+c+"[]'][pkg="+p+"][cat="+c+"][food="+f+"]").val();
+	
+	rate= rate==""?0:parseInt(rate);
+	pax	= pax==""?0:parseInt(pax);
+	
+	$("[name='aftotal_"+p+"_"+c+"[]'][pkg="+p+"][cat="+c+"][food="+f+"]").val(rate * pax);
+	
+	var total = 0;
+	$(".aft[pkg="+p+"]").each(function(){
+		total += parseInt($(this).val());
+	});
+	
+	var cattotal = 0;
+	$(".aft[pkg="+p+"][category="+category+"]").each(function(){
+		cattotal += parseInt($(this).val());
+	});
+	
+	//console.log(c);
+	document.getElementById("aftc_"+p).innerHTML = total;
+	$("[pkg="+p+"][category="+category+"]").html(cattotal);
+}
+
+$(document).on("click",".updateaddons",function(){
+	var fpid = $(this).attr("fpid");
+	var bookingid = $(this).attr("bookingid");
+
+	var items = new Array();
+	var rates = new Array();
+	var paxs  = new Array();
+	var totals= new Array();
+
+	$(".c-item").each(function(){
+		items.push($(this).val());
+	});
+
+	$(".c-rate").each(function(){
+		rates.push($(this).val());
+	});
+
+	$(".c-pax").each(function(){
+		paxs.push($(this).val());
+	});
+
+	$(".c-total").each(function(){
+		totals.push($(this).val());
+	});
+	
+	var fdata = {
+		"items" : items,
+		"rates" : rates,
+		"paxs"  : paxs,
+		"totals": totals
+	};
+	
+	$.ajax({
+		type	: "post",
+		url		: base_url+"erp/ajax.php?Pg=updateAddonItems&fpid="+fpid+"&bookingid="+bookingid,
+		data	: fdata,
+		success	: function(){
+			window.location.reload(true);
+		}
+	});
+});
+
+$(document).on("click",".afpupdate",function(){
+	var fpid = $(this).attr("fpid");
+	var items = {};
+	var fdata = {
+		"title"		: $("#efp_title").val(),
+		"datetime"	: $("#efp_datetime").val(),
+		"rate"		: $("#efp_rate").val(),
+		"pax"		: $("#efp_pax").val(),
+		"items"		: items
+	};
+	
+	var i = 0;
+	while($("[name='food_items"+i+"[]']").length > 0)
+	{
+		$(".xfp[name='food_items"+i+"[]']:checked").each(function(k,v){
+			var keey = $(this).attr("name").replace("[]","");
+			
+			if(typeof items[keey] == "undefined")
+				items[keey] = [];
+			
+			items[keey].push($(this).val());
+		});
+
+		i++;
+	}
+	
+	//wconsole.log(fdata);
+
+	$.ajax({
+		type		: "post",
+		url			: base_url+"erp/ajax.php?Pg=save_additional_fp&fpid="+fpid,
+		data		: fdata,
+		success		: function(res){
+						$("#lbct25").removeClass("active");
+						window.location.reload(true);
+					}
+	});
+});
+
+$(document).on('click', '.bannerSlider', function () {
+	var cname = $(this).attr("target");
+	$('.commonslidemaind').removeClass('active');
+	$('#'+cname).addClass('active');
+	$('.scroll-d2-over').toggleClass('scroll-off-main');
+
+	if($(this).is("[pkg][edit]"))
+	{
+		var pkg = $(this).attr("pkg");
+		var edit = $(this).attr("edit");
+
+		if(edit == "foodpkg")
+		{
+			$.get(base_url+"erp/ajax.php?Pg=preselected_food_package_menu_additional&fpid="+pkg,function(res){
+				res = JSON.parse(res);
+				document.getElementById("lbct25").innerHTML = res.html;
+				'use strict';
+			
+				jQuery('.date-time-picker').datetimepicker({
+					format:'d-m-Y h:i A',
+					formatTime:'h:i A',
+					formatDate:'d-m-Y',
+					minDate: new Date(),
+					step: 15
+				});
+			});
+		}
+		else if(edit == "addon")
+		{
+			$.get(base_url+"erp/ajax.php?Pg=preselected_addon_menu&type=addtional&id="+pkg,function(res){
+				//res = JSON.parse(res);
+				document.getElementById("lbct25").innerHTML = res;
+				document.getElementById("lbct25").style.overflowY = "scroll";
+			});
+		}
+		else if(edit == "defaddon")
+		{
+			$.get(base_url+"erp/ajax.php?Pg=preselected_addon_menu&type=default&id="+pkg,function(res){
+				//res = JSON.parse(res);
+				document.getElementById("lbct25").innerHTML = res;
+				document.getElementById("lbct25").style.overflowY = "scroll";
+			});
+		}
+	}
+
+	//console.log("A");
+});
+
+$(document).on("keyup","#efp_rate,#efp_pax",function(){
+	var rate= $("#efp_rate").val();
+	var pax = $("#efp_pax").val();
+	
+	if(!isNaN(rate) && !isNaN(pax))
+		$("#efp_cost").val(parseInt(rate)*parseInt(pax));
+	else
+		$("#efp_cost").val(0);
+});
+
+$("#agent").change(function(){
+	if($(this).is(":checked"))
+		$("#agentcommbox").show();
+	else
+		$("#agentcommbox").hide();
+});
+
+$("[name=commtype]").change(function(){
+	$("[name=commvalue]").val(0);
+	calc();
+});
+
+$(document).ready(function(){
+	$(document).on("click",".addaddonfp",function(){
+		var pkg = 1;
+
+		while(document.getElementById("afis_"+pkg))
+			pkg++;
+
+		if(pkg == 1)
+		{
+			$("#addon_food_item_block").addClass("addon-food-item-block");
+			var str = '';
+		}
+		else
+			var str = '<div style="width:100%; float:left; height:1px;border:#CCCCCC 1px solid"></div>';
+
+		str += '<div class="col-xs-4"><div class="form-group"><label>Addon food package #<span id="afis_'+pkg+'">'+pkg+'</span></label><input type="text" class="form-control" name="fp_pkgnames[]" pkg="'+pkg+'" placeholder="Food serving Ex. Lunch"></div></div><div class="col-xs-2"><div class="form-group"><label>Pax</label><input type="number" class="form-control" name="fp_paxes[]" pkg="'+pkg+'" min="1" step="1" value="0"></div></div><div class="col-xs-3"><div class="form-group"><label>Date Time</label><input type="text" class="form-control date-time-picker" name="datetimes[]" pkg="'+pkg+'"></div></div><div class="col-xs-3"><div class="form-group"><div style="width:100%; float:left; height:10px; text-align:right; font-size:10px;">Total Charges: <span id="fptotal_'+pkg+'">0</span></div><button type="button" class="btn btn-dribbble chargeable-food-items tooltipa bannerSlider" pkg="'+pkg+'" data-tooltip-text="Addional chargeable food items" target="addonitems'+pkg+'"><span class="fa fa-check"></span> Addons </button></div></div><div class="col-xs-4"><label class="width-100">Select Food Package <i class="fa fa-cutlery fr sidefoodpb sleectfpon slectfoodpnewb" pkg="'+pkg+'" style="display:none"></i></label><select name="fp_packageids[]" class="form-control" pkg="'+pkg+'">'+fpOpts+'</select></div><div class="col-xs-2"><div class="form-group"><label>per plate</label><input type="number" min="0" step="1" class="form-control" name="perplates[]" pkg="'+pkg+'" value="0" required></div></div><div class="col-xs-2"><div class="form-group"><label>Package Cost</label><input type="number" min="0" step="1" class="form-control" name="fp_pkgcosts[]" pkg="'+pkg+'" onKeyup="calc()" value="0" readonly></div></div><div class="col-xs-2"><div class="form-group"><label class="tooltipa" style="color:#E04C86" data-tooltip-text="Total cost of chargeable items">Addons</label><input type="number" min="0" step="1" class="form-control" name="fp_addons[]" pkg="'+pkg+'" onKeyup="calc()" value="0" readonly></div></div><div class="col-xs-2"><div class="form-group"><label>GST</label><input type="number" min="0" step="0.01" class="form-control" name="fp_gsts[]" pkg="'+pkg+'" onKeyup="calc()" value="0" readonly></div></div><slider id="addonitems'+pkg+'" class="commonslidemaind dispcenterd animination-z padding2 scroll-d1 of-a"><div class="col-sm-12 backbutton-lb"><a href="javascript:void(0)" class="backbuttonsideb tooltipa fr2 margin_right2 slider-back" data-tooltip-text="Go back"><i class="fa fa-arrow-left fl2 arrow_mar"></i><h4 class="small-title sldecolor-t1 fl2">Back to booking</h4></a></div><div class="row"><div class="col-xs-7">';
+		
+		fcats.forEach(function(fc,fci){
+			str += '<div class="row" style="border-bottom:#CCCCCC 1px solid"><div class="form-group"><div class="col-xs-12"><b>'+fc.category+'</b></div>';
+						
+			fc.items.forEach(function(fi,fri){
+				str += '<div class="col-xs-12"><div class="form-group"><div class="row"><div class="col-xs-4">';
+
+				if(fci==0 && fri==0)
+					str += '<label style="width:100%">Food Item</label>';
+
+				str += fi.food_item+'<input type="hidden" name="afitems_'+pkg+'_'+fci+'[]" value="'+fi.id+'"></div><div class="col-xs-2">';
+
+				if(fci==0 && fri==0)
+					str += '<label style="width:100%">Rate</label>';
+
+				str += '<input type="number" class="form-control af" name="afrates_'+pkg+'_'+fci+'[]" value="'+fi.rate+'" placeholder="Rate" pkg="'+pkg+'" cat="'+fci+'" food="'+fri+'"></div><div class="col-xs-2">';
+
+				if(fci==0 && fri==0)
+					str += '<label style="width:100%">Pax</label>';
+
+				str += '<input type="number" class="form-control af" name="afpax_'+pkg+'_'+fci+'[]" value="0" placeholder="Rate" pkg="'+pkg+'" cat="'+fci+'" food="'+fri+'"></div><div class="col-xs-3">';
+
+				if(fci==0 && fri==0)
+					str += '<label style="width:100%">Total</label>';
+
+				str += '<input type="number" class="form-control aft" name="aftotal_'+pkg+'_'+fci+'[]" value="0" placeholder="Rate" pkg="'+pkg+'" cat="'+fci+'" food="'+fri+'" category="'+fc.categoryid+'" readonly></div><div class="col-xs-1"></div></div></div></div>';
+			});
+						
+			str += '</div></div>';
+		});
+
+		str += '</div><div class="col-xs-5"><div class="form-group"><br>';
+		
+		fcats.forEach(function(fc,fci){
+			str += '<div class="row"><div class="col-xs-8">'+fc.category+'</div><div class="col-xs-4" style="text-align:right" pkg="'+pkg+'" category="'+fc.categoryid+'">0</div></div>';
+		});
+		
+		str += '<hr><div class="row"><div class="col-xs-8"><b>Total</b></div><div class="col-xs-4" style="text-align:right"><b id="aftc_'+pkg+'">0</b></div></div></div></div></div><div class="row"><div class="col-xs-2"><button type="button" class="btn btn-primary slider-back addoncalc" pkg="'+pkg+'">Save</button></div></div></slider><slider class="fp_box animination-z food-menu-parent scroll-d1 of-a" id="food_menu_container_'+pkg+'" style="overflow:auto"><div class="col-sm-3 food-menu-pt"><i class="fa fa-arrow-left backbuttonsideb tooltipa slider-back" data-tooltip-text="Go back"></i><h4 class="small-title sldecolor-t1">Food Menu</h4></div><div class="col-sm-9" style="padding-left: 7px;"><input type="text" class="form-control input-height-small" id="searchItem"><span class="label label-danger clearSearch-btn cler-btn" onClick="clearSearchBox()">x</span></div><div id="food_menu_container-items_'+pkg+'"></div></slider>';
+		
+		$("#addon_food_item_block").append(str);
+		
+		$(".datepicker").datepicker({
+			dateFormat : "dd-mm-yy"
+		});
+
+		'use strict';
+			
+		jQuery('.date-time-picker').datetimepicker({
+			format:'d-m-Y h:i A',
+			formatTime:'h:i A',
+			formatDate:'d-m-Y',
+			minDate: new Date(),
+			step: 15
+		});
+	});
+
+	$(document).on("change","[name='fp_packageids[]']",function(){
+		
+		var fpid= $(this).val();
+		var pkg = $(this).attr("pkg");
+		var pax = $("[name='fp_paxes[]'][pkg="+pkg+"]").val();
+		pax = pax==""?0:parseInt(pax);
+
+		var accept = document.getElementById("accept_gst").checked?1:0;
+		var gstp = $("#rate1").attr("gst");
+		gstp = gstp==""?0:parseInt(gstp)*accept;
+		
+		if(fpid!="" && fpid!="{}")
+		{
+			console.log("hiiiiiiiiii");
+			//$( ".scroll_trigger" ).click();
+			//console.log(fpid);
+			fpid= JSON.parse(fpid);
+			id	= fpid.id;
+			rate= parseInt(fpid.rate);
+			//console.log("Rate:"+rate+" Pax:"+pax);
+			$("[name='perplates[]'][pkg="+pkg+"]").val(rate);
+			
+			$.ajax({
+				"type" : "POST",
+				"url" : base_url+"erp/ajax.php?Pg=get_food_package_menu&fpid="+id+"&pkg="+pkg,
+				"data": {},
+				"success": function(res){
+						data = JSON.parse(res);
+						html = data.html;
+						foodlist = data.foodList;
+						
+						document.getElementById("food_menu_container-items_"+pkg).innerHTML = html;
+						
+						/*itemList = flist = [];
+						
+						data.foodList.forEach(function(v,i){
+							itemList.push(v.fi);
+							flist.push(v);
+						});*/
+						
+						var fptotal = rate * pax;
+						$("[name='fp_pkgcosts[]'][pkg="+pkg+"]").val(fptotal);
+
+						var adn = $("[name='fp_addons[]'][pkg="+pkg+"]").val();
+						adn = adn==""?0:parseInt(adn);
+						
+						var gstv = Math.round((fptotal+adn) * gstp * 0.005)*2;
+						$("[name='fp_gsts[]'][pkg="+pkg+"]").val(gstv);
+						
+						$("#fptotal_"+pkg).html(fptotal + adn + gstv);
+
+						//subtotal += (fptotal+adn);
+						
+						calc();
+
+						//$(".fp_viewselection[pkg="+pkg+"]").addClass("active");
+						//$(".fp_viewselection[pkg="+pkg+"]").click();
+
+						activateSlider("food_menu_container_"+pkg);
+					}
+			});
+			
+			//$("#food_menu_container_"+pkg).addClass("active");
+			//$(".fp_viewselection[pkg="+pkg+"]").click();
+		}
+		else
+		{
+			$("[name='perplates[]'][pkg="+pkg+"]").val(0);
+			$("[name='fp_pkgcosts[]'][pkg="+pkg+"]").val(0);
+			//$(".fp_viewselection[pkg="+pkg+"]").removeClass("active");
+			//console.log("No FP");
+			calc();
+		}
+
+		cutleryIcon(pkg);
+	});
+
+	$(document).on("click",".bannerSlider",function(){
+		var target = $(this).attr("target");
+		activateSlider(target);
+	});
+
+	$("select[name=package][target=food_menu_container]").change(function(){
+		if($(this).val()!="{}")
+			activateSlider("food_menu_container");
+	});
+
+	$("button[target=addonitems0]").click(function(){
+		activateSlider("addonitems0");
+	});
+
+	$(document).on("click",".fa-cutlery[pkg]",function(){
+		var pkg = $(this).attr("pkg");
+		//console.log(pkg);
+		if(pkg != "0")
+		{
+			var target = "food_menu_container_"+pkg;
+			activateSlider(target);
+			//console.log("B");
+		}
+		else
+		{
+			var target = "food_menu_container";
+			activateSlider(target);
+		}
+	});
+});
+
+$(document).on("click",".slider-back",function(){
+	var target = $(this).closest("slider").attr("id");
+	//console.log("Kooii");
+	deactivateSlider(target);
+});
+
+function activateSlider(target)
+{
+	$("#"+target).addClass("active");
+	$("body").addClass("scroll-off-main");
+	//console.log("Hii");
+}
+
+function deactivateSlider(target)
+{
+	$("#"+target).removeClass("active");
+	$("body").removeClass("scroll-off-main");
+	//console.log("closing");
+}
+
+function cutleryIcon(pkg)
+{
+	if(pkg=="0")
+	{console.log("YEESS");
+		var fp = $("select[name=package]").val();
+
+		$(".fa-cutlery[pkg=0]").hide();
+
+		if(fp!='{}')
+			$(".fa-cutlery[pkg=0]").show();
+	}
+	else
+	{
+		var fp = $("select[pkg="+pkg+"]").val();
+		//console.log("SED: "+fp);
+		$(".fa-cutlery[pkg="+pkg+"]").hide();
+
+		if(fp!='{}')
+		{
+			$(".fa-cutlery[pkg="+pkg+"]").show();
+			console.log("Bonjour");
+		}
+		else
+			console.log("Hola");
+	}
+}
+
+$(document).on("click",".defadonn",function(){
+	if($(this).is("[pkg]"))
+	{
+		//var pkg = $(this).attr("pkg");
+		document.getElementById("fp_addon").value = document.getElementById("aftc_0").innerHTML;
+		
+		document.getElementById("fptotal_0").innerHTML = parseInt(document.getElementById("fp_addon").value) + parseInt(document.getElementById("totalfoodcharges").value) + parseInt(document.getElementById("gst1").value);
+		
+		calc();
+	}
+});
+
+$(document).on("click",".addoncalc",function(){
+	var pkg = $(this).attr("pkg");
+	
+	var addon = document.getElementById("aftc_"+pkg).innerHTML;
+	addon = addon==""?0:parseInt(addon);
+	
+	var foodpkg = $("[name='fp_pkgcosts[]'][pkg="+pkg+"]").val();
+	foodpkg = foodpkg==""?0:parseInt(foodpkg);
+	
+	//var gst = $("[name='fp_gsts[]'][pkg="+pkg+"]").val();
+	//gst = gst==""?0:parseInt(gst);
+
+	var accept_gst = document.getElementById("accept_gst").checked?1:0;
+
+	var gstp = parseInt($("#rate1").attr("gst"));
+
+	var gst = Math.round(accept_gst * (addon + foodpkg) * gstp) * 0.01;
+	//console.log(gst);
+	$("[name='fp_addons[]'][pkg="+pkg+"]").val(addon);
+	$("[name='fp_gsts[]'][pkg="+pkg+"]").val(gst);
+	document.getElementById("fptotal_"+pkg).innerHTML = foodpkg + addon + gst;
+	
+	calc();
+});
+						
+$(document).on("keyup","[name='fp_paxes[]'],[name='perplates[]']",function(){
+	var pkg = $(this).attr("pkg");
+	var pax = $("[name='fp_paxes[]'][pkg="+pkg+"]").val();
+	var accept = document.getElementById("accept_gst").checked?1:0;
+	var gstp = $("#rate1").attr("gst");
+	gstp = gstp==""?0:parseFloat(gstp)*accept;
+	
+	pax = pax==""?0:parseFloat(pax);
+	var perplate = $("[name='perplates[]'][pkg="+pkg+"]").val();
+	perplate = perplate==""?0:parseFloat(perplate);
+	
+	var pkgcost = perplate * pax;
+	$("[name='fp_pkgcosts[]'][pkg="+pkg+"]").val(pkgcost);
+	var adn = $("[name='fp_addons[]'][pkg="+pkg+"]").val();
+	adn = adn==""?0:parseFloat(adn);
+	
+	var afpcost = pkgcost + adn;
+	var pkggst = Math.round(afpcost * gstp) * 0.01;
+	//pkggst = Math.round(pkggst);
+	$("[name='fp_gsts[]'][pkg="+pkg+"]").val(pkggst);
+	//console.log("HI: "+pkggst);
+	//console.log("HH: "+pkg);
+	$("#fptotal_"+pkg).html(pkgcost + adn + pkggst);
+	
+	calc();
+});
+
+$(document).on("click",".food-menu-pt, .back_button_sec2",function(){
+	//$(".fp_box,.sidelb").removeClass("active");
+	//$('.fp_box_show .backbuttonsideb').click();
+});
+
+$(document).on("click",".fp_box_show .backbuttonsideb",function(){
+	if ($(".fp_box").hasClass("fp_box_show")) {
+		$('body').addClass('scroll-off-main')
+	}
+	else
+	{
+		$('body').removeClass('scroll-off-main')
+	}
+
+	//$('body').removeClass('scroll-off-main')
+});
+
+$(document).on("click",".sidefoodpb",function(){
+	$(this).parent().parent().removeClass("fp_box_show").removeClass("active");
+	//$( ".scroll_trigger" ).click();
+});
+
+function confirm_submit(){/*
+	var time	= $('[name=payment_time]').val();
+	var amount	= $('[name=amount]').val();
+
+	if(amount != ''){
+		if(time == '')
+			return false;
+	}
+
+	return true;*/
+}

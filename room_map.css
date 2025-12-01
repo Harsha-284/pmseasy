@@ -1,0 +1,317 @@
+.modal-content{
+    width: 70%;
+}
+
+.modal-cnt {
+    width: 30%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* width: 100%; */
+    color: var(--bs-modal-color);
+    pointer-events: auto;
+    background-color: var(--bs-modal-bg);
+    background-clip: padding-box;
+    border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+    border-radius: var(--bs-modal-border-radius);
+    outline: 0;
+}
+.date-container {
+    display: flex;
+    /* overflow-x: scroll; */
+    width: 100%;
+    /* background-color: #f0f0f0; */
+    padding: 12px 0 0 12px;
+    white-space: nowrap;
+}
+
+.main-container {
+    overflow-x: scroll;
+    background-color: #f0f0f0;
+    overflow-y: scroll;
+    height: 400px;
+}
+
+.date-item {
+    background-color: #0099cc;
+    color: white;
+    padding: 4px;
+    margin-right: 0px;
+    /* text-align: center; */
+    min-width: 63px;
+    font-family: Arial, sans-serif;
+    /* border-radius: 4px; */
+}
+.main-head{
+    text-align: center;
+    padding-top: 10px;
+    /* color:rgb(144 146 163); */
+    
+}
+.main-head h6{
+    font-size: 0.8rem;
+}
+
+
+.box-red{
+    background-color: red !important;
+}
+.box-yellow{
+    background-color: yellow !important;
+}
+/* .box-black{
+    background-color: black !important;
+} */
+/* .box-white{
+    background-color: white !important;
+} */
+.box-white p{
+    color: #000;
+}
+.available {
+    background:#37bc9b !important;
+}
+.available p{
+    color: white;
+}
+
+.box-color {
+    border: 1px solid #000;
+}
+
+.occupied {
+    background-color: #fb3c3c;
+
+}
+.up{
+    margin-top: 40px !important;
+}
+.selected {
+    background-color: yellow;
+}
+
+.date-bg {
+    background-color: #fafaf9;
+}
+.dates-box{
+    /* position: fixed; */
+    /* background-color: #fff; */
+    padding: 0px 12px 0px 12px;
+    margin-top: 10px;
+    /* z-index: 10; */
+}
+
+.box-color {
+    width: 10px;
+    height: 10px;
+    margin-top: 5.7px !important;
+}
+
+
+.rooms-topbox{
+    flex-wrap: nowrap;
+}
+
+
+
+.optins {
+    margin-left: -25px;
+    padding-top: 10px;
+    font-size: 13px;
+}
+.text-title-tag {
+    width: fit-content;
+    padding: 5px;
+    margin: 10px 0px 10px 0px;
+    font-size: 13px;
+    border: 1px solid #000;
+    background-color: black;
+    color: white;
+}
+.text-title-tag h6{
+    font-size: 10px;
+    margin: 0px !important;
+}
+.dates {
+    /* height: auto;
+    width: 55px;
+    margin-left: 4px; */
+    height: auto;
+    width: 59px;
+    margin-right: 4px;
+    background-color: #3bafda;
+    color: white;
+}
+
+.dates span {
+    font-size: 8px;
+    font-weight: 600;
+}
+rooms-topbox
+.dates b {
+    font-size: 11px;
+}
+
+.dates p {
+    font-size: 9px;
+    margin: 0;
+}
+
+.rooms {
+    height: 62px;
+    width: 63px;
+    margin-left: 4px;
+    margin-top: 8px;
+}
+
+.rooms span {
+    color: #000;
+    margin-top: 5px;
+    font-size: 9px;
+    font-weight: 700;
+    /* border: 1px solid #fff; */
+    border-radius: 20px;
+    background-color: #fff;
+    /* width: 15px; */
+    /* height: 14px; */
+    text-align: center;
+    /* position: relative; */
+    /* top: -3px; */
+    /* left: -15px; */
+    padding: 0px 2PX;
+}
+
+#select-room {
+    width: 40px;
+    font-size: 10px;
+    font-weight: 700;
+    height: 17px;
+}
+.rooms p {
+    font-size: 9px;
+}
+
+.room-info {
+    margin: 0 !important;
+    max-width: 930px !important;
+}
+
+.modal-dialog {
+    max-width: 990px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.room-selection {
+    font-size: 9px;
+    font-weight: 500;
+    color: #fff;
+    width: 55px;
+    text-align: center;
+    margin: 2px 0px 2px 0px;
+}
+
+/* .dropdown-toggle::after {
+    margin-left: 0 !important;
+} */
+
+@media screen and (max-width: 1024px) {
+    .room-info {
+        margin: 0 !important;
+        width: 1024px !important;
+    }
+
+    .dates {
+        width: 57px;
+    }
+
+    .rooms {
+        width: 57px;
+    }
+
+    .dates b {
+        font-size: 12px;
+    }
+
+    .rooms b {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) and (min-width: 426px) {
+    .room-info {
+        margin: 0 !important;
+        width: 768px !important;
+    }
+
+    .dates {
+        height: auto;
+        width: 41px;
+    }
+
+    .rooms {
+        height: auto;
+        width: 41px;
+    }
+
+    .dates b {
+        font-size: 12px;
+    }
+
+    .rooms b {
+        font-size: 12px;
+    }
+}
+.main-boxcont{
+    padding-left: 12px;
+}
+
+.summry{
+    background-color: #f0f0f0;
+    height: 77%;
+    padding: 10px 0 0 4px;
+    overflow-y: scroll;
+}
+.tbl-dta td{
+    font-size: 11px;
+}
+.tbl-dta th{
+    font-size: 9px;
+}
+
+.tbl-dta{
+    border-bottom: 1px solid lightgray;
+}
+
+.last-tbl{
+    background-color: black;
+    color: white;
+}
+
+
+
+.rupee{
+    font-size: 9px;
+    display: inline-block;
+    margin: 0;
+    color: white;
+}
+.btn-btm button{
+    background-color: #37bc9b;
+    border: none;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

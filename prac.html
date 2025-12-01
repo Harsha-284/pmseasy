@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Room Map</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="room_map.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+
+<script>
+    const base_url = "https://pmseasy.in/pms"
+</script>
+
+<body>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog row">
+            <div class="modal-content col-9">
+                <div class="main-head">
+                    <h6>PMS data last updated at : 10-Sep-2024 10:34:00 PM</h6>
+                </div>
+                <div class="main-container">
+
+                    <div class="date-container">
+                        <!-- <div class="dates-box row g-1"> -->
+                        <div class="dates date-item col-sm-1 ">
+                            <p class=""> <span class="">WED</span> <br><b>15 Jan</b></p>
+                        </div>
+                        <div class="dates date-item col-sm-1 ">
+                            <p class=""> <span class="">WED</span> <br><b>16 Jan</b></p>
+                        </div>
+                        <div class="dates date-item col-sm-1 ">
+                            <p class=""> <span class="">WED</span> <br><b>17 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>18 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>19 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>20 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>21 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>22 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>23 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>24 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>25 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>26 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>27 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>28 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>29 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>30 Jan</b></p>
+                        </div>
+                        <div class="dates date-item ">
+                            <p class=""> <span class="">WED</span> <br><b>31 Jan</b></p>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+
+
+                    <form class="row g-3 needs-validation" novalidate
+                        style="display: flex; flex-wrap: wrap; width: 50%;">
+                        <div class="col-md-2"
+                            style="flex: 1; min-width: 50px; margin-right: 0px; padding-right: 0px; padding-left: 7px">
+                            <label for="validationCustom01" class="form-label">Check-in date</label>
+                            <input type="date" name="checkinDateBooking" class="form-control" id="validationCustom01"
+                                style="padding: 5px">
+                        </div>
+                        <div class="col-md-2"
+                            style="flex: 1; min-width: 50px; margin-right: 0px; padding-right: 0px; padding-left: 7px">
+                            <label for="validationCustom02" class="form-label">Check-out date</label>
+                            <input type="date" name="checkoutDateBooking" class="form-control" id="validationCustom02"
+                                style="padding: 5px">
+                        </div>
+                        <div class="col-md-2"
+                            style="flex: 1; min-width: 50px; margin-right: 0px; padding-right: 0px; padding-left: 7px">
+                            <button type="submit" class="btn btn-primary" id="submitButton"
+                                style="margin-top: 30px;">Submit</button>
+                        </div>
+                    </form>
+                    <!-- <div class="container room-info "> -->
+                    <div class="d-flex flex-column main-boxcont" id="room-detail">
+
+                    </div>
+                    <!-- </div> -->
+                </div>
+
+
+                <script>
+                    $(document).ready(function () {
+                        console.log('Document is ready');
+
+                        // Set default check-in and check-out dates
+                        const today = new Date();
+                        const tomorrow = new Date();
+                        tomorrow.setDate(today.getDate() + 1);
+
+                        const checkinInput = $('#validationCustom01');
+                        const checkoutInput = $('#validationCustom02');
+
+                        checkinInput.val(today.toISOString().split('T')[0]);
+                        checkoutInput.val(tomorrow.toISOString().split('T')[0]);
+
+                        // Function to fetch room data based on dates
+                        function fetchRoomData(checkinDate, checkoutDate) {
+                            let body = new URLSearchParams({
+                                checkin: checkinDate,
+                                checkout: checkoutDate,
+                                action: "fetch_room_data",
+                                hotel: 917
+                            })
+                            fetch(`${base_url}/bookingajax.php`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: body.toString() // Send the URL-encoded body
+                        })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Network response was not ok: ' + response.statusText);
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    let main_div = document.getElementById("room-detail");
+                                    let mainStr = '';
+
+                                    const roomTypes = Object.keys(data);
+                                    console.log(data);
+                                    console.log(roomTypes);
+
+                                    roomTypes.forEach((roomtype) => {
+                                        let rateplanStr = ''; // Reset for each room type
+                                        data[roomtype].rateplans.forEach((rateplan) => {
+                                            let dropDownStr = '<select name="Select Room" class="select-room">';
+                                            data[roomtype].rooms.forEach((room) => {
+                                                dropDownStr += `<option value="${room.roomId}">${room.roomnumber}</option>`;
+                                            });
+                                            dropDownStr += '</select>';
+
+                                            rateplanStr += `
+                                                <div class="rooms available col-1 d-flex flex-column align-items-center box-red">
+                                                    <div style="display: flex; align-items: flex-end;">
+                                                        <span>${data[roomtype].rooms.length}</span>
+                                                        <p class="rupee">&#8377;${rateplan.fulldaytariff}/-</p>
+                                                    </div>
+                                                    <div class="room-selection">${rateplan.room_rate_plan}</div>
+                                                    ${dropDownStr}
+                                                </div>`;
+                                        });
+                                        mainStr += `<div class="text-title-tag"><h6>${roomtype}</h6></div><div class="rooms-topbox row row-cols-15 row-cols-lg-12 g-2">${rateplanStr}</div>`;
+                                    });
+
+                                    main_div.innerHTML = mainStr; // Replace existing content
+                                })
+                                .catch(error => console.error('Error:', error));
+                        }
+
+                        // Handle form submission
+                        $('form').on('submit', function (e) {
+                            e.preventDefault(); // Prevent the default form submission
+                            const checkinDate = checkinInput.val();
+                            const checkoutDate = checkoutInput.val();
+                            fetchRoomData(checkinDate, checkoutDate); // Fetch room data based on selected dates
+                        });
+
+                        // Fetch room data initially with default dates
+                        fetchRoomData(checkinInput.val(), checkoutInput.val());
+                    });
+                </script>
+
+
+
+                <div class="text-center pt-3 btn-btm">
+                    <button class="">Book Selected Room</button>
+
+                </div>
+                <ul class="d-flex optins justify-content-center">
+                    <li class="mx-1 list-group-item d-flex ">
+                        <div class="box-color mx-1 available"></div>Available
+                    </li>
+                    <li class="mx-1 list-group-item d-flex ">
+                        <div class="box-color mx-1 selected"></div>Selected
+                    </li>
+                    <li class="mx-1 list-group-item d-flex ">
+                        <div class="box-color mx-1 occupied"></div>Occupied
+                    </li>
+                    <!-- <li class="mx-1 list-group-item d-flex">
+                        <div class="box-color mx-1 booked-tentative"></div>Booked-tentative
+                    </li>
+                    <li class="mx-1 list-group-item d-flex">
+                        <div class="box-color mx-1 blocked"></div>Blocked
+                    </li> -->
+                </ul>
+
+
+            </div>
+            <div class="modal-cnt col-3">
+                <div class="main-head">
+                    <h6>Room Summry</h6>
+                </div>
+                <div class="summry">
+                    <table>
+                        <tr class="tbl-dta sticky-top bg-white">
+                            <th>Room Name</th>
+                            <th>Date</th>
+                            <th class=" text-end">Rate</th>
+                            <th class=" text-end">Qty.</th>
+                            <th class=" text-end">Amount</th>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td class="">MAHARAJA SUITE</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM </td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">2300</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM ROOM HALL BIG ROOM & SMALL</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">5000</td>
+                            <td class="ps-3 text-end align-top">0</td>
+                            <td class="ps-2 text-end align-top">9000</td>
+                        </tr>
+                        <!-- <tr class="tbl-dta last-tbl border-1">
+                            <td></td>
+                            <td></td>
+                            <td class="text-end">Total:</td>
+                            <td class="ps-3 text-end">15</td>
+                            <td class="ps-2 text-end">27500</td>
+                        </tr> -->
+                    </table>
+                    <table>
+                        <!-- <tr class="tbl-dta">
+                            <th>Room Name</th>
+                            <th>Date</th>
+                            <th class=" text-end">Rate</th>
+                            <th class=" text-end">Qty.</th>
+                            <th class=" text-end">Amount</th>
+                        </tr> -->
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td class="">MAHARAJA SUITE</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM </td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">2300</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM HALL SMALL BIG HALL</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">5000</td>
+                            <td class="ps-3 text-end align-top">0</td>
+                            <td class="ps-2 text-end align-top">9000</td>
+                        </tr>
+                        <!-- <tr class="tbl-dta last-tbl border-1">
+                            <td></td>
+                            <td></td>
+                            <td class="text-end">Total:</td>
+                            <td class="ps-3 text-end">15</td>
+                            <td class="ps-2 text-end">27500</td>
+                        </tr> -->
+                    </table>
+                    <table>
+                        <!-- <tr class="tbl-dta">
+                            <th>Room Name</th>
+                            <th>Date</th>
+                            <th class=" text-end">Rate</th>
+                            <th class=" text-end">Qty.</th>
+                            <th class=" text-end">Amount</th>
+                        </tr> -->
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td class="">MAHARAJA SUITE</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM </td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">0</td>
+                            <td class="ps-3 text-end align-top">3</td>
+                            <td class="ps-2 text-end align-top">2300</td>
+                        </tr>
+                        <tr class="tbl-dta">
+                            <td>FAMILY PREMIUM ROOM</td>
+                            <td class="align-top">24/09/24</td>
+                            <td class="ps-2 text-end align-top">5000</td>
+                            <td class="ps-3 text-end align-top">0</td>
+                            <td class="ps-2 text-end align-top">9000</td>
+                        </tr>
+                        <tr class="tbl-dta last-tbl border-1 sticky-bottom">
+                            <td></td>
+                            <td></td>
+                            <td class="text-end">Total:</td>
+                            <td class="ps-3 text-end">15</td>
+                            <td class="ps-2 text-end">27500</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        $('.one').click(function () {
+            document.title = "ronit";
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Scroll</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+</body>
+
+</html>

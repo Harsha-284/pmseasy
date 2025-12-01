@@ -1,0 +1,75 @@
+.hours{
+    border: 1px solid #c9cbce;
+    width: 200px;
+    background: #ffffff;
+    z-index: 999999;
+    display: none;
+    padding: 0px 0px 10px 10px;
+    float: left;
+    margin-top: 10px;	
+}
+button.hours_number,button.minutes_number,button.ampm{
+	width: 26px;
+	height: 23px;
+	float: left;
+	color: black;
+	border: none;
+	margin: 5px 4px 0px 0px;
+	outline: none;
+	font-size: 10px;
+	font-family: arial;
+	background-color: #dadadac4;
+	cursor:pointer
+}
+.time_width{
+	width: 100%;
+	float: left;			
+}
+.time_width label{
+	width: 100%;
+	float: left;
+	display: block;
+	font-family: arial;
+	margin-top: 8px;
+	font-size: 12px;
+}
+.hours_button_back button{
+	background-color: #bbbbf7bd;
+}
+.minute_button_back button{
+	background-color: #ffc137bd;
+}
+.ap_button_back button{
+	background-color: #bbbbf7bd;
+}			
+.hours_button_back button.active_button,.minute_button_back button.active_button,.ap_button_back button.active_button{
+	background-color: #ff0909bd;
+	color: white;
+}
+.mtp{position:relative;}
+
+.hours:before,
+.hours:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: 10px;
+    border-style: solid;
+    position: absolute;
+    left: 20px;
+    z-index: 999999;
+}
+
+.hours:before {
+    border-color: transparent transparent #ffffff;
+    top: 21px;
+    z-index: 9999999;
+    display:none;
+}
+
+.hours:after {
+    border-color: transparent transparent #c9cbce;
+    top: 20px;
+    display:none;
+}

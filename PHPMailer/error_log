@@ -1,0 +1,23 @@
+[05-Jan-2019 06:05:49 UTC] PHP Fatal error:  Call to undefined function datetime() in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 113
+[05-Jan-2019 06:06:50 UTC] PHP Fatal error:  Call to undefined function datetime() in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 121
+[05-Jan-2019 06:07:49 UTC] PHP Catchable fatal error:  Object of class DateTime could not be converted to string in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 121
+[05-Jan-2019 06:07:50 UTC] PHP Catchable fatal error:  Object of class DateTime could not be converted to string in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 121
+[05-Jan-2019 06:07:51 UTC] PHP Catchable fatal error:  Object of class DateTime could not be converted to string in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 121
+[05-Jan-2019 06:07:51 UTC] PHP Catchable fatal error:  Object of class DateTime could not be converted to string in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 121
+[05-Jan-2019 06:28:48 UTC] PHP Fatal error:  Uncaught exception 'PHPMailer\PHPMailer\Exception' with message 'Invalid address:  (addAnAddress to): ' in /home/banqueteasy/public_html/erp/PHPMailer/src/PHPMailer.php:964
+Stack trace:
+#0 /home/banqueteasy/public_html/erp/PHPMailer/src/PHPMailer.php(897): PHPMailer\PHPMailer\PHPMailer->addOrEnqueueAnAddress('to', NULL, '')
+#1 /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php(42): PHPMailer\PHPMailer\PHPMailer->addAddress(NULL)
+#2 /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php(74): awsmailapi('nikhildk@aspiri...', 'emailtest', 'testmessage', '', '', 'bookings@banque...')
+#3 {main}
+  thrown in /home/banqueteasy/public_html/erp/PHPMailer/src/PHPMailer.php on line 964
+[05-Jan-2019 06:29:37 UTC] PHP Fatal error:  Uncaught exception 'PHPMailer\PHPMailer\Exception' with message 'Message body empty' in /home/banqueteasy/public_html/erp/PHPMailer/src/PHPMailer.php:1393
+Stack trace:
+#0 /home/banqueteasy/public_html/erp/PHPMailer/src/PHPMailer.php(1301): PHPMailer\PHPMailer\PHPMailer->preSend()
+#1 /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php(58): PHPMailer\PHPMailer\PHPMailer->send()
+#2 /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php(74): awsmailapi('nikhildk@aspiri...', 'emailtest', 'testmessage', '', '', 'bookings@banque...')
+#3 {main}
+  thrown in /home/banqueteasy/public_html/erp/PHPMailer/src/PHPMailer.php on line 1393
+[05-Jan-2019 07:16:37 UTC] PHP Warning:  Creating default object from empty value in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 62
+[05-Jan-2019 07:16:37 UTC] PHP Fatal error:  Call to undefined method stdClass::setFrom() in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 72
+[15-Mar-2019 07:14:02 UTC] PHP Warning:  Missing argument 7 for awsmailapi(), called in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 110 and defined in /home/banqueteasy/public_html/erp/PHPMailer/awsmailapi.php on line 17
