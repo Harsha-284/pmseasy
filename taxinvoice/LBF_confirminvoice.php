@@ -1318,7 +1318,7 @@ include '../udf.php';
 					console.log(new_row_data);
 					$.ajax({
 						type: 'POST',
-						url: `https://www.pmseasy.in/pms/bookingajax.php`,
+						url: `bookingajax.php`,
 						data: {
 							action: "add_additional_service_addons",
 							bookingid: <?= $row['id'] ?>,
@@ -1376,7 +1376,7 @@ include '../udf.php';
 				console.log(JSON.stringify(alldata));
 				$.ajax({
 					type: 'POST',
-					url: `https://www.pmseasy.in/pms/bookingajax.php`,
+					url: `bookingajax.php`,
 					data: {
 						action: "add_invoice",
 						bookingid: <?= $row['id'] ?>,

@@ -26,11 +26,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 //sharvesh system start
-define("db_host", "localhost");
-define("db_user", "u721475486_pmseasy"); 
-define("db_password", "banqueteasy@2012AWS#2008");
-define("db_database", "u721475486_pmseasy");
+// define("db_host", "localhost");
+// define("db_user", "u721475486_pmseasy"); 
+// define("db_password", "banqueteasy@2012AWS#2008");
+// define("db_database", "u721475486_pmseasy");
 //sharvesh system end
+
+define("db_host", "localhost");
+define("db_user", "root"); 
+define("db_password", "");
+define("db_database", "pms");
 
 // production db start 
 // define("db_host", "srv921.hstgr.io");
@@ -41,7 +46,8 @@ define("db_database", "u721475486_pmseasy");
 
 
 // define("base_url", "https://www.nikhilkadam.com/frotels/");
-define("base_url", "https://www.pmseasy.in/pms");
+// define("base_url", "https://www.pmseasy.in/pms");
+define("base_url", "http://localhost/pms");
 define("server_root", "");
 //define("mailer_path", "PHPMailer_5.2.0/class.phpmailer.php");
 define("mailer_path", "/files/public_html/frotels/PHPMailer_5.2.0/class.phpmailer.php");

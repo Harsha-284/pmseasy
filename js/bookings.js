@@ -609,7 +609,7 @@ async function bookRoom(hotelcode) {
     toggleSubmitAndImage('submitAnchor', 'fancybox/source/fancybox_loading.gif');
 
 
-    fetch(`https://www.pmseasy.in/pms/update_reservation.php`, {
+    fetch(`update_reservation.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
