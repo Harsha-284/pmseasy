@@ -214,7 +214,7 @@ if (!isset($_SESSION['groupid'])) { ?>
 			console.log(body);
 
 
-			fetch(`https://www.pmseasy.in/pms/update_reservation.php`, {
+			fetch(`update_reservation.php`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

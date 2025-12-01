@@ -397,7 +397,7 @@ if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] ==
 				channel: "Goingo",
 				bookingId: bookingid
 			}
-			fetch(`https://www.pmseasy.in/pms/update_reservation.php`, {
+			fetch(`update_reservation.php`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
