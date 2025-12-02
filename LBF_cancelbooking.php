@@ -35,7 +35,43 @@ if (!isset($_SESSION['groupid'])) { ?>
 	</head>
 
 	<body style="padding-top:0px;">
+ <div id="messageBox-userdetails"></div>
+        <script>
+            function showMessageBoxuserdetails(content, type) {
+                const messageBox = document.getElementById('messageBox-userdetails');
 
+                // Determine the alert class based on the type parameter
+                let alertClass;
+                switch (type) {
+                    case 'success':
+                        alertClass = 'alert-success';
+                        break;
+                    case 'error':
+                        alertClass = 'alert-danger';
+                        break;
+                    case 'warning':
+                        alertClass = 'alert-warning';
+                        break;
+                    default:
+                        alertClass = 'alert-info';
+                }
+
+                // Populate the messageBox with the content and appropriate styling
+                messageBox.innerHTML = `
+                <div style="position:absolute; z-index:50; width:75%; padding: 5px 14px; height:30px; top:9px; right:37px; border-radius: 2px;" class="alert ${alertClass} alert-block square fade in alert-dismissable">
+                <button style="width: 45px;" type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <p style="width:90%;">${content}</p>
+                </div>`;
+
+                // Show the message box
+                messageBox.style.display = "block";
+
+                // Automatically hide the message box after 4 seconds
+                setTimeout(() => {
+                    messageBox.style.display = "none";
+                }, 4000);
+            }
+        </script>
 		<div class="the-box" style="padding-bottom:0px; margin-bottom: 0px;">
 
 			<?php
@@ -224,10 +260,14 @@ if (!isset($_SESSION['groupid'])) { ?>
 				})
 				.then(response => response.json())
 				.then(data => {
+          showMessageBoxuserdetails("Room Cancelled Successfully", "success");
+
 					// Handle the response from the API
 					console.log('Success:', data);
 				})
 				.catch(error => {
+          showMessageBoxuserdetails("Room Cancellation Failed", "error");
+
 					// Handle any errors
 					console.error('Error:', error);
 				});

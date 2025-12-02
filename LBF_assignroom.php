@@ -55,50 +55,61 @@ include 'functions.php';
     h5 {
         margin-left: 0px;
     }
-    .d-flex{
-		display:flex;
+
+    .d-flex {
+        display: flex;
         padding: 0 15px 15px;
         gap: 10px;
-	}
-	.w-40{
-		width: 40%;
-	}
-	.w-60{
-		width: 60%;
-	}
-	.h-155{
-		height: 155px;
-	}
-	.bill-heading{
-		    padding: 10px;
-    background: #e8e9ee;
-	margin-top:0;
-	}
-	.border{
-		border:1px solid #e8e9ee;
-	}
-	.inner-content{
-		padding:10px;
-	}
-	.inner-content p {
-		margin:0 0 2px;
-	}
-	.details{
-		display:flex;
-		padding: 0 15px;
-	}
-	.table-section{
-		padding:0 10px 10px;
-		overflow-x:scroll;
-	}
-	.inner-container{
-    border: 1px solid #dcdcdc;
-	padding-bottom:10px;
-	}
-    .pt-15{
-        padding-top: 15px;
     }
 
+    .w-40 {
+        width: 40%;
+    }
+
+    .w-60 {
+        width: 60%;
+    }
+
+    .h-155 {
+        height: 155px;
+    }
+
+    .bill-heading {
+        padding: 10px;
+        background: #e8e9ee;
+        margin-top: 0;
+    }
+
+    .border {
+        border: 1px solid #e8e9ee;
+    }
+
+    .inner-content {
+        padding: 10px;
+    }
+
+    .inner-content p {
+        margin: 0 0 2px;
+    }
+
+    .details {
+        display: flex;
+        padding: 0 15px;
+    }
+
+    .table-section {
+        padding: 0 10px 10px;
+        overflow-x: scroll;
+    }
+
+    .inner-container {
+        border: 1px solid #dcdcdc;
+        padding-bottom: 10px;
+    }
+
+    .pt-15 {
+        padding-top: 15px;
+    }
 </style>
 
 <body style="overflow-x: hidden;padding: 7px 13px;">
@@ -176,31 +187,31 @@ include 'functions.php';
         </script>
         <div class="inner-container">
             <div>
-                <h6 style="margin-bottom: 15px; color: #fb3c3c;background: #dcdcdc;" class="bill-heading ">BRN Number: FR<?= $_GET['id'] ?></h6>
+                <h6 style="margin-bottom: 15px; color: #fb3c3c;background: #dcdcdc;" class="bill-heading ">BRN Number: <?= $_GET['id'] ?></h6>
             </div>
 
             <div class="d-flex">
                 <div class="left-section w-60">
                     <div class="border">
                         <div class="bill-heading">Client Details</div>
-                    		<div class="inner-content h-155">
-                                <p><strong>Guest Name:</strong> <?= $row['fullname'] ?></p>
-                                <p><strong>Mobile No:</strong> <?= $row['contact'] ?></p>
-                                <p><strong>Email:</strong> <?= $row['email'] ?></p>
-                                <p><strong>Address:</strong> <?= $row['address1'] ?></p>
-                                <p><strong>Id Proof: </strong><a href="uploads/<?= $row['id_proof_path'] ?>" target="_blank"><i class="fa fa-print" style="color: #3BAFDA; cursor: pointer"></i></a></p>
-					        </div>
+                        <div class="inner-content h-155">
+                            <p><strong>Guest Name:</strong> <?= $row['fullname'] ?></p>
+                            <p><strong>Mobile No:</strong> <?= $row['contact'] ?></p>
+                            <p><strong>Email:</strong> <?= $row['email'] ?></p>
+                            <p><strong>Address:</strong> <?= $row['address1'] ?></p>
+                            <p><strong>Id Proof: </strong><a href="uploads/<?= $row['id_proof_path'] ?>" target="_blank"><i class="fa fa-print" style="color: #3BAFDA; cursor: pointer"></i></a></p>
+                        </div>
                     </div>
                 </div>
                 <div class="right-section w-40">
                     <div class="border">
-                    <div class="bill-heading">Room Details</div>
+                        <div class="bill-heading">Room Details</div>
                         <div class="inner-content h-155">
                             <p><strong>Check-in Date:</strong> <?= $checkindate->format('d-m-Y') ?></p>
                             <p><strong>Check-out Date:</strong> <?= $checkoutdate->format('d-m-Y') ?></p>
                             <p><strong>Room Type:</strong> <?= $roomtype['roomtype'] ?></p>
-                             <p><strong>No. of Rooms:</strong> <?= $no_of_room['cnt'] ?></p>
-					    </div>
+                            <p><strong>No. of Rooms:</strong> <?= $no_of_room['cnt'] ?></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -218,55 +229,55 @@ include 'functions.php';
                             </div>
 
 
-                                    <div class="card" id="FR156151" style="display: flex; flex-direction: row; gap: 15px; width: 100% ">
+                                    <div class="card" id="156151" style="display: flex; flex-direction: row; gap: 15px; width: 100% ">
 
-                                        <div class="available-rooms" style="width: 41%; display: flex; gap: 5px; flex-wrap: wrap; padding: 20px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 3px;">
+                                <div class="available-rooms" style="width: 41%; display: flex; gap: 5px; flex-wrap: wrap; padding: 20px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 3px;">
 
-                                            <?php
-                                            $length = 0;
-                                            $assignedRooms = explode(',', $availableRooms['available_rooms']);
+                                    <?php
+                                    $length = 0;
+                                    $assignedRooms = explode(',', $availableRooms['available_rooms']);
 
-                                            if (!empty($assignedRooms)) {
-                                                // Process assigned rooms
-                                                foreach ($assignedRooms as $roomNumber) {
-                                                    $length++;
-                                                    $roomnum = execute("select roomnumber from roomnumbers where id=$roomNumber");
-                                                    echo "<div class='cube available' id='$roomnum[roomnumber]' data-roomid='$roomNumber' style='border-radius: 2px; width:50px; text-align: center; cursor: pointer; height: 25px; line-height: 25px;'>$roomnum[roomnumber]</div>";
-                                                }
-                                            }
-                                            ?>
+                                    if (!empty($assignedRooms)) {
+                                        // Process assigned rooms
+                                        foreach ($assignedRooms as $roomNumber) {
+                                            $length++;
+                                            $roomnum = execute("select roomnumber from roomnumbers where id=$roomNumber");
+                                            echo "<div class='cube available' id='$roomnum[roomnumber]' data-roomid='$roomNumber' style='border-radius: 2px; width:50px; text-align: center; cursor: pointer; height: 25px; line-height: 25px;'>$roomnum[roomnumber]</div>";
+                                        }
+                                    }
+                                    ?>
 
-                                        </div>
-                                        <script>
-                                            document.getElementById("total-available-room").innerText = "(<?= $length ?>)"
-                                        </script>
-                                        <div class="assign-rooms" style="display: flex; flex-direction: row; gap: 5px; width: 41%; flex-wrap: wrap; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  padding: 20px; border-radius: 3px;">
-                                            <?php
-                                            $assignedval = 0;
-                                            $roomNumbers = explode(',', $row['roomnumbers']);
-                                            $isRoomAssigned = explode(',', $row['isRoomAssigned']);
+                                </div>
+                                <script>
+                                    document.getElementById("total-available-room").innerText = "(<?= $length ?>)"
+                                </script>
+                                <div class="assign-rooms" style="display: flex; flex-direction: row; gap: 5px; width: 41%; flex-wrap: wrap; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  padding: 20px; border-radius: 3px;">
+                                    <?php
+                                    $assignedval = 0;
+                                    $roomNumbers = explode(',', $row['roomnumbers']);
+                                    $isRoomAssigned = explode(',', $row['isRoomAssigned']);
 
-                                            $i = 0;
-                                            foreach ($roomNumbers as $roomNumber) {
-                                                $indiIsRoomAssigned = $isRoomAssigned[$i];
-                                                $i++;
-                                                if ($indiIsRoomAssigned) {
-                                                    $assignedval++;
+                                    $i = 0;
+                                    foreach ($roomNumbers as $roomNumber) {
+                                        $indiIsRoomAssigned = $isRoomAssigned[$i];
+                                        $i++;
+                                        if ($indiIsRoomAssigned) {
+                                            $assignedval++;
 
-                                                    $roomnum = execute("select roomnumber from roomnumbers where id=$roomNumber");
-                                                    echo "<div class='cube booked' id='$roomnum[roomnumber]' data-roomid='$roomNumber' style='border-radius: 2px; width:50px; text-align: center; cursor: pointer; height: 25px; line-height: 25px;'>$roomnum[roomnumber]</div>";
-                                                }
-                                            }
-                                            ?>
-                                        </div>
-                                        <div class="action" style="line-height: 7;">
-                                            <button onclick="assignrooms()" style="width: 100px; height: 27px; border: none; border-radius: 3px; cursor: pointer; margin-left: -5px; " class="btn available" disabled>Assign room</button>
-                                        </div>
-                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            $roomnum = execute("select roomnumber from roomnumbers where id=$roomNumber");
+                                            echo "<div class='cube booked' id='$roomnum[roomnumber]' data-roomid='$roomNumber' style='border-radius: 2px; width:50px; text-align: center; cursor: pointer; height: 25px; line-height: 25px;'>$roomnum[roomnumber]</div>";
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                                <div class="action" style="line-height: 7;">
+                                    <button id="assignroomBtn" onclick="assignrooms()" style="width: 100px; height: 27px; border: none; border-radius: 3px; cursor: pointer; margin-left: -5px; " class="btn available" disabled>Assign room</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -277,6 +288,14 @@ include 'functions.php';
     const maxAssignRooms = <?= $no_of_room['cnt'] ?>;
     let assignedCount = <?= $assignedval ?>;
 
+    $(document).ready(function() {
+        $('#assignroomBtn').on('click', function() {
+            setTimeout(() => {
+                window.parent.location = "admin.php?Pg=bookingmap"
+                console.log('clicked')
+            }, 1000);
+        })
+    })
 
     function assignrooms() {
         if (maxAssignRooms == assignedCount) {

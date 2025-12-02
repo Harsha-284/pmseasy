@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 			$rs_row = execute("select count(*)totalrooms,r.chargeperextra from roomtypes r left join roomnumbers rn on rn.roomtype=r.id where r.id=$rt and r.active=1 and (r.adults+r.extraallowed)>=$adults and r.children>=$children");
 			$totalrooms = $rs_row['totalrooms'];
-			
+
 			if ($rpid && $rate_plan) {
 				if ($totalrooms - $previouslybookedrooms < $no_of_rooms) {
 					echo json_encode(['total_rooms' => 0, 'extra_charge' => $rs_row['chargeperextra']]);
@@ -553,7 +553,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 
 		if (1) {
-			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Assigned Room Number for FR$bookingid", 'BOOKINGS');
+			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Assigned Room Number for $bookingid", 'BOOKINGS');
 			echo json_encode(['status' => 'success', 'message' => 'Data updated successfully']);
 		} else {
 			echo json_encode(['status' => 'error', 'message' => 'Failed to update data']);
@@ -591,7 +591,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$result = $stmt->execute();
 
 		if ($result) {
-			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Created invoices for FR$bookingid", 'INVOICES');
+			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Created invoices for $bookingid", 'INVOICES');
 			echo json_encode(['status' => 'success', 'message' => 'Data updated successfully']);
 		} else {
 			echo json_encode(['status' => 'error', 'message' => 'Failed to update data']);
@@ -696,7 +696,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 
 		if ($result) {
-			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Created new additional services for FR$bookingid", 'BOOKINGS');
+			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Created new additional services for $bookingid", 'BOOKINGS');
 			echo json_encode(['status' => 'success', 'message' => 'Data updated successfully']);
 		} else {
 			echo json_encode(['status' => 'error', 'message' => 'Failed to update data']);
@@ -766,7 +766,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			// Commit transaction
 			$conn->commit();
 
-			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Updated additional services for FR$bookingid", 'BOOKINGS');
+			add_hotel_task_log($_POST['user'], $_POST['hotel'], "Updated additional services for $bookingid", 'BOOKINGS');
 			echo json_encode(['status' => 'success', 'message' => 'Data updated successfully']);
 		} catch (Exception $e) {
 			// Rollback on error
@@ -804,7 +804,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$update_result = $conn->query("update bookings set declaredtariff='$newprice' where id='$bookingid'");
 
 			if ($update_result) {
-				add_hotel_task_log($_POST['user'], $_POST['hotel'], "Deleted additional services for FR$bookingid", 'BOOKINGS');
+				add_hotel_task_log($_POST['user'], $_POST['hotel'], "Deleted additional services for $bookingid", 'BOOKINGS');
 				echo json_encode(['status' => 'success', 'message' => 'Service deleted and tariff updated successfully']);
 			} else {
 				echo json_encode(['status' => 'error', 'message' => 'Failed to update tariff after deletion']);
@@ -1370,16 +1370,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$missingRatePlanDates[] = $date;
 			}
 		}
-		if (!empty($missingRatePlanDates)) {
-			// echo json_encode([
-			//     'status' => 'error',
-			//     'message' => 'Rate plan is missing for the following dates: ' . implode(', ', $missingRatePlanDates)
-			// ]);
-			//     echo json_encode([
-			//     'status' => 'error',
-			//     'message' => 'Please set the rate plan to access the bookmap'
-			// ]);
-			// exit;
+		$totalDays = (strtotime($endDate) - strtotime($startDate)) / 86400 + 1;
+		$coveredDays = $totalDays - count($missingRatePlanDates);
+
+		// ❗ Block only when NO rate plan exists for the month
+		if ($coveredDays === 0) {
 			$missing[] = 'rate plan';
 		}
 		// Fetch room types
@@ -1459,7 +1454,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$bookingQuery = $conn->query("
 				SELECT rd.roomnumber, b.status, u.fullname, 
 					   CAST(b.checkindatetime AS DATE) AS checkindate, 
-					   CAST(b.checkoutdatetime AS DATE) AS checkoutdate, 
+					   CAST(b.checkoutdatetime AS DATE) AS checkoutdate, u.contact,
 					   b.checkoutdatetime, b.ticker,rd.isRoomAssigned, b.paid, b.id as bookingid 
 				FROM bookings b 
 				JOIN room_distribution rd ON rd.bookingid = b.id 
@@ -1502,6 +1497,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						// No existing booking for this room on this date, assign the booking
 						$bookings[$roomNumber][$currentDate] = [
 							'status' => $bookingStatus,
+							'contact' => $booking['contact'],
 							'fullname' => $booking['fullname'],
 							'checkin' => $checkinDate,
 							'checkout' => $checkoutDate,
@@ -1521,6 +1517,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 							// Replace the existing booking if the current one is more relevant
 							$bookings[$roomNumber][$currentDate] = [
 								'status' => $bookingStatus,
+								'contact' => $booking['contact'],
 								'fullname' => $booking['fullname'],
 								'checkin' => $checkinDate,
 								'checkout' => $checkoutDate,
@@ -1548,6 +1545,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						$currentDate = date('Y-m-d', $date);
 						$availability[$roomType][$roomNumber]['availability'][$currentDate] = isset($bookings[$roomData['id']][$currentDate]) ? $bookings[$roomData['id']][$currentDate] : [
 							'status' => 0,
+							'contact' => '',
 							'fullname' => '',
 							'checkin' => '',
 							'checkout' => '',

@@ -374,15 +374,15 @@ if (!empty($row['traveldesk']) && $row['traveldesk'] == 1) {
                         property
                         will be treated as a No-Show and will incur a charge of 100% of the booking value (Hotel
                         policy).</h6>
-                    <h6 class=" mt-2">Benefits : </h6>
+                    <h6 class=" mt-2">Amenities : </h6>
                     <?php if (!empty($included)) {
     echo '<h6 class="text-secondary">Included ' . implode(', ', $included) . '</h6>';
 }?>
 
-                    <h6 class=" mt-2">Remarks :</h6>
+                    <!-- <h6 class=" mt-2">Remarks :</h6> -->
                     <!--<h6 class="text-secondary">Included : Taxes and fees INR 232.34</h6>-->
-                    <h6 class="text-secondary">NonSmoke,LargeBed, AdditionalNotes: Late check-in after 8pm
-                    </h6>
+                    <!-- <h6 class="text-secondary">NonSmoke,LargeBed, AdditionalNotes: Late check-in after 8pm
+                    </h6> -->
                     <h6 class=" mt-2">All special requests are subject to availability upon arrival</h6>
                 </div>
             </div>

@@ -126,14 +126,30 @@ if (!isset($_SESSION['groupid'])) { ?>
                         <label for="validationCustom02" class="form-label">Email</label>
                         <input type="email" class="form-control" id="validationCustom02" placeholder="abc@gmail.com" name="email" style="width:176px" required>
                     </div>
+                    <?php
+                    $country = $conn->query("select country from countries");
+                    ?>
                     <div class="col-md-4" style="margin-bottom: 10px; margin-right: 0px;">
                         <label for="validationCustom02" class="form-label">Country</label>
-                        <input type="text" class="form-control" id="validationCustom02" onkeypress="return blockNumbers(event)" placeholder="Enter Country Name" name="country" style="width:176px" required>
+                        <select name="country" id="countrydropdown" class="form-control" required="" style="width: 176px;">
+
+                            <option value="">Select</option>
+                            <?php while ($rs_row = $country->fetch_assoc()) {
+                                $countryName = htmlspecialchars($rs_row['country']);
+                                $selected = ($countryName == "India") ? "selected" : "";
+                            ?>
+                                <option value="<?= $countryName ?>" <?= $selected ?>>
+                                    <?= $countryName ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                        <!-- <input type="text" class="form-control" id="validationCustom02" placeholder="Enter Country Name"  style="width:176px" required> -->
                     </div>
                     <div class="col-md-4" style="margin-bottom: 10px; margin-right: 0px;">
                         <label for="validationCustom02" class="form-label">State</label>
                         <!-- <input type="text" class="form-control" id="validationCustom02" onkeypress="return blockNumbers(event)" placeholder="Enter State name" name="state" style="width:176px" required> -->
                         <select name="state" id="stateDropDown" class="form-control" required="" style="width: 176px;">
+                            <?php  ?>
                             <option value="">State</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                             <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -173,8 +189,20 @@ if (!isset($_SESSION['groupid'])) { ?>
                             <option value="Telangana">Telangana</option>
                             <option value="New Delhi">New Delhi</option>
                         </select>
-
                     </div>
+                    <script>
+                        document.getElementById("countrydropdown").addEventListener("change", function() {
+                            let country = this.value;
+                            let stateDropDown = document.getElementById("stateDropDown");
+
+                            if (country === "India") {
+                                stateDropDown.value = "Maharashtra";
+                            } else {
+                                stateDropDown.value = "";
+                            }
+                        });
+                    </script>
+
                     <div class="col-md-4" style="margin-bottom: 10px; margin-right: 0px;">
                         <label for="validationCustom02" class="form-label">City</label>
                         <input type="text" class="form-control" id="validationCustom02" placeholder="Enter city name" onkeypress="return blockNumbers(event)" name="city" style="width:176px" required>
@@ -184,8 +212,13 @@ if (!isset($_SESSION['groupid'])) { ?>
                         <input type="text" class="form-control" id="validationCustom02" placeholder="Enter ZipCode" name="zip_code" style="width:176px" required>
                     </div>
                     <div class="col-md-4" style="margin-bottom: 10px; margin-right: 0px;">
+                        <label for="validationCustom02" class="form-label">Address</label>
+                        <textarea name="address2" id="address2" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 10px; margin-right: 0px;">
                         <label for="validationCustom03" class="form-label">Identity proof</label>
                         <select name="payment_mode" id="identityproof" style="display: block;width:176px; height: 30px; border-color: gainsboro">
+                            <option value="">Select</option>
                             <option value="Aadhar Card">Aadhar Card</option>
                             <option value="Pan Card">Pan Card</option>
                             <option value="Passport">Passport</option>

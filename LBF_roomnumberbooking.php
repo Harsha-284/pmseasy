@@ -294,6 +294,7 @@ include 'udf.php'; ?>
 									<a href='LBF_usercheckinout.php?id=" . $row['id'] . "' class='fancybox2 fancybox.iframe' style='color:#FFFFFF'>
 									<button class='filter-action-btn2' style='margin-left: 108px;' >Check out</button>
 									</a>
+							<small style='display: flex; justify-content: end;' >Checked in at: " . $checkInTime . "</small> 
 									</div>
 								";
 						} else {
@@ -337,11 +338,7 @@ include 'udf.php'; ?>
 			<div class="brn-card" style="padding:5px 0px">
 				<div style="padding: 0 15px;">
 					<div class="border">
-						<div class="bill-heading d-flex justify-content-between">Client Details <?php if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] == "") {
-																									// User is checked in but has not checked out yet, show 'Check out' button and check-in time
-																									$checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin'])); ?>
-								<div class="details" style="padding:0px;"><small style=" color: red; font-size: 60%;" class="fs-4">Checked in at: <?= $checkInTime ?></small></div>
-							<?php } ?>
+						<div class="bill-heading d-flex justify-content-between">Client Details 
 						</div>
 
 						<div class="inner-content">
@@ -417,6 +414,11 @@ include 'udf.php'; ?>
 					<div class="border">
 						<h6 class="bill-heading">Payment Trail</h6>
 						<div class="table-section">
+							<?php
+							$reg_date = new DateTime($row['reg_date']);
+							$payment = $conn->query("select id,payment_type, date_of_payment, txnid, cheque_bank, cheque_no, cheque_date, comment,amount,discount_type,discount_percent,discount_flat from payment_mode where bookingid=$row[id] and deleted=0 order by id desc;");
+							$payment_count = $payment->num_rows;
+							if($payment_count > 0){ ?>
 							<table id="payment-table" class="table table-bordered br-none mg-top" style="border-collapse: collapse; width: 100%; border: none; margin: 5px 0px">
 								<thead style="border-bottom: 1px solid #ddd;">
 									<tr class="table-color" style="border-bottom: 1px solid #ddd;border-top: 1px solid #ddd; font-size: 15px; ">
@@ -518,6 +520,7 @@ include 'udf.php'; ?>
 									} ?>
 								</tbody>
 							</table>
+							<?php } ?>
 							<div>
 								<a id="booking-edit-add" href="LBF_editpaymentdetails.php?id=<?= $row['id']; ?>&isUpdate=0" class="btn available">Add Payment details </a>
 							</div>

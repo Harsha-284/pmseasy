@@ -28,6 +28,7 @@ function postResponse()
         $fullname = $input['guest']['firstName'] . " " . $input['guest']['lastName'];
         $phone = $input['guest']['phone'];
         $email = $input['guest']['email'];
+        $address2 = $input['address2'];
         $address = $input['guest']['address']['line1'] . ", " . $input['guest']['address']['city'] . ", " . $input['guest']['address']['state'] . ", " . $input['guest']['address']['country'] . " - " . $input['guest']['address']['zipCode'];
         $bookedOn = $input['bookedOn'];
         $checkindatetime = new DateTime($input['checkin'] . "T12:00:00");
@@ -41,7 +42,7 @@ function postResponse()
 
         $hotelid = execute("select h.id from hotels h JOIN users u ON h.user = u.id where u.cm_company_name = '$hotelCode';");
 
-        $guestid = insert("insert into users (fullname,email,contact,address1,groupid) values ('$fullname','$email','$phone','$address',5);");
+        $guestid = insert("insert into users (fullname,email,contact,address1,address2,groupid) values ('$fullname','$email','$phone','$address','$address2',5);");
 
         $bookingid = insert("insert into bookings (checkindatetime, checkoutdatetime, hours, guestid, paid, ticker, reg_date, ip, source, hoteltariff, declaredtariff,intialtariff, specialrequest) 
             values (
@@ -141,6 +142,58 @@ function postResponse()
         $modifiedCheckOutDate->modify('-1 day');
         $res = updateCmAvailability($checkindatetime->format("Y-m-d"), $modifiedCheckOutDate->format("Y-m-d"), $availble, $roomtype, $hotelCode);
         if ($res === true) {
+            // ------------------------------
+            // SEND EMAIL + WHATSAPP
+            // ------------------------------
+            $hotelInfo = execute("SELECT h.id, u.company
+                      FROM hotels h 
+                      JOIN users u ON h.user = u.id 
+                      WHERE u.cm_company_name = '$hotelCode'");
+
+            $hotelid = $hotelInfo['id'];
+            $hotelName = $hotelInfo['company'];
+            // echo $email;
+            // var_dump(empty($email));
+            // if (!empty($email)) {
+            // try {
+            $subject = "Your Booking Confirmation – $hotelName";
+
+            $message = "Dear $fullname,<br><br>"
+                . "Thank you for choosing <strong>$hotelName</strong>.<br>"
+                . "Your booking has been confirmed.<br><br>"
+                . "<strong>Hotel:</strong> $hotelName<br>"
+                . "Check-in: " . $checkindatetime->format('d-m-Y H:i') . "<br>"
+                . "Check-out: " . $checkoutdatetime->format('d-m-Y H:i') . "<br><br>"
+                . "Warm regards,<br>"
+                . "$hotelName Team";
+
+            $voucher = generateAndDownloadVoucher($bookingid);
+            $voucherContent = $voucher['content'];
+
+            $myemail = myemail5($email, $subject, $message, "", "", "PMSEasy", $voucherContent);
+            // echo "<pre>";
+            // print_r($myemail);
+            // echo "</pre>";
+            // print_r($myemail);
+            // } catch (Exception $e) {
+            //     error_log("Email sending failed: " . $e->getMessage());
+            // }
+            // }
+            // ------------------------------
+            // WhatsApp Message
+            // ------------------------------
+            $wa_message = "Hello $fullname,\n"
+                . "Thank you for booking your stay at *$hotelName*.\n"
+                . "Your reservation is confirmed!\n\n"
+                . "Hotel: $hotelName\n"
+                . "Check-in: " . $checkindatetime->format('d-m-Y H:i') . "\n"
+                . "Check-out: " . $checkoutdatetime->format('d-m-Y H:i') . "\n\n"
+                . "We look forward to hosting you.\n"
+                . "- $hotelName Team";
+
+
+            sendwhatsapp($phone, $wa_message);
+
             $response = array(
                 "success" => true,
                 "message" => "Reservation Booked Successfully",
@@ -199,6 +252,33 @@ function postResponse()
         $availble = search_booking($room_number_info['roomtype'], $checkindatetime, $checkoutdatetime, '0', '0');
         $res = updateCmAvailability($checkindatetime->format("Y-m-d"), $checkoutdatetime->format("Y-m-d"), $availble, $roomtypename['cmroomid'], $hotelCode);
 
+
+        $hotelInfo = execute("SELECT h.id, u.company
+                      FROM hotels h 
+                      JOIN users u ON h.user = u.id 
+                      WHERE u.cm_company_name = '$hotelCode'");
+
+            $hotelid = $hotelInfo['id'];
+            $hotelName = $hotelInfo['company'];
+        // Fetch guest details
+$guest = execute("SELECT fullname, contact FROM users WHERE id = (SELECT guestid FROM bookings WHERE id='$bookingid')");
+$fullname = $guest['fullname'];
+$phone = $guest['contact'];  // use same name as in your sendwhatsapp()
+
+// Build WA message
+$wa_message = "Hello $fullname,\n"
+            . "Your reservation at *$hotelName* has been cancelled.\n\n"
+            . "*Cancellation Details:*\n"
+            . "Check-in: " . $checkindatetime->format('d-m-Y H:i') . "\n"
+            . "Check-out: " . $checkoutdatetime->format('d-m-Y H:i') . "\n"
+            . "Refund Amount: ₹$refundAmount\n"
+            . "Reason: $refundReason\n\n"
+            . "We hope to serve you in the future.\n"
+            . "- $hotelName Team";
+
+// Send WhatsApp message
+sendwhatsapp($phone, $wa_message);
+
         if ($res === true) {
             $response = [
                 "success" => true,
@@ -245,4 +325,88 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     getResponse();
 } else {
     echo "Invalid request method.";
+}
+
+function sendwhatsapp($cellno, $smstext)
+{
+    // $varsms = "authentic-key=31334e696b68696c73697240676d61696c2e636f6d3130301726726008&route=1&number=" . $cellno . "&message=" . $smstext;
+    // $url = "http://wapp.powerstext.in/http-tokenkeyapi.php?" . $varsms;
+
+    $url = "https://wapp.powerstext.in/http-tokenkeyapi.php?authentic-key=31334e696b68696c73697240676d61696c2e636f6d3130301726726008&route=1&number=" . $cellno . "&message=" . urlencode($smstext);
+    // echo $url;
+    $curl = curl_init();
+
+    curl_setopt_array($curl, [
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTPGET => true
+    ]);
+
+    $response = curl_exec($curl);
+    // print_r($response);
+    $error = curl_error($curl);
+    // dd($error);
+    curl_close($curl);
+
+    if ($error) {
+        return "cURL Error: " . $error;
+    } else {
+        return $response;
+    }
+}
+
+function generateAndDownloadVoucher($booking)
+{
+    $filename = "Booking Confirmation";
+    $url = "https://pmseasy.in/pms/voucher.php?id=" . $booking;
+    $label = " Booking Confirmation";
+    $data = array(
+        "url"                => $url,
+        "filename"            => $filename,
+        "uniqueFilename"    => true,
+        "label"                => $label,
+        "paper"                => "A4",
+        "orientation"        => "portrait",
+        "printBackground"    => true
+    );
+
+    $jsonData = json_encode($data);
+    $url = "https://okpdf.banqueteasy.com/api";
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+    ));
+
+    $server_response = curl_exec($ch);
+
+    if (curl_errno($ch))
+        $error = curl_error($ch);
+    else
+        $error = [];
+
+    curl_close($ch);
+    // dd($server_response);
+    //printr(http_build_query($data));
+    $server_response = json_decode($server_response, true);
+
+    if ($server_response['success']) {
+        $return['preview'] = $server_response['previewUrl'];
+        $return['download'] = $server_response['downloadUrl'];
+        $return['content'] = $server_response['content'];
+        $return['error'] = '';
+    } else {
+        $return['preview'] = "";
+        $return['download'] = "";
+        $return['error'] = $error;
+    }
+
+    return $return;
 }

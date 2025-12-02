@@ -180,7 +180,7 @@ include 'udf.php'; ?>
 
 									$traveler = $row['trav_name'] == "" ? $row['fullname'] : $row['trav_name'];
 
-									$info = "<b>BRN:</b> FR" . $row['id'] . " | <b>Rs :</b>" . round($row['total'], 2) . " | <b>User:</b>" . $row['fullname'] . " | <b>Traveler:</b> " . $traveler . " | <b>Checkin :</b> " . date_create($row['checkindatetime'])->format("d-M-Y H:i") . " | <b>Checkout :</b>  " . date_create($row['checkoutdatetime'])->format("d-M-Y H:i") . "<br><b>Stay Period :</b> " . $stay_period . "<br><b>Checked in at:</b> " . $usercheckin . " | <b>Checked out at:</b>" . $usercheckout;
+									$info = "<b>BRN:</b> " . $row['id'] . " | <b>Rs :</b>" . round($row['total'], 2) . " | <b>User:</b>" . $row['fullname'] . " | <b>Traveler:</b> " . $traveler . " | <b>Checkin :</b> " . date_create($row['checkindatetime'])->format("d-M-Y H:i") . " | <b>Checkout :</b>  " . date_create($row['checkoutdatetime'])->format("d-M-Y H:i") . "<br><b>Stay Period :</b> " . $stay_period . "<br><b>Checked in at:</b> " . $usercheckin . " | <b>Checked out at:</b>" . $usercheckout;
 								} else {
 									$info = "";
 									$btnvalue = "";

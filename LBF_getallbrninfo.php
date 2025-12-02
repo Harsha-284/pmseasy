@@ -184,21 +184,21 @@ if (!isset($_SESSION['groupid'])) { ?>
 			<div class="olddetails border">
 				<h5 class="assign-head" style="font-weight:bold;margin:0;">Assign Rooms</h5>
 
-
-				<?php
-				$i = 0;
-				$nowFormatted = $now->format("Y-m-d H:i");
-				$aFormatted = $a->format("Y-m-d H:i");
-				$roomTypeId = intval($_GET['id']); // Ensure this is an integer for security
-				$roomNumberId = intval($_GET['room_id']); // Ensure this is an integer for security
-				if ($_GET['id'] != "all") {
-					$roomtype = execute("select roomtype from roomtypes where id=$_GET[id]");
-					$roomTypeId     = (int)$_GET['id'];
-					$roomTypeFilter = " AND r.id = $roomTypeId";
-				} else {
-					$roomTypeFilter = '';
-				}
-				$result = $conn->query("SELECT DISTINCT b.id,u.fullname,u.contact,u.email,u.address1,b.checkindatetime,b.checkoutdatetime ,b.usercheckedout,b.usercheckedin,r.id as room_id, GROUP_CONCAT(rn.roomnumber) AS roomnumbers, GROUP_CONCAT(rd.isRoomAssigned) AS isRoomAssigned
+			
+ <?php 
+ $i = 0;
+					$nowFormatted = $now->format("Y-m-d H:i");
+					$aFormatted = $a->format("Y-m-d H:i");
+					$roomTypeId = intval($_GET['id']); // Ensure this is an integer for security
+					$roomNumberId = intval($_GET['room_id']); // Ensure this is an integer for security
+					if($_GET['id'] != "all"){
+		            $roomtype = execute("select roomtype from roomtypes where id=$_GET[id]");
+		             $roomTypeId     = (int)$_GET['id'];  
+		              $roomTypeFilter = " AND r.id = $roomTypeId"; 
+		            }else{
+		                $roomTypeFilter = '';    
+		            }
+					$result = $conn->query("SELECT DISTINCT b.id,u.fullname,u.contact,u.email,u.address1,address2,b.checkindatetime,b.checkoutdatetime ,b.usercheckedout,b.usercheckedin,r.id as room_id, GROUP_CONCAT(rn.roomnumber) AS roomnumbers, GROUP_CONCAT(rd.isRoomAssigned) AS isRoomAssigned
                          FROM bookings b 
                          JOIN room_distribution rd ON rd.bookingid = b.id 
                          JOIN roomnumbers rn ON rn.id = rd.roomnumber 
@@ -312,33 +312,26 @@ if (!isset($_SESSION['groupid'])) { ?>
 											}
 											?>
 
-										</div>
-									</div>
-									<div class="inner-content">
-
-										<div class="client-details">
-											<div class="content-header">
-												Client Details
-											</div>
-											<div class="client-content">
-												<p><b>Guest Name:</b> <?= $row['fullname'] ?></p>
-												<p><b>Mobile No:</b> <?= $row['contact'] ?></p>
-												<p><b>Email:</b> <?= $row['email'] ?></p>
-												<p><b>Address:</b> <?= $row['address1'] ?></p>
-											</div>
-										</div>
-										<div class="check-in-details">
-											<div class="content-header">
-												Check-in Detailes
-											</div>
-											<div class="client-content">
-												<p><b>Check-in Date:</b> (<?= $checkindate->format('d-m-Y') ?>)</p>
-												<p><b>Check-out Date:</b> (<?= $checkoutdate->format('d-m-Y') ?>)</p>
-												<p><b>Room Type:</b> <?= $roomtype['roomtype'] ?></p>
-												<p><b>No. of Rooms:</b> <?= $no_of_room['cnt'] ?></p>
-											</div>
-										</div>
-									</div>
+							<div class="client-details">
+								<div class="content-header">
+									Client Details
+								</div>
+								<div class="client-content">
+									<p><b>Guest Name:</b> <?= $row['fullname'] ?></p>
+									<p><b>Mobile No:</b> <?= $row['contact'] ?></p>
+									<p><b>Email:</b> <?= $row['email'] ?></p>
+									<p><b>Address:</b> <?= $row['address1'] ?>, <?= $row['address2'] ?> </p>
+								</div>
+							</div>
+							<div class="check-in-details">
+								<div class="content-header">
+									Check-in Detailes
+								</div>
+								<div class="client-content">
+									<p><b>Check-in Date:</b> (<?= $checkindate->format('d-m-Y') ?>)</p>
+									<p><b>Check-out Date:</b> (<?= $checkoutdate->format('d-m-Y') ?>)</p>
+									<p><b>Room Type:</b> <?= $roomtype['roomtype'] ?></p>
+									<p><b>No. of Rooms:</b> <?= $no_of_room['cnt'] ?></p>
 								</div>
 							</div>
 						</div>
