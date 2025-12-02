@@ -187,7 +187,7 @@ include 'functions.php';
         </script>
         <div class="inner-container">
             <div>
-                <h6 style="margin-bottom: 15px; color: #fb3c3c;background: #dcdcdc;" class="bill-heading ">BRN Number: FR<?= $_GET['id'] ?></h6>
+                <h6 style="margin-bottom: 15px; color: #fb3c3c;background: #dcdcdc;" class="bill-heading ">BRN Number: <?= $_GET['id'] ?></h6>
             </div>
 
             <div class="d-flex">
@@ -229,7 +229,7 @@ include 'functions.php';
                             </div>
 
 
-                            <div class="card" id="FR156151" style="display: flex; flex-direction: row; gap: 15px; width: 100% ">
+                                    <div class="card" id="156151" style="display: flex; flex-direction: row; gap: 15px; width: 100% ">
 
                                 <div class="available-rooms" style="width: 41%; display: flex; gap: 5px; flex-wrap: wrap; padding: 20px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; border-radius: 3px;">
 

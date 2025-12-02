@@ -612,6 +612,12 @@ else if ($_SESSION['groupid'] < 5) {
 								Booking Report
 							</a>
 						</li>
+            <li <?php if (col("Pg") == "customer_report") echo "class='active'" ?>>
+							<a href="?Pg=customer_report">
+								<i class="fa fa-user icon-sidebar"></i>
+								Customer Report
+							</a>
+						</li>
 					<?php
 					}
 					if ($_SESSION['groupid'] <= 2)
@@ -677,6 +683,13 @@ else if ($_SESSION['groupid'] < 5) {
 							<a href="?Pg=hotel_task_log">
 								<i class="fa fa-times icon-sidebar"></i>
 								Hotel Task Log
+							</a>
+						</li>
+
+            <li <?php if (col("Pg") == "hotel_basic_setup") echo "class='active'" ?>>
+							<a href="?Pg=hotel_basic_setup">
+								<i class="fa fa-cog icon-sidebar"></i>
+								Hotel Basic Setup
 							</a>
 						</li>
 					<?php
@@ -819,7 +832,8 @@ else if ($_SESSION['groupid'] < 5) {
 								</a>
 							</li>
 						<?php
-						}
+						}?>            
+            <?php
 					}
 
 					if ($_SESSION['groupid'] <= 4) {
@@ -954,6 +968,9 @@ else if ($_SESSION['groupid'] < 5) {
 							$page_access = page_access($_GET['Pg']);
 
 							if ($_GET['Pg'] == "basicinfo" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_POST['hotel'])) {
 									$address1 = $_POST['address1'];
 									$address2 = $_POST['address2'];
@@ -1266,6 +1283,9 @@ else if ($_SESSION['groupid'] < 5) {
           </div>
           <?php
 							} else if ($_GET['Pg'] == "contactinfo" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_POST['conper'])) {
 									$conper = $_POST['conper'];
 									$conperemail = $_POST['conperemail'];
@@ -1507,6 +1527,9 @@ else if ($_SESSION['groupid'] < 5) {
           </div>
           <?php
 							} else if ($_GET['Pg'] == "usefulinfo" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_POST['goodfor']) or isset($_POST['landmark'])) {
 									$conn->query("delete hf from hotel_facilities hf join facilities f on f.id=hf.facility where hf.hotel=$_SESSION[hotel] and f.type=1");
 									$sql = "insert into hotel_facilities (hotel,facility) values ";
@@ -1699,6 +1722,9 @@ else if ($_SESSION['groupid'] < 5) {
           </div>
           <?php
 							} else if ($_GET['Pg'] == "facilities" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_POST['facility'])) {
 									$dining = col("dining", 0);
 									$wifi = col("wifi", 0);
@@ -1861,6 +1887,9 @@ else if ($_SESSION['groupid'] < 5) {
           </div>
           <?php
 							} else if ($_GET['Pg'] == "hotelimages" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_FILES['propic'])) {
 									if ($_FILES['propic']['name'] != "") {
 										$result = $conn->query("select id,path from pictures where propertyid=$_SESSION[hotel] and type='Hotel' and title='Hotel Profile Picture'");
@@ -2238,6 +2267,9 @@ else if ($_SESSION['groupid'] < 5) {
           </div>
           <?php
 							} else if ($_GET['Pg'] == "hotelpolicy" and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (col("checkintime") != "") {
 									$hotelcheckintime = $_POST['checkintime'];
 									$hotelcheckouttime = $_POST['checkouttime'];
@@ -3222,6 +3254,9 @@ else if ($_SESSION['groupid'] < 5) {
 							}
 							// vrusharth- additional servicies
 							else if ($_GET['Pg'] == "additionalservicies" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_POST['accountholder'])) {
 									$accountholder = $_POST['accountholder'];
 									$accountnumber = $_POST['accountnumber'];
@@ -4196,6 +4231,9 @@ else if ($_SESSION['groupid'] < 5) {
 
                 <?php
               }  else if ($_GET['Pg'] == "roomdetails" and $_SESSION['hotel'] > 0 and $page_access) {
+                 if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
                 if (isset($_POST['roomtypes'])) {
                   $roomtypes = $_POST['roomtypes'];
                   $numofrooms = $_POST['numofrooms'];
@@ -5203,6 +5241,9 @@ echo "
           </div>
           <?php
 							} else if ($_GET['Pg'] == "hotelnormalrates" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (col("weekendloader") != "") {
 									$weekendloader = $_POST['weekendloader'];
 									$nightloader = $_POST['nightloader'];
@@ -6763,6 +6804,9 @@ if (!$rows) {
 							}
 							// cm setup here:
 							else if ($_GET['Pg'] == "cmsetup" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_POST['roomtypes'])) {
 									$roomtypes = $_POST['roomtypes'];
 									$numofrooms = $_POST['numofrooms'];
@@ -7905,6 +7949,9 @@ function save_CM_Hotel_Name(userId) {
             </div>
             <?php
 							} else if ($_GET['Pg'] == "hoteltaxsetup" and $_SESSION['hotel'] > 0 and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								if (isset($_POST['chargingst'])) {
 									$chargingst = $_POST['chargingst'];
 									$stnumber = $_POST['stnumber'];
@@ -13026,7 +13073,12 @@ $totalCommissionAmt += $commissionValue;
 																	</nav>
 																<?php endif; ?>
 															</div>
-
+	<?php
+							} else if ($_GET['Pg'] == "hotel_basic_setup" and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
+								?>
 														<?php
 							} else if ($_GET['Pg'] == "invoices" and $page_access) {
 								 ?>
@@ -13273,7 +13325,7 @@ $totalCommissionAmt += $commissionValue;
 																												$isinvoiceCreated = 1;
 																												$invoicestr = '' . $hotel_prefix['invoice_prefix'] . '' . $invoice_num['invoice_number'] . '';
 																											}
-																											$brn = "FR" . $row['id'];
+																											$brn =  $row['id'];
 																											$date = new DateTime($row['checkindatetime']);
 																											$str .= "<tr style='font-size: 13px'>
 																		<td id='td1id$i'>$invoicestr</td>
@@ -13379,7 +13431,210 @@ $totalCommissionAmt += $commissionValue;
 																																																						</div>
 
 																	<?php
-							} else if ($_GET['Pg'] == "hotelstaff" and $page_access) {
+							} else if ($_GET['Pg'] == "customer_report" and $page_access) { ?>
+
+<div id="messageBox-alert"></div>
+
+<div class="row" style="margin-left: -11px; margin-right: -12px">
+    <div class="col-sm-12">
+        <div class="the-box">
+            <div class="invoices-section">
+
+                <div class="invoice-heading">
+                    <h1 class="page-heading" id="customerreport">CUSTOMER REPORT</h1>
+                </div>
+
+                <!-- FILTER FORM -->
+                <form name="filter_form" method="POST">
+                    <div class="btn-toolbar top-table" role="toolbar" style="margin-bottom:12px;">
+
+                        <div class="btn-group">
+                            <label>Guest Name</label>
+                            <input type="text" class="form-control" name="guestname" 
+                                   value="<?= col("guestname") ?>" placeholder="Guest Name"
+                                   style="height:34px; width: 150px;">
+                        </div>
+
+                        <div class="btn-group">
+                            <label>Contact</label>
+                            <input type="text" class="form-control" name="guestcontact" 
+                                   value="<?= col("guestcontact") ?>" placeholder="Contact No"
+                                   style="height:34px; width: 150px;">
+                        </div>
+
+                        <div class="btn-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="guestemail" 
+                                   value="<?= col("guestemail") ?>" placeholder="Email"
+                                   style="height:34px; width: 180px;">
+                        </div>
+
+                        <div class="d-flex-btn">
+                            <div class="col-lg-1">
+                                <input type="submit" class="filter-action-btn1" value="Apply">
+                            </div>
+                            <div class="col-lg-1">
+                                <a href="?Pg=customer_report">
+                                    <input type="button" class="btn btn-danger" value="Reset">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="cnt" id="cnt" value="<?= col("cnt") ?>">
+                </form>
+
+                <?php
+                // Pagination
+                $pagesize = 10;
+                $current_page = isset($_GET['cnt']) ? (int)$_GET['cnt'] : 1;
+                if ($current_page < 1) $current_page = 1;
+$offset = ($current_page - 1) * $pagesize;
+                                        $hotel_id = (int) $_SESSION['hotel'];   // always cast session values
+             // ---------------- BASE QUERY (used for BOTH SELECT + COUNT) ----------------
+$base_query = "
+FROM bookings b
+JOIN room_distribution rd ON rd.bookingid = b.id
+JOIN roomnumbers rn ON rn.id = rd.roomnumber
+JOIN roomtypes r ON r.id = rn.roomtype
+JOIN hotels h ON h.id = r.hotel
+JOIN users u_hotel ON u_hotel.id = h.user
+JOIN cities c ON c.id = u_hotel.city
+JOIN users u_gst ON u_gst.id = b.guestid
+WHERE h.id = $hotel_id
+";
+
+
+// ---------------- FILTERS ----------------
+$filt = "";
+
+if ($_SESSION['groupid'] == 2) {
+    $filt .= " AND h.id = $_SESSION[hotel] ";
+}
+
+if (col("guestname") != "") {
+    $filt .= " AND u_gst.fullname LIKE '%" . col("guestname") . "%' ";
+}
+
+if (col("guestcontact") != "") {
+    $filt .= " AND u_gst.contact LIKE '%" . col("guestcontact") . "%' ";
+}
+
+if (col("guestemail") != "") {
+    $filt .= " AND u_gst.email LIKE '%" . col("guestemail") . "%' ";
+}
+
+
+// ---------------- TOTAL ROW COUNT (UNIQUE GUESTS) ----------------
+$count_qry = "
+SELECT COUNT(DISTINCT u_gst.id) AS total
+" . $base_query . $filt;
+
+$count_res = $conn->query($count_qry);
+$total_rows = $count_res->fetch_assoc()['total'];
+$total_pages = ($total_rows > 0) ? ceil($total_rows / $pagesize) : 1;
+
+
+// ---------------- FINAL SELECT QUERY ----------------
+$qry = "
+SELECT DISTINCT
+    u_gst.id,
+    u_gst.fullname,
+    u_gst.contact,
+    u_gst.email,
+    u_gst.address1,
+    u_gst.id_proof,
+    u_gst.id_proof_path,
+    u_hotel.company AS hotel_name,
+    c.city AS city
+" 
+. $base_query . $filt . "
+ORDER BY u_gst.fullname DESC
+LIMIT $offset, $pagesize";
+
+$result = $conn->query($qry);
+                ?>
+
+                <div style="overflow-x:scroll;">
+                    <?php if ($result->num_rows > 0) { ?>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr style='font-size: 11px'>
+                                    <th>#</th>
+                                    <th>Full Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>ID Proof</th>
+                                    <th>View Proof</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <?php
+                            $i = $offset + 1;
+                            while ($row = $result->fetch_assoc()) {
+                                $viewBtn = $row['id_proof_path'] 
+                                    ? "<a href='./uploads/medium/$row[id_proof_path]' target='_blank' class='btn btn-info btn-xs'>View</a>"
+                                    : "-";
+
+                                echo "
+                                <tr style='font-size: 13px'>
+                                    <td>{$i}</td>
+                                    <td>{$row['fullname']}</td>
+                                    <td>{$row['contact']}</td>
+                                    <td>{$row['email']}</td>
+                                    <td>{$row['address1']}</td>
+                                    <td>{$row['id_proof']}</td>
+                                    <td>$viewBtn</td>
+                                </tr>";
+
+                                $i++;
+                            }
+                            ?>
+
+                            </tbody>
+                        </table>
+
+                    <?php } else { ?>
+                        <tr><td colspan='7'>No customers found</td></tr>
+                    <?php } ?>
+
+                   <div class="pagination-container">
+    <ul class="pagination">
+
+        <?php
+        // Page range
+        $page_range = 5;
+        $start_page = max(1, $current_page - $page_range);
+        $end_page   = min($total_pages, $current_page + $page_range);
+
+        // Previous
+        if ($current_page > 1) {
+            echo '<li class="page-item"><a class="page-link" href="?Pg=customer_report&cnt=' . ($current_page - 1) . '">&laquo;</a></li>';
+        }
+
+        // Page numbers
+        for ($page = $start_page; $page <= $end_page; $page++) {
+            echo '<li class="page-item ' . ($page == $current_page ? 'active' : '') . '">
+                    <a class="page-link" href="?Pg=customer_report&cnt=' . $page . '">' . $page . '</a>
+                  </li>';
+        }
+
+        // Next
+        if ($current_page < $total_pages) {
+            echo '<li class="page-item"><a class="page-link" href="?Pg=customer_report&cnt=' . ($current_page + 1) . '">&raquo;</a></li>';
+        }
+        ?>
+    </ul>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php } 
+else if ($_GET['Pg'] == "hotelstaff" and $page_access) {
 								 ?>
 															
 																																																							<div id="messageBox-alert"></div>
@@ -14011,7 +14266,7 @@ $totalCommissionAmt += $commissionValue;
 																											$invoicestr = "" . $hotel_prefix['invoice_prefix'] . "" . $row['invoice_number'] . "";
 																											$reg_date = new DateTime($row['reg_date']);
 																											$date = new DateTime($userinfo['checkindatetime']);
-																											$brn = "FR" . $row['bookingid'];
+																											$brn =  $row['bookingid'];
 
 																											// Build the table row
 																											$str .= "<tr style='font-size: 13px'>
@@ -14295,7 +14550,7 @@ $totalCommissionAmt += $commissionValue;
 																									$str = "";
 																									$i = (($current_page - 1) * $pagesize + 1);
 																									while ($row = $result->fetch_assoc()) {
-																										$brn = "FR" . $row['id'];
+																										$brn =  $row['id'];
 																										$str .= "<tr>
 																
 																<td id='td1id$i'>$i</td>
@@ -14477,7 +14732,7 @@ $totalCommissionAmt += $commissionValue;
 																									$i = (($current_page - 1) * $pagesize + 1);
 																									while ($row = $result->fetch_assoc()) {
 																										if ($row['hours'] > 0 and $row['hours'] < 24)
-																											$brn = "FR" . $row['id'];
+																											$brn =  $row['id'];
 																										else
 																											$brn = "HR" . $row['id'];
 
@@ -16787,7 +17042,7 @@ $totalCommissionAmt += $commissionValue;
 																										$str .= "<tr>
 																
 																<td id='td1id$i'>$i</td>
-																<td id='td13id$i'>FR$row[id]</td>
+																<td id='td13id$i'>$row[id]</td>
 																<td id='td2id$i'>$row[fullname]</td>
 																<td id='td3id$i'>$row[source]</td>
 																<td id='td4id$i'>$row[hotel]</td>
@@ -20986,7 +21241,7 @@ $(document).on('click', '.delete-pending-sub', function(e) {
 																									$str .= "<tr>
 																
 																<td id='td1id$i'>$i</td>
-																<td id='td2id$i'>FR$row[id]</td>
+																<td id='td2id$i'>$row[id]</td>
 																<td id='td3id$i'>$row[status]</td>
 																<td id='td4id$i'>$row[company]</td>
 																<td id='td5id$i'>$row[location]</td>
@@ -21565,7 +21820,7 @@ $(document).on('click', '.delete-pending-sub', function(e) {
 																									$str .= "<tr>
 																
 																<td id='td1id$i'>$i</td>
-																<td id='td2id$i'>FR$row[id]</td>
+																<td id='td2id$i'>$row[id]</td>
 																<td id='td3id$i'>$row[status]</td>
 																<td id='td4id$i'>$row[company]</td>
 																<td id='td5id$i'>" . round($row['total'], 2) . "</td>
@@ -21732,10 +21987,18 @@ $(document).on('click', '.delete-pending-sub', function(e) {
 																								$str = "";
 																								$i = (($current_page - 1) * $pagesize + 1);
 																								while ($row = $result->fetch_assoc()) {
+                                                  $bookingId = (int)$row['id']; 
+$sql = "SELECT SUM(amount) AS total_amount 
+        FROM payment_mode_receipt 
+        WHERE bookingid = $bookingId";
+
+$res = $conn->query($sql)->fetch_assoc();
+
+$total = $res['total_amount'] ?? 0; 
 																									$str .= "<tr>
 																
 																<td id='td1id$i'>$i</td>
-																<td id='td2id$i'>FR$row[id]</td>
+																<td id='td2id$i'>$row[id]</td>
 																<td id='td3id$i'>$row[status]</td>
 																
 																
@@ -21748,8 +22011,8 @@ $(document).on('click', '.delete-pending-sub', function(e) {
 															
 																<td id='td5id$i'>$row[roomtype]</td>
 															
-																<td id='td5id$i'>$row[stonsc]</td>
-																<td id='td5id$i'>" . round($row['total'], 2) . "</td>
+																<td id='td5id$i'>$row[hoteltariff]</td>
+																<td id='td5id$i'>" . round($total, 2) . "</td>
 																<td id='td5id$i'>" . date_create($row['cancellationrequestdate'])->format("d-M-Y") . "</td>
 																<td id='td5id$i'>" . date_create($row['cancellationrequestdate'])->format("h:i A") . "</td>
 																
@@ -21869,14 +22132,15 @@ $(document).on('click', '.delete-pending-sub', function(e) {
 																																																																																															<th>Luxury Taxes</th>
 																																																																																															<th>Service Charges</th>
 																																																																																															<th>Service Tax on Service Charges</th> -->
-																																																																																															<th>Total invoiced to customer/Paid by customer</th>
+																																																																																															<!-- <th>Total invoiced to customer/Paid by customer</th> -->
 																																																																																															<th>Cancellation Date</th>
 																																																																																															<th>Cancellation Time</th>
 																																																																																															<!-- <th>Cancelled By</th> -->
 																																																																																															<th>Cancellation Reason</th>
 																																																																																															<!-- <th>How many hours prior to Check In time Booking got cancelled?</th> -->
-																																																																																															<th>Total refund to be paid to the user.</th>
-																																																																																															<th>Total Amount paid to Hotel if any between booking & cancellation.</th>
+                                                                                                                                                                                               <th>Booking Amount</th>
+                                                                                                                                                                                               <th>Actual Paid Amount</th>
+																																																																																															<th>Refunded Amount.</th>
 																																																																																															<th>Remark</th>
 																																																																																														</tr>
 																																																																																													</thead>
@@ -21887,10 +22151,18 @@ $(document).on('click', '.delete-pending-sub', function(e) {
 																								$str = "";
 																								$i = (($current_page - 1) * $pagesize + 1);
 																								while ($row = $result->fetch_assoc()) {
+                                                  $bookingId = (int)$row['id'];
+$sql = "SELECT SUM(amount) AS total_amount 
+        FROM payment_mode_receipt 
+        WHERE bookingid = $bookingId";
+
+$res = $conn->query($sql)->fetch_assoc();
+
+$total = $res['total_amount'] ?? 0; 
 																									$str .= "<tr>
 																
 																<td id='td1id$i'>$i</td>
-																<td id='td2id$i'>FR$row[id]</td>
+																<td id='td2id$i'>$row[id]</td>
 																<td id='td3id$i'>$row[status]</td>
 															
 																<td id='td6id$i'>$row[source]</td>
@@ -21904,13 +22176,12 @@ $(document).on('click', '.delete-pending-sub', function(e) {
 																<td id='td5id$i'>$row[hoteltariff]</td>
 															
 																
-																<td id='td5id$i'>" . round($row['total'], 2) . "</td>
 																<td id='td5id$i'>" . date_create($row['cancellationrequestdate'])->format("d-M-Y") . "</td>
 																<td id='td5id$i'>" . date_create($row['cancellationrequestdate'])->format("h:i A") . "</td>
 															
 																<td id='td5id$i'>$row[cancellationreason]</td>
-															
-																<td id='td5id$i'>$row[refund_amount]</td>
+																<td id='td5id$i'>$row[hoteltariff]</td>
+																<td id='td5id$i'>" . round($total, 2) . "</td>
 																<td id='td5id$i'>$row[refund_amount]</td>
 																<td><a href='LBF_editcity.php?id=$row[id]&cntr=$i' class='fancybox fancybox.iframe'><span class='label label-info'>Remark</span></a></td>
 																</tr>";
@@ -21930,6 +22201,9 @@ $(document).on('click', '.delete-pending-sub', function(e) {
                                                                                                                                                                                 </div>
 																<?php
 							} else if ($_GET['Pg'] == "payment" and $page_access) {
+                if ($_SESSION['hotel'] > 0) {
+								pms_info_status();
+							}
 								 ?>
 																																																																																									<div class="row" style="margin-right:0;margin-left:0">
                                                                                                                                                                                     <div class="col-sm-12 pe-0 ps-0">

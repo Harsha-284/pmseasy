@@ -252,6 +252,33 @@ function postResponse()
         $availble = search_booking($room_number_info['roomtype'], $checkindatetime, $checkoutdatetime, '0', '0');
         $res = updateCmAvailability($checkindatetime->format("Y-m-d"), $checkoutdatetime->format("Y-m-d"), $availble, $roomtypename['cmroomid'], $hotelCode);
 
+
+        $hotelInfo = execute("SELECT h.id, u.company
+                      FROM hotels h 
+                      JOIN users u ON h.user = u.id 
+                      WHERE u.cm_company_name = '$hotelCode'");
+
+            $hotelid = $hotelInfo['id'];
+            $hotelName = $hotelInfo['company'];
+        // Fetch guest details
+$guest = execute("SELECT fullname, contact FROM users WHERE id = (SELECT guestid FROM bookings WHERE id='$bookingid')");
+$fullname = $guest['fullname'];
+$phone = $guest['contact'];  // use same name as in your sendwhatsapp()
+
+// Build WA message
+$wa_message = "Hello $fullname,\n"
+            . "Your reservation at *$hotelName* has been cancelled.\n\n"
+            . "*Cancellation Details:*\n"
+            . "Check-in: " . $checkindatetime->format('d-m-Y H:i') . "\n"
+            . "Check-out: " . $checkoutdatetime->format('d-m-Y H:i') . "\n"
+            . "Refund Amount: ₹$refundAmount\n"
+            . "Reason: $refundReason\n\n"
+            . "We hope to serve you in the future.\n"
+            . "- $hotelName Team";
+
+// Send WhatsApp message
+sendwhatsapp($phone, $wa_message);
+
         if ($res === true) {
             $response = [
                 "success" => true,
