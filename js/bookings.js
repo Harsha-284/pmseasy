@@ -143,9 +143,8 @@ function search_bookings(
 
 function fetchRatePlan(roomtypeid) {
   let currendate = new Date();
-  let date = `${currendate.getFullYear()}-0${
-    currendate.getMonth() + 1
-  }-${currendate.getDate()}`;
+  let date = `${currendate.getFullYear()}-0${currendate.getMonth() + 1
+    }-${currendate.getDate()}`;
 
   return fetch(`bookingajax.php?roomtypeid=${roomtypeid}&date=${date}`, {
     method: "GET",
@@ -164,13 +163,12 @@ function fetchRatePlan(roomtypeid) {
                         <div style="font-size: 11px; text-align: justify; " >
                             <div class="bullet available" style="display: inline-block; width: 9px;height: 9px;border-radius: 50%;" ></div>
                             <span class="booked-text" style="display: inline" >₹${Number(
-                              item.fulldaytariff
-                            )}/-</span>
-                            <span style="display: inline" >${
-                              item.room_rate_plan.length > 23
-                                ? item.room_rate_plan.substring(0, 23) + "..."
-                                : item.room_rate_plan
-                            }</span>
+            item.fulldaytariff
+          )}/-</span>
+                            <span style="display: inline" >${item.room_rate_plan.length > 23
+              ? item.room_rate_plan.substring(0, 23) + "..."
+              : item.room_rate_plan
+            }</span>
                         </div>
                 `;
         });
@@ -199,46 +197,39 @@ function renderCards() {
     card.dataset.roomdata = JSON.stringify(value);
     let encodedData = encodeURIComponent(card.dataset.roomdata);
     card.innerHTML = `
-        <div  class="col-sm-6 autoTextarea " style=" box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;  padding: 8px; width: 262.5px;  height: 150px;   margin: 0px 8px 8px 0px; text-align: center; overflow-y: auto; background-color: ${
-          value.totalRooms > 0 ? "white" : "#ffe3e3"
-        }">
-            <a ${
-              value.totalRooms > 0
-                ? `href="LBF_userdetails.php?data=${encodedData}"`
-                : ""
-            }  class="card openInfoModalButton" style="text-decoration: none; color: black; cursor: ${
-      value.totalRooms > 0 ? "pointer" : "auto"
-    }; ">
+        <div  class="col-sm-6 autoTextarea " style=" box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;  padding: 8px; width: 262.5px;  height: 150px;   margin: 0px 8px 8px 0px; text-align: center; overflow-y: auto; background-color: ${value.totalRooms > 0 ? "white" : "#ffe3e3"
+      }">
+            <a ${value.totalRooms > 0
+        ? `href="LBF_userdetails.php?data=${encodedData}"`
+        : ""
+      }  class="card openInfoModalButton" style="text-decoration: none; color: black; cursor: ${value.totalRooms > 0 ? "pointer" : "auto"
+      }; ">
                 <div class="card-body">
                     <h5 class="card-title" style="margin: 0px 0px; font-size: 14px; text-align: justify; ">
-                        ${
-                          value.roomtypename.length > 22
-                            ? value.roomtypename.substring(0, 22) + "..."
-                            : value.roomtypename
-                        }
+                        ${value.roomtypename.length > 22
+        ? value.roomtypename.substring(0, 22) + "..."
+        : value.roomtypename
+      }
                     </h5>
                     <div class="available" id="line" style="width: 30px; height: 2px; margin: 5px 0px; " ></div>
-                    <p class="card-text available-text " style="font-weight: bold; margin: 0px 0px; font-size: 25px;">${
-                      value.totalRooms
-                    }</p>
-                    <small id="room-occupancy-${
-                      value.roomtypeid
-                    }">(2 + 1 + 1)</small>
+                    <p class="card-text available-text " style="font-weight: bold; margin: 0px 0px; font-size: 25px;">${value.totalRooms
+      }</p>
+                    <small id="room-occupancy-${value.roomtypeid
+      }">(2 + 1 + 1)</small>
 
                     <div id="rateplan-${value.roomtypeid}">
                         Loading rate plan...
                     </div>
                     
-                    ${
-                      value.extraCharge > 0
-                        ? `
+                    ${value.extraCharge > 0
+        ? `
                      <div style="font-size: 11px; text-align: justify; " >
                             <div class="bullet available" style="display: inline-block; width: 9px;height: 9px;border-radius: 50%;" ></div>
                             <span class="booked-text" style="display: inline" >₹${value.extraCharge}/-</span>
                             <span style="display: inline" >Extra Charge Per Person</span>
                      </div>`
-                        : ""
-                    }
+        : ""
+      }
                 </div>
             </a>
         </div>
@@ -297,9 +288,8 @@ function getRoomRatePlan(
   extra_charge
 ) {
   let currendate = new Date();
-  let date = `${currendate.getFullYear()}-0${
-    currendate.getMonth() + 1
-  }-${currendate.getDate()}`;
+  let date = `${currendate.getFullYear()}-0${currendate.getMonth() + 1
+    }-${currendate.getDate()}`;
   fetch(`bookingajax.php?roomtypeid=${roomtypeid}&date=${date}`, {
     method: "GET",
     headers: {
@@ -360,9 +350,8 @@ function handleRadioSelection(
   total_stay,
   extra_charge
 ) {
-  document.querySelector('input[name="fixed-rate-input"]').value = `${
-    extra_charge + fullDayTariff * noOfRoom * total_stay
-  }`;
+  document.querySelector('input[name="fixed-rate-input"]').value = `${extra_charge + fullDayTariff * noOfRoom * total_stay
+    }`;
 }
 
 // Function to synchronize radio selection across all cards
@@ -498,6 +487,7 @@ async function bookRoom(hotelcode) {
   let city = document.querySelector('input[name="city"]').value;
   let zip_code = document.querySelector('input[name="zip_code"]').value;
   let id_proof = document.getElementById("identityproof").value;
+  let address2 = document.getElementById("address2").value;
   let roomData = JSON.parse(
     document.getElementById("dataTo2ndModal").innerText
   );
@@ -549,9 +539,12 @@ async function bookRoom(hotelcode) {
     showMessageBoxuserdetails("Contact number is required.", "warning");
     return;
   }
-  if (!email) {
-    showMessageBoxuserdetails("Email is required.", "warning");
-    return;
+  if (email) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      showMessageBoxuserdetails("Please enter a valid email address.", "warning");
+      return;
+    }
   }
   if (!country) {
     showMessageBoxuserdetails("Country is required.", "warning");
@@ -776,6 +769,7 @@ async function bookRoom(hotelcode) {
       },
     },
     rooms: rooms,
+    address2: address2
   };
 
   console.log(JSON.stringify(body));
@@ -801,6 +795,7 @@ async function bookRoom(hotelcode) {
       formData.append("reg_date", currentDate);
       formData.append("id_proof", id_proof);
       formData.append("action", "upload_document");
+      formData.append('address2', address2)
 
       $.ajax({
         type: "POST",

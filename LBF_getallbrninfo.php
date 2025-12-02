@@ -183,7 +183,7 @@ if (!isset($_SESSION['groupid'])) { ?>
 		            }else{
 		                $roomTypeFilter = '';    
 		            }
-					$result = $conn->query("SELECT DISTINCT b.id,u.fullname,u.contact,u.email,u.address1,b.checkindatetime,b.checkoutdatetime ,b.usercheckedout,b.usercheckedin,r.id as room_id, GROUP_CONCAT(rn.roomnumber) AS roomnumbers, GROUP_CONCAT(rd.isRoomAssigned) AS isRoomAssigned
+					$result = $conn->query("SELECT DISTINCT b.id,u.fullname,u.contact,u.email,u.address1,address2,b.checkindatetime,b.checkoutdatetime ,b.usercheckedout,b.usercheckedin,r.id as room_id, GROUP_CONCAT(rn.roomnumber) AS roomnumbers, GROUP_CONCAT(rd.isRoomAssigned) AS isRoomAssigned
                          FROM bookings b 
                          JOIN room_distribution rd ON rd.bookingid = b.id 
                          JOIN roomnumbers rn ON rn.id = rd.roomnumber 
@@ -309,7 +309,7 @@ if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] ==
 									<p><b>Guest Name:</b> <?= $row['fullname'] ?></p>
 									<p><b>Mobile No:</b> <?= $row['contact'] ?></p>
 									<p><b>Email:</b> <?= $row['email'] ?></p>
-									<p><b>Address:</b> <?= $row['address1'] ?></p>
+									<p><b>Address:</b> <?= $row['address1'] ?>, <?= $row['address2'] ?> </p>
 								</div>
 							</div>
 							<div class="check-in-details">

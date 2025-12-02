@@ -28,6 +28,7 @@ function postResponse()
         $fullname = $input['guest']['firstName'] . " " . $input['guest']['lastName'];
         $phone = $input['guest']['phone'];
         $email = $input['guest']['email'];
+        $address2 = $input['address2'];
         $address = $input['guest']['address']['line1'] . ", " . $input['guest']['address']['city'] . ", " . $input['guest']['address']['state'] . ", " . $input['guest']['address']['country'] . " - " . $input['guest']['address']['zipCode'];
         $bookedOn = $input['bookedOn'];
         $checkindatetime = new DateTime($input['checkin'] . "T12:00:00");
@@ -41,7 +42,7 @@ function postResponse()
 
         $hotelid = execute("select h.id from hotels h JOIN users u ON h.user = u.id where u.cm_company_name = '$hotelCode';");
 
-        $guestid = insert("insert into users (fullname,email,contact,address1,groupid) values ('$fullname','$email','$phone','$address',5);");
+        $guestid = insert("insert into users (fullname,email,contact,address1,address2,groupid) values ('$fullname','$email','$phone','$address','$address2',5);");
 
         $bookingid = insert("insert into bookings (checkindatetime, checkoutdatetime, hours, guestid, paid, ticker, reg_date, ip, source, hoteltariff, declaredtariff,intialtariff, specialrequest) 
             values (
@@ -151,7 +152,7 @@ function postResponse()
 
             $hotelid = $hotelInfo['id'];
             $hotelName = $hotelInfo['company'];
-            echo $email;
+            // echo $email;
             // var_dump(empty($email));
             // if (!empty($email)) {
             // try {
@@ -170,9 +171,9 @@ function postResponse()
             $voucherContent = $voucher['content'];
 
             $myemail = myemail5($email, $subject, $message, "", "", "PMSEasy", $voucherContent);
-            echo "<pre>";
-            print_r($myemail);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r($myemail);
+            // echo "</pre>";
             // print_r($myemail);
             // } catch (Exception $e) {
             //     error_log("Email sending failed: " . $e->getMessage());
