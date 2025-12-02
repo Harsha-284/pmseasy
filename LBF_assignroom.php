@@ -207,8 +207,9 @@ include 'functions.php';
                     <div class="border">
                         <div class="bill-heading">Room Details</div>
                         <div class="inner-content h-155">
-                            <p><strong>Check-in Date:</strong> <?= $checkindate->format('d-m-Y') ?></p>
-                            <p><strong>Check-out Date:</strong> <?= $checkoutdate->format('d-m-Y') ?></p>
+                           <p><strong>Check-in Date:</strong> <?= htmlspecialchars(popdate($checkindate->format('Y-m-d'))) ?></p>
+                           <p><strong>Check-out Date:</strong> <?= htmlspecialchars(popdate($checkoutdate->format('Y-m-d'))) ?></p>
+
                             <p><strong>Room Type:</strong> <?= $roomtype['roomtype'] ?></p>
                             <p><strong>No. of Rooms:</strong> <?= $no_of_room['cnt'] ?></p>
                         </div>

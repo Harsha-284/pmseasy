@@ -4797,18 +4797,20 @@ if (!empty($orderedPlans)) {
 
     $sr = 1;
     foreach ($orderedPlans as $plan) {
-        $start = $plan['validfrom'];
-        $end = $plan['validto'];
-        echo "
-            <tr>
-                <td>{$sr}</td>
-                <td>{$start}</td>
-                <td>{$end}</td>
-                <td>{$start} to {$end}</td>
-            </tr>
-        ";
-        $sr++;
-    }
+    $start = $plan['validfrom'];
+    $end = $plan['validto'];
+
+    echo "
+        <tr>
+            <td>" . htmlspecialchars($sr) . "</td>
+            <td>" . htmlspecialchars(popdate($start)) . "</td>
+            <td>" . htmlspecialchars(popdate($end)) . "</td>
+            <td>" . htmlspecialchars(popdate($start) . ' to ' . popdate($end)) . "</td>
+        </tr>
+    ";
+
+    $sr++;
+}
 
     echo '
             </tbody>
@@ -6019,8 +6021,8 @@ while ($rt = $roomtypes->fetch_assoc()):
             echo "<tr>
                 <td>{$sr}</td>
                 <td style='width:20%'>{$row['room_rate_plan']}</td>
-                <td style='width:20%'>" . date('d-m-Y', strtotime($row['validfrom'])) . "</td>
-                <td style='width:20%'>" . date('d-m-Y', strtotime($row['validto'])) . "</td>
+               <td style='width:20%'>" . htmlspecialchars(popdate($row['validfrom'])) . "</td>
+               <td style='width:20%'>" . htmlspecialchars(popdate($row['validto'])) . "</td>
                 <td style='width:20%'>{$row['fulldaytariff']}</td>
                 <td style='width:20%'><a href='LBF_editrateplan.php?id={$row['vid']}' class='fancybox2 fancybox.iframe'><span class='label label-primary'>Edit</span></a></td>
             </tr>";
@@ -6164,8 +6166,8 @@ while ($rt = $roomtypes->fetch_assoc()):
             echo "<tr>
                 <td>{$sr}</td>
                 <td style='width:20%'>{$row['room_rate_plan']}</td>
-                <td style='width:20%'>" . date('d-m-Y', strtotime($row['validfrom'])) . "</td>
-                <td style='width:20%'>" . date('d-m-Y', strtotime($row['validto'])) . "</td>
+                <td style='width:20%'>" . htmlspecialchars(popdate($row['validfrom'])) . "</td>
+                <td style='width:20%'>" . htmlspecialchars(popdate($row['validto'])) . "</td>
                 <td style='width:20%'>{$row['old_tariff']}</td>
                 <td style='width:20%'>{$row['new_tariff']}</td>
             </tr>";
@@ -6309,8 +6311,8 @@ while ($rt = $roomtypes->fetch_assoc()):
             echo "<tr>
                 <td>{$sr}</td>
                 <td style='width:20%'>{$row['room_rate_plan']}</td>
-                <td style='width:20%'>" . date('d-m-Y', strtotime($row['validfrom'])) . "</td>
-                <td style='width:20%'>" . date('d-m-Y', strtotime($row['validto'])) . "</td>
+                <td style='width:20%'>" . htmlspecialchars(popdate($row['validfrom'])) . "</td>
+                <td style='width:20%'>" . htmlspecialchars(popdate($row['validto'])) . "</td>
                 <td style='width:20%'>{$row['old_tariff']}</td>
                 <td style='width:20%'>{$row['new_tariff']}</td>
             </tr>";
@@ -6783,8 +6785,8 @@ if (!$rows) {
                 <tr <?= $rowStyle ?>>
                     <td style="width: 5%;"><?= $sr++ ?></td>
                     <td style="width: 22.5%;"><?= htmlspecialchars($row['room_rate_plan']) ?></td>
-                    <td><?= date('d-m-Y', strtotime($row['validfrom'])) ?></td>
-                    <td><?= date('d-m-Y', strtotime($row['validto'])) ?></td>
+                    <td><?= htmlspecialchars(popdate($row['validfrom'])) ?></td>
+                    <td><?= htmlspecialchars(popdate($row['validto'])) ?></td>
                     <td><?= number_format($row['fulldaytariff'], 2) ?></td>
                     <td><?= $status ?></td>
                     <td style='width:20%'><a href='LBF_editseasonalrateplan.php?id=<?=$row['vid']?>' class='fancybox2 fancybox.iframe'><span class='label label-primary'>Edit</span></a></td>
@@ -11940,7 +11942,7 @@ $totalCommissionAmt += $commissionValue;
                                                                                                                               class="chkRow">
                                                                                                                           </td>
 
-                                                                                                                          <td><?= date('d-m-Y', strtotime($r['bdate'])) ?></td>
+                                                                                                                          <td><?= htmlspecialchars(popdate($r['bdate'])) ?></td>
                                                                                                                           <td><?= htmlspecialchars($r['roomtype']) ?></td>
                                                                                                                           <td><?= $r['rate'] ?? '<span class="text-muted">No rate</span>' ?></td>
 
@@ -13942,7 +13944,7 @@ else if ($_GET['Pg'] == "hotelstaff" and $page_access) {
 																							<td>$role</td>
 																							<td>$row[fullname]</td>
 																							<td>$row[email]</td>
-																							<td>" . $created_at->format('Y-m-d H:i') . "</td>
+<td>" . htmlspecialchars(popdate($created_at->format('Y-m-d H:i'))) . "</td>
 																							<td>$row[module]</td>
 																							<td>$row[message]</td>
 																						
@@ -19826,7 +19828,7 @@ if ($total_pages > 1):
             <td><?= htmlspecialchars($row['locality']) ?></td>
             <td><?= htmlspecialchars($row['email']) ?></td>
             <td><?= htmlspecialchars($row['mobile']) ?></td>
-            <td><?= htmlspecialchars($row['created_at']) ?></td>
+            <td><?= popdate($row['created_at']) ?></td>
             <td>
 <button type="button" class="btn btn-danger btn-sm delete-demo-btn" data-id="<?= $row['id'] ?>">Delete</button>
             </td>

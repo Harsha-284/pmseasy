@@ -317,8 +317,8 @@ if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] ==
 									Check-in Detailes
 								</div>
 								<div class="client-content">
-									<p><b>Check-in Date:</b> (<?= $checkindate->format('d-m-Y') ?>)</p>
-									<p><b>Check-out Date:</b> (<?= $checkoutdate->format('d-m-Y') ?>)</p>
+									<p><b>Check-in Date:</b> (<?= htmlspecialchars(popdate($checkindate->format('Y-m-d'))) ?>)</p>
+                                    <p><b>Check-out Date:</b> (<?= htmlspecialchars(popdate($checkoutdate->format('Y-m-d'))) ?>)</p>
 									<p><b>Room Type:</b> <?= $roomtype['roomtype'] ?></p>
 									<p><b>No. of Rooms:</b> <?= $no_of_room['cnt'] ?></p>
 								</div>
