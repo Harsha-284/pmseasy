@@ -271,7 +271,7 @@ include 'udf.php'; ?>
 		$checkoutdate = new DateTime($row['checkoutdatetime']);
 		?>
 		<div class="inner-container">
-			<div class="brn-card" style="display: flex;justify-content: space-between;align-items: center; padding:10px 25px; background: #dcdcdc; margin-bottom:10px;">
+			<div class="brn-card" style="display: flex;justify-content: space-between;align-items: center; padding:10px 15px 10px  17px; background: #dcdcdc; margin-bottom:10px;">
 				<div>
 					<h6 style="  font-size:17px;font-weight: 700;line-height: 100%;" class="">BRN Number: <span style=" color: #fb3c3c;"><?= $row['id'] ?></span></h6>
 				</div>
@@ -565,8 +565,8 @@ include 'udf.php'; ?>
 											onclick="toggleServiceRow(this)">
 
 										<a id="add-row-btn-<?= $i ?>" style='color: #656D78'>
-											<label class="form-check-label" for="service-<?= $rs_row['id'] ?>" style="display: inline-block; max-width: 100%; margin-bottom: 0px; font-weight: 700; font-size: 13px; cursor: pointer">
-												<?= $rs_row['service'] ?> - ₹ <?= $rs_row['charge'] ?>
+											<label class="form-check-label" for="service-<?= $rs_row['id'] ?>" style="display: inline-block; max-width: 100%; margin-bottom: 0px; font-weight: 700; font-size: 13px; cursor: pointer;     margin-top: 1.5px;">
+												<?= $rs_row['service'] ?> - ₹<span style="color: black !imporant;"><?= $rs_row['charge'] ?></span>
 											</label>
 										</a>
 									</div>
