@@ -549,10 +549,10 @@ async function bookRoom(hotelcode) {
     showMessageBoxuserdetails("Contact number is required.", "warning");
     return;
   }
-  if (!email) {
-    showMessageBoxuserdetails("Email is required.", "warning");
-    return;
-  }
+  // if (!email) {
+  //   showMessageBoxuserdetails("Email is required.", "warning");
+  //   return;
+  // }
   if (!country) {
     showMessageBoxuserdetails("Country is required.", "warning");
     return;

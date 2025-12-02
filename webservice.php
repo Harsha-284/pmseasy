@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         $row['invoice_url'] = $invoiceUrl;
                     }
                     $row['invoicestr'] = $invoicestr;
-                    $row['booking_reference'] = "FR" . $row['id'];
+                    $row['booking_reference'] =  $row['id'];
                     $entries[] = $row;
                 }
 
@@ -458,7 +458,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         'igst' => $igst,
                         'total_tax' => $totalTax,
                         'total_amount' => $totalAmount,
-                        'booking_reference' => "FR" . $row['bookingid'],
+                        'booking_reference' =>  $row['bookingid'],
                     ];
                 }
                 echo json_encode(['status' => 'success', 'data' => $entries]);
@@ -513,7 +513,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if ($result->num_rows > 0) {
                 $entries = [];
                 while ($row = $result->fetch_assoc()) {
-                    $row['booking_reference'] = "FR" . $row['id'];
+                    $row['booking_reference'] =  $row['id'];
                     $entries[] = $row;
                 }
                 echo json_encode(['status' => 'success', 'data' => $entries]);
@@ -1788,7 +1788,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
 
         if ($result) {
-            add_hotel_task_log($user, $hotelId, "Created new additional services for FR$bookingid", 'BOOKINGS');
+            add_hotel_task_log($user, $hotelId, "Created new additional services for $bookingid", 'BOOKINGS');
             echo json_encode(['status' => 'success', 'message' => 'Room service recorded successfully']);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Failed to update booking']);
@@ -1994,7 +1994,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // build email body
         if ($chkod && $chkot) {
             $emailbody = "Guest has just checked out.<br><br>
-            <b>#BRN:</b> FR$id<br><br>
+            <b>#BRN:</b> $id<br><br>
             <b>Hotel Name:</b> {$row['company']}<br><br>
             <b>Guest Name:</b> {$row['fullname']}<br><br>
             <b>Email:</b> {$row['email']}<br><br>
@@ -2007,7 +2007,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <b>Total Amount:</b> " . round($row['total'], 2);
         } else {
             $emailbody = "Guest has just checked in.<br><br>
-            <b>#BRN:</b> FR$id<br><br>
+            <b>#BRN:</b> $id<br><br>
             <b>Hotel Name:</b> {$row['company']}<br><br>
             <b>Guest Name:</b> {$row['fullname']}<br><br>
             <b>Email:</b> {$row['email']}<br><br>
@@ -2094,7 +2094,7 @@ LIMIT 1";
 
     return [
         "client_details" => [
-            "booking_reference" => 'FR' . $booking['id'],
+            "booking_reference" => $booking['id'],
             "fullname" => $booking['fullname'],
             "contact" => "+91 " . $booking['contact'],
             "email" => $booking['email'],

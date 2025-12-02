@@ -44,7 +44,7 @@ define("db_database", "pms");
 
 
 // define("base_url", "https://www.nikhilkadam.com/frotels/");
-define("base_url", "https://http://localhost/pms/pmseasy");
+define("base_url", "http://localhost/pms");
 // define("base_url", "https://www.pmseasy.in/pms");
 define("server_root", "");
 //define("mailer_path", "PHPMailer_5.2.0/class.phpmailer.php");

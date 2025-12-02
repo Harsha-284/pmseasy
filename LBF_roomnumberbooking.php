@@ -294,6 +294,7 @@ include 'udf.php'; ?>
 									<a href='LBF_usercheckinout.php?id=" . $row['id'] . "' class='fancybox2 fancybox.iframe' style='color:#FFFFFF'>
 									<button class='filter-action-btn2' style='margin-left: 108px;' >Check out</button>
 									</a>
+							<small style='display: flex; justify-content: end;' >Checked in at: " . $checkInTime . "</small> 
 									</div>
 								";
 						} else {
@@ -337,11 +338,7 @@ include 'udf.php'; ?>
 			<div class="brn-card" style="padding:5px 0px">
 				<div style="padding: 0 15px;">
 					<div class="border">
-						<div class="bill-heading d-flex justify-content-between">Client Details <?php if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] == "") {
-																									// User is checked in but has not checked out yet, show 'Check out' button and check-in time
-																									$checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin'])); ?>
-								<div class="details" style="padding:0px;"><small style=" color: red; font-size: 60%;" class="fs-4">Checked in at: <?= $checkInTime ?></small></div>
-							<?php } ?>
+						<div class="bill-heading d-flex justify-content-between">Client Details 
 						</div>
 
 						<div class="inner-content">

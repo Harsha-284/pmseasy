@@ -108,7 +108,7 @@ if (!isset($_SESSION['groupid'])) { ?>
 
 							
 
-							<b>#BRN :</b> FR" . $id . "<br><br>
+							<b>#BRN :</b> " . $id . "<br><br>
 
 
 
@@ -161,7 +161,7 @@ if (!isset($_SESSION['groupid'])) { ?>
 
 							
 
-							<b>#BRN :</b> FR" . $id . "<br><br>
+							<b>#BRN :</b> " . $id . "<br><br>
 
 
 
