@@ -5896,12 +5896,12 @@ fieldset[disabled] .btn-vimeo.active {
 
 .alert-warning.alert-block {
     color: #fff;
-    background-color: #f6bb42;
-    border-color: #f6bb42;
+    background-color: #e4514b;
+    border-color: #e4514b;
 }
 
 .alert-warning.alert-block .alert-link {
-    color: #fff5db;
+    color: #e4514b;
 }
 
 .alert-danger.alert-block {

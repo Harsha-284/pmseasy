@@ -10330,7 +10330,10 @@ $totalCommissionAmt += $commissionValue;
 
                                       <div style="margin-top:11px;">
                                       <a class="action-btn w-75 btn available fancybox fancybox.iframe" href="bookmap.php"
-                                  style="float: inline-end; margin-right: 14px; position: relative; top: -10px; height:29px;">Check In</a>  
+                                  style="float: inline-end; margin-right: 14px; position: relative; top: -11px;
+    height: 29px;
+    font-size: 12px !important;
+    padding-top: 6px;">Check In Now</a>  
                                           </div>
                               </div>
 
@@ -22281,7 +22284,10 @@ $total = $res['total_amount'] ?? 0;
 						} ?>
             </div>
 															</div>
+
+                              
 														</div>
+                            
 													</div>
 
 													<div id="back-top">
@@ -22312,6 +22318,7 @@ $total = $res['total_amount'] ?? 0;
               
               </div>
                           </div> -->
+         
 			</body>
 
 		<?php include("js.php"); ?>
