@@ -562,6 +562,8 @@ include '../udf.php';
 			<div class="row">
 				<div class="hr-invoice">
 					<p class="Reference-createinvo"><b>Invoice Reference No.: #62010</b></p>
+                            <input type="hidden" id="invoice_type" value="<?= $_GET['type'] ?>">
+
 				</div>
 				<div class="col-xs-12 hr-invoice hr-invoice-padd ">
 					<div class="form-group row">
@@ -700,7 +702,7 @@ include '../udf.php';
 					</div>
 				</div>
 			</div>
-			<div id="description" class="form-groupmb">
+			<div id="description" class="form-group">
 				<input type="hidden" id="igst_flag" value="0">
 				<?php
 				$invoice_num = execute("select count(*)cnt,invoice_data from invoices where bookingid = $row[id]");
@@ -732,7 +734,10 @@ include '../udf.php';
 					$chargeWithoutDecimal = intval($charge);
 					$checkindate = new DateTime($row['checkindatetime']);
 
-					$subtotal = $row['intialtariff'] / $no_of_room['cnt'];
+					$sub_total = $row['intialtariff'] / $no_of_room['cnt'];
+					$subtotal = $sub_total;
+
+					//($subtotal);
 
 					?>
 					<div class="row" id="row1" style="margin-left: 0;">
@@ -745,8 +750,8 @@ include '../udf.php';
 								<input type="text" style="display:none;" class="form-control" id="dataid1" value="<?= $intitalroomamount['id'] ?>">
 							</div>
 						</div>
-						<input type="checkbox" <?= $vatChecked ?> class="form-control" id="isvat1" name="isvat1" value="1" disabled style="display:none;">
 
+						<input type="checkbox" <?= $vatChecked ?> class="form-control" id="isvat1" name="isvat1" value="1" disabled style="display:none;">
 						<div class="inv-hsn float-left" style="padding-left:0;">
 
 							<div class="form-group">
@@ -756,6 +761,10 @@ include '../udf.php';
 						<div class="inv-rate float-left" style="padding-left:0;">
 
 							<div class="form-group">
+									<input type="hidden" min="0" step="0.01" class="form-control nonnegative" id="rates1" name="rates[]" onkeyup="invCalc()" value="<?= $subtotal ?>">	
+									
+									<input type="hidden" id="edit" value="0">
+
 								<input type="number" min="0" step="0.01" class="form-control nonnegative" id="rate1" name="rate[]" onkeyup="invCalc()" value="<?= $subtotal ?>">
 							</div>
 						</div>
@@ -829,7 +838,7 @@ include '../udf.php';
 					</div>
 				</div>
 			</div>
-			<?php
+			<?php 
 			$invoice_num = execute("select count(*)cnt,invoice_data from invoices where bookingid = $row[id]");
 			if ($invoice_num['cnt'] == 0) {
 			?>
@@ -887,7 +896,7 @@ include '../udf.php';
 													<input type="text" style="display:none;" class="form-control" id="dataid${i}" value="<?= $rs_row['id'] ?>">
 												</div>
 											</div>
-											<input type="checkbox" <?= $vatChecked ?> class="form-control" id="isvat${i}" name="isvat${i}" value="1" disabled style="display:none;">
+											<input type="checkbox" <?= $vatChecked ?> class="form-control" id="isvat${i}"name="isvat${i}" value="1" disabled style="display:none;">
 
 											<div class="inv-hsn">
 												<div class="form-group">
@@ -897,6 +906,9 @@ include '../udf.php';
 
 											<div class="inv-rate">
 												<div class="form-group">
+												<input type="hidden" min="0" step="1" class="form-control nonnegative" id="rates${i}" name="rates[]"
+														onKeyup="invCalc()" value="<?= $chargeWithoutDecimal ?>">
+														<input type="hidden" id="edit" value="0">
 													<input type="number" min="0" step="1" class="form-control nonnegative" id="rate${i}" name="rate[]"
 														onKeyup="invCalc()" value="<?= $chargeWithoutDecimal ?>">
 												</div>
@@ -1027,14 +1039,16 @@ include '../udf.php';
 											id="desc${i}" name="description[]" value="${dat.description}">
 									</div>
 									</div>
-									isgst
 									<div class="inv-hsn">
 									<div class="form-group">
 										<input type="text" class="form-control" id="hsn${i}" name="hsn[]" value="${dat.hsn}">
-									</div>
+									</div>	
 									</div>
 									<div class="inv-rate">
 									<div class="form-group">
+									<input type="hidden" min="0" step="1" class="form-control nonnegative" id="rates${i}" 
+											name="rates[]" onKeyup="invCalc()" value="${dat.rate}">
+											<input type="hidden" id="edit" value="0">
 										<input type="number" min="0" step="1" class="form-control nonnegative" id="rate${i}" 
 											name="rate[]" onKeyup="invCalc()" value="${dat.rate}">
 									</div>
@@ -1318,7 +1332,7 @@ include '../udf.php';
 					console.log(new_row_data);
 					$.ajax({
 						type: 'POST',
-						url: `bookingajax.php`,
+						url: `../bookingajax.php`,
 						data: {
 							action: "add_additional_service_addons",
 							bookingid: <?= $row['id'] ?>,
@@ -1376,7 +1390,7 @@ include '../udf.php';
 				console.log(JSON.stringify(alldata));
 				$.ajax({
 					type: 'POST',
-					url: `bookingajax.php`,
+					url: `../bookingajax.php`,
 					data: {
 						action: "add_invoice",
 						bookingid: <?= $row['id'] ?>,

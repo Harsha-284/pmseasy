@@ -7968,12 +7968,14 @@ function save_CM_Hotel_Name(userId) {
 									$takingsc = $_POST['takingsc'];
 									$servicecharge = col('servicecharge', 0);
 									$charginglt = $_POST['charginglt'];
+                  $invoice_type = $_POST['invoice_type'];
 									$ltnumber = $_POST['ltnumber'];
 									$state = col('state', 0);
 
+                  
 									$row = execute("select count(*)cnt from taxes where hotel=$_SESSION[hotel]");
 									if ($row['cnt'] == 0) {
-										$taxid = insert("insert into taxes (hotel,chargingst,stnumber,stcopy,st,sbc,kkc,takingabetment,threshold,ast,asbc,akkc,takingsc, sc,chargingluxury,ltnumber,state) values ($_SESSION[hotel],$chargingst,'$stnumber','',$st,$sbc,$kkc,$abetment,$threshold,$ast, $asbc,$akcc,$takingsc,$servicecharge,$charginglt,'$ltnumber',$state)");
+										$taxid = insert("insert into taxes (hotel,chargingst,stnumber,stcopy,st,sbc,kkc,takingabetment,threshold,ast,asbc,akkc,takingsc, sc,chargingluxury,invoice_type,ltnumber,state) values ($_SESSION[hotel],$chargingst,'$stnumber','',$st,$sbc,$kkc,$abetment,$threshold,$ast, $asbc,$akcc,$takingsc,$servicecharge,$charginglt,$invoice_type,'$ltnumber',$state)");
 
 										foreach ($_POST['rrf'] as $key => $rrf) {
 											$rrt = $_POST['rrt'][$key];
@@ -7983,7 +7985,7 @@ function save_CM_Hotel_Name(userId) {
 												$conn->query("insert into luxurytaxes (tax,minrent,maxrent,value) values ($taxid,$rrf,$rrt,$pv)");
 										}
 									} else {
-										$conn->query("update taxes set chargingst=$chargingst,stnumber='$stnumber',st=$st,sbc=$sbc,kkc=$kkc,takingabetment=$abetment, threshold=$threshold,ast=$ast,asbc=$asbc,akkc=$akcc,takingsc=$takingsc,sc=$servicecharge,chargingluxury=$charginglt, ltnumber='$ltnumber',state=$state where hotel=$_SESSION[hotel]");
+										$conn->query("update taxes set chargingst=$chargingst,stnumber='$stnumber',st=$st,sbc=$sbc,kkc=$kkc,takingabetment=$abetment, threshold=$threshold,ast=$ast,asbc=$asbc,akkc=$akcc,takingsc=$takingsc,sc=$servicecharge,chargingluxury=$charginglt,invoice_type='$invoice_type', ltnumber='$ltnumber',state=$state where hotel=$_SESSION[hotel]");
 
 										$taxid = execute("select id from taxes where hotel=$_SESSION[hotel]");
 										$conn->query("delete from luxurytaxes where tax=$taxid[id]");
@@ -8017,6 +8019,7 @@ function save_CM_Hotel_Name(userId) {
 								$result = $conn->query("select * from taxes where hotel=$_SESSION[hotel]");
 								if ($result->num_rows > 0) {
 									$row = $result->fetch_assoc();
+                  // print_r($row);
 									if ($row['chargingst'] == 0) {
 										$checked1 = "";
 										$display1 = "none";
@@ -8064,6 +8067,7 @@ function save_CM_Hotel_Name(userId) {
 									$akkc = $row['akkc'];
 									$ltnumber = $row['ltnumber'];
 									$ltcopy = $row['ltcopy'];
+									$invoice_type = $row['invoice_type'];
 									$state = $row['state'];
 								} else {
 									$checked1 = "";
@@ -8087,6 +8091,7 @@ function save_CM_Hotel_Name(userId) {
 									$akkc = "";
 									$ltnumber = "";
 									$ltcopy = "";
+									$invoice_type = "";
 									$state = "";
 								}
 								 ?>
@@ -8287,7 +8292,21 @@ function save_CM_Hotel_Name(userId) {
                      <h1 class="page-heading">HOTEL Tax Setup</h1>
                     <h4 class="small-title">GST SETUP</h4>
                     <div class="row" style="margin-right:0;margin-left:0">
-                      <div class="col-xs-12 pe-0 ps-0">
+                     <div class="d-flex">
+                       <div class="col-xs-12 pe-0 ps-0">
+                        <label>Invoice Type <?php echo $invoice_type;?></label>
+                        <div style="margin-left:-10px;display: flex;" class="">
+                         <div class="" style="width:120px;">
+                           <input type="radio" id="inclusive_invoice" name="invoice_type" <?= checked($invoice_type, "inclusive_invoice") ?> value="inclusive_invoice">
+                          <label for="inclusive_invoice">Inclusive Invoice</label>
+                          </div>
+                         <div class="" style="width:120px;">
+                             <input type="radio" id="exclusive_invoice" name="invoice_type" <?= checked($invoice_type, "exclusive_invoice") ?> value="exclusive_invoice">
+                             <label for="exclusive_invoice">Exclusive Invoice</label>
+                         </div>
+                        </div>
+                      </div>
+                       <div class="col-xs-12 pe-0 ps-0">
                         <label>Do you want to charge GST?</label>
                         <div style="margin-left:-10px;">
                           <div class="radio-3">
@@ -8301,6 +8320,7 @@ function save_CM_Hotel_Name(userId) {
                           </div>
                         </div>
                       </div>
+                     </div>
                       <div id="ltblock" style="display:<?= $display4 ?>">
                         <div class="row" style="margin-right:0;margin-left:0">
                           <div class="col-xs-4 pe-0 ps-0">
@@ -13319,11 +13339,15 @@ $totalCommissionAmt += $commissionValue;
 
 
 																									<?php
-																									
+																									 $hotel = execute("select invoice_type from taxes where hotel = $_SESSION[hotel]");
+                                                      
+                                                   $invoice_type=$hotel['invoice_type'];
+                                                  //  print_r($hotel);
 																										$str = "";
 																										$i = $offset + 1;
 																										while ($row = $result->fetch_assoc()) {
 																											$invoice_num = execute("select invoice_number,count(*)cnt from invoices where bookingid = $row[id]");
+                                                     
 																											$invoicestr = "-";
 																											$isinvoiceCreated = 0;
 																											if ($invoice_num['cnt'] > 0) {
@@ -13347,11 +13371,36 @@ $totalCommissionAmt += $commissionValue;
 
 																		<td id='td3id$i' >
 																			<button style='height: 25px; padding: 2px 10px;'  href='LBF_roomnumberbooking.php?id=$row[roomnumberid]&date=" . $date->format("Y-m-d") . "' class=' btn btn available  fancybox fancybox.iframe'>Summary</button>
-																		</td>
+																		</td>";
 
-																		<td id='td9id$i' >
-																			<button style='width: 104px; height: 25px; padding: 2px 4px;'  href='./taxinvoice/LBF_confirminvoice.php?id=$row[roomnumberid]&date=" . $date->format("Y-m-d") . "' class=' btn btn available  fancybox4 fancybox.iframe'>" . ($isinvoiceCreated ? 'Edit Invoice' : 'Create Invoice') . "</button>
-																		</td>
+																		$str .= "<td id='td9id$i'>";
+
+if ($invoice_type == "inclusive_invoice") {
+    $str .= "<button style='width:182px; height:25px; padding:2px 4px; background:#8CC152;'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                class='btn btn available fancybox4 fancybox.iframe'>" .
+                ($isinvoiceCreated ? 'Edit Invoice' : 'Create Inclusive Invoice') .
+            "</button>";
+} elseif ($invoice_type == "exclusive_invoice") {
+    $str .= "<button style='width:168px; height:25px; padding:2px 4px; background:#37BC9B;'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                class='btn btn available fancybox4 fancybox.iframe'>" .
+                ($isinvoiceCreated ? 'Edit Invoice' : 'Create Exclusive Invoice') .
+            "</button>";
+} else {
+    // Both buttons
+    $str .= "<button style='width:168px; height:25px; padding:2px 4px;'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                class='btn btn-warning fancybox4 fancybox.iframe'>Inclusive Invoice</button>
+            &nbsp;
+            <button style='width:168px; height:25px; padding:2px 4px;'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                class='btn btn-info fancybox4 fancybox.iframe'>Exclusive Invoice</button>";
+}
+
+$str .= "</td>
+
+
 
 																		
 																		
