@@ -432,17 +432,19 @@ if (!isset($_SESSION['groupid'])) { ?>
                     <?php
                     $hotelcode = execute("select u.cm_company_name, h.user from hotels h JOIN users u ON h.user = u.id where h.id = $_SESSION[hotel]");
                     ?>
-                    <div class="submit-button" style="width: 100%;float: right; text-align: end;">
+                    <div class="submit-button" style="width: 100%;float: right;">
                         <label for="commentTextarea " class="form-label " style="display: block; font-weight: 700;">Deal Amount</label>
-                        <input class="fw-bold" type="text" style=" text-align: end;  border: none; 
+                        <input class="fw-bold" type="text" style=" text-align: end;  border: none;     width: 92px; 
     background-color: #fff;" name="fixed-rate-input" disabled>
+                        <div class="deal-submint-btn" style="margin-top: -4%;
+    position: relative;
+    left: 14%; width: 85%;">
+                            <a id="submitAnchor" class="btn btn-primary" style="margin: 0px 0px 0px auto;" onClick="bookRoom('<?= $hotelcode['cm_company_name'] ?>')">
+                                Submit
+                            </a>
+                        </div>
+                    </div>
 
-                    </div>
-                    <div class="deal-submint-btn" style="text-align: end; margin-top: 6%;">
-                        <a id="submitAnchor" class="btn btn-primary" style="margin: 0px 0px 0px auto;" onClick="bookRoom('<?= $hotelcode['cm_company_name'] ?>')">
-                            Submit
-                        </a>
-                    </div>
 
                 </form>
             </div>

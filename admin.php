@@ -10322,13 +10322,13 @@ $totalCommissionAmt += $commissionValue;
                                  <input type="text" id="book-brn" class="form-control"
                                     style=""
                                     placeholder="Search #BRN">
-                                  <a  style="" class=" action-btn"
+                                  <a  style="font-size: 12px !important;" class=" action-btn"
                                     id="book-submit">Submit</a>
 																<a href="LBF_bookroom.php?date=" class="fancybox fancybox.iframe"><button class="btn btn-danger" style="color: #fff" fdprocessedid="d0insh">Check Room Availability</button></a>
 
                                       <div style="margin-top:11px;">
                                       <a class="action-btn w-75 btn available fancybox fancybox.iframe" href="bookmap.php"
-                                  style="float: inline-end; margin-right: 14px; position: relative; top: -10px; height:29px;">Check In</a>  
+                                  style="float: inline-end; margin-right: 14px; position: relative; top: -10px; height:29px; font-size: 12px !important;">Check In Now</a>  
                                           </div>
                               </div>
 

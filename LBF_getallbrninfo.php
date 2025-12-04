@@ -91,8 +91,8 @@ if (!isset($_SESSION['groupid'])) { ?>
 		.header-content{
 			display: flex;
 			justify-content: space-between;
-			padding:5px 10px;
-			padding-right: 30px;
+			padding:5px 15px;
+			padding-right: 22px;
 			background:#ede8e8;
 			margin-bottom: 15px;
 		}
@@ -229,7 +229,7 @@ if (!isset($_SESSION['groupid'])) { ?>
 					<div class="header">
 						<div class="header-content">
 							<div class="br">
-								<span style="font-weight: 600;">BR#</span> &nbsp;&nbsp;&nbsp; <span><?= $row['id'] ?></span>
+								<span style="font-weight: 600;">BRN#</span> &nbsp;&nbsp;&nbsp; <span><?= $row['id'] ?></span>
 							</div>
 							<div class="btns" style="position: relative; top: 8px; right: -30px;">
 																<?php
@@ -293,7 +293,7 @@ if (!isset($_SESSION['groupid'])) { ?>
 									
 if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] == "") {
     $checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin']));
-    echo "<small style='display: block; position: relative;left: -200%;top:-49%;'>Checked in at: " . $checkInTime . "</small>";
+    echo "<small style='display: block; position: relative;left: -220%;top:-49%;'>Checked in at: " . $checkInTime . "</small>";
 }
 ?>
 
