@@ -1338,14 +1338,16 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 		$("[name='description[]']").each(function(k,v){
 			var id = $(this).prop("id").replace("desc","");
 			var dtype = document.getElementById("dtype"+id).value;
+
+			var action = document.getElementById("action").value;
 			
-			if(document.getElementById("rate"+id).value=="")
+			if(document.getElementById("rates"+id).value=="")
 				rate = 0;
-			else if(isNaN(document.getElementById("rate"+id).value))
+			else if(isNaN(document.getElementById("rates"+id).value))
 				rate = 0;
 			else
-				rate = parseFloat(document.getElementById("rate"+id).value);
-
+				rate = parseFloat(document.getElementById("rates"+id).value);
+			
 			rate = Math.round(rate * 100) * 0.01;
 
 			var discper = document.getElementById("discper"+id).value;
@@ -1359,7 +1361,6 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 				qty = parseInt(document.getElementById("qty"+id).value);
 
 			var subtot = Math.round(rate * qty * 100) * 0.01;
-			document.getElementById("subtot"+id).value = subtot;
 
 			if(dtype == "Flat")
 				var discount = discper;
@@ -1370,6 +1371,7 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 			
 			var taxable = Math.round((subtot - discount)*100) * 0.01;
 			document.getElementById("taxable"+id).value = taxable;
+
 
 			var isvat = $("#isvat"+id).is(":checked");
 			
@@ -1401,6 +1403,7 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 			
 			cgst = sgst = parseFloat(cgst);
 			igst = parseFloat(igst);
+
 			
 			document.getElementById("cgst"+id).value = cgst;
 			document.getElementById("sgst"+id).value = sgst;
@@ -1409,16 +1412,35 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 			if(document.getElementById("vat"+id))
 				document.getElementById("vat"+id).value	 = vat;
 			
+				totalgst	+= cgst + sgst + igst;
+				
+		var invoice_type = document.getElementById("invoice_type").value;
+
+		
+		if (invoice_type == "inclusive_invoice" ) {
+			var allgst = cgst + sgst + igst;
+			var rate = ( rate * qty) - allgst
+
+			var subtot = Math.round(rate * 100) * 0.01;
+			var taxable = Math.round((subtot - discount)*100) * 0.01;
+			var rate = rate/qty;
+			
+			document.getElementById("rate"+id).value=rate;
+		    document.getElementById("taxable"+id).value = taxable.toFixed(2);
+		}   		
+		
 			subtotal += taxable;
 			stotal = Math.floor((taxable + cgst + sgst + igst + vat) * 100) * 0.01;
-			//console.log(stotal);
-			document.getElementById("total"+id).value = stotal.toFixed(2);
 
-			totalgst	+= cgst + sgst + igst;
+		
 			totalvat	+= vat;
 			total		+= stotal;
 
 			totaldiscount += discount;
+			
+        document.getElementById("subtot"+id).value = subtot;
+		document.getElementById("total"+id).value = stotal.toFixed(2);
+  
 		});
 		//console.log("A:"+totaldiscount);
 		if($("[name=adjust_discount]:checked").length)
@@ -1428,7 +1450,7 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 		
 		totaldiscount += cashDisc;
 		totalgst = parseFloat(totalgst.toFixed(2));
-		
+			
 		document.getElementById("subtotal").value = subtotal;
 		document.getElementById("totdisc").value  = totaldiscount;
 		document.getElementById("gsttotal").value = totalgst;
@@ -1460,7 +1482,7 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 		while(document.getElementById("desc"+i))
 			i++;
 		
-		var str = '<div class="row" id="row'+i+'" style="margin-left: 0;"><div class="inv-desc"><div class="form-group d-flex"><a href="javascript:void(0)" class="text-danger invoice_close_btn cross-icon-invocre" onClick="cancel_invoice_row('+i+');" title="Cancel" style="position: relative;top: 5px;">X</a><input type="text" style="width:90%; float:left" class="form-control" id="desc'+i+'" name="description[]" value=""></div></div><input type="checkbox" <?= $vatChecked ?> class="form-control" id="isvat${i}" name="isvat${i}" value="1" disabled style="display:none;"><div class="inv-hsn"><div class="form-group"><input type="text" class="form-control" id="hsn'+i+'" name="hsn[]" value=""></div></div><div class="inv-rate"><div class="form-group"><input type="number" min="0" step="1" class="form-control nonnegative" id="rate'+i+'" name="rate[]" onKeyup="invCalc()" value="0"></div></div><div class="inv-qty"><div class="form-group"><input type="number" min="1" step="1" class="form-control nonnegative" id="qty'+i+'" name="qty[]" onKeyup="invCalc()" value="1"></div></div><div class="inv-qty"><div class="form-group"><input type="number" min="0" step="1" class="form-control" id="subtot'+i+'" name="subtot[]" value="0" readonly></div></div><div class="inv-disctype"><div class="form-group d-flex"><input type="number" min="0" step="1" class="form-control width-50 nonnegative" id="discper'+i+'" name="discper[]" onKeyup="invCalc()" value="0"><select class="form-control width-50" id="dtype'+i+'" name="dtype[]"><option>Flat</option><option>%</option></select></div></div><div class="inv-qty"><div class="form-group"><input type="number" class="form-control" id="discount'+i+'" name="discount[]" value="0" readonly></div></div><div class="inv-qty"><div class="form-group"><input type="number" class="form-control" id="taxable'+i+'" name="taxable[]" value="0" readonly></div></div><div class="inv-slab"><div class="form-group"><input type="number" step="1" min="0" class="form-control nonnegative" name="slab[]" onkeyup="invCalc()" id="slab'+i+'" value="0"></div></div><div class="inv-gst"><div class="form-group"><input type="text" class="form-control" id="cgst'+i+'" name="cgst[]" value="0" readonly></div></div><div class="inv-gst cls-csgst"><div class="form-group"><input type="text" class="form-control" id="sgst'+i+'" name="sgst[]" value="0" readonly></div></div><div class="inv-gst cls-igst"><div class="form-group"><input type="text" class="form-control" id="igst'+i+'" name="igst[]" value="0" readonly></div></div><div class="inv-total"><div class="form-group"><input type="text" class="form-control" id="total'+i+'" name="total[]" value="0" readonly></div></div></div>';
+		var str = '<div class="row" id="row'+i+'" style="margin-left: 0;"><div class="inv-desc"><div class="form-group d-flex"><a href="javascript:void(0)" class="text-danger invoice_close_btn cross-icon-invocre" onClick="cancel_invoice_row('+i+');" title="Cancel" style="position: relative;top: 5px;">X</a><input type="text" style="width:90%; float:left" class="form-control" id="desc'+i+'" name="description[]" value=""></div></div><div class="inv-hsn"><div class="form-group"><input type="text" class="form-control" id="hsn'+i+'" name="hsn[]" value=""></div></div><div class="inv-rate"><div class="form-group"><input type="number" min="0" step="1" class="form-control nonnegative" id="rate'+i+'" name="rate[]" onKeyup="invCalc()" value="0"></div></div><div class="inv-qty"><div class="form-group"><input type="number" min="1" step="1" class="form-control nonnegative" id="qty'+i+'" name="qty[]" onKeyup="invCalc()" value="1"></div></div><div class="inv-qty"><div class="form-group"><input type="number" min="0" step="1" class="form-control" id="subtot'+i+'" name="subtot[]" value="0" readonly></div></div><div class="inv-disctype"><div class="form-group d-flex"><input type="number" min="0" step="1" class="form-control width-50 nonnegative" id="discper'+i+'" name="discper[]" onKeyup="invCalc()" value="0"><select class="form-control width-50" id="dtype'+i+'" name="dtype[]"><option>Flat</option><option>%</option></select></div></div><div class="inv-qty"><div class="form-group"><input type="number" class="form-control" id="discount'+i+'" name="discount[]" value="0" readonly></div></div><div class="inv-qty"><div class="form-group"><input type="number" class="form-control" id="taxable'+i+'" name="taxable[]" value="0" readonly></div></div><div class="inv-slab"><div class="form-group"><input type="number" step="1" min="0" class="form-control nonnegative" name="slab[]" onkeyup="invCalc()" id="slab'+i+'" value="0"></div></div><div class="inv-gst"><div class="form-group"><input type="text" class="form-control" id="cgst'+i+'" name="cgst[]" value="0" readonly></div></div><div class="inv-gst cls-csgst"><div class="form-group"><input type="text" class="form-control" id="sgst'+i+'" name="sgst[]" value="0" readonly></div></div><div class="inv-gst cls-igst"><div class="form-group"><input type="text" class="form-control" id="igst'+i+'" name="igst[]" value="0" readonly></div></div><div class="inv-total"><div class="form-group"><input type="text" class="form-control" id="total'+i+'" name="total[]" value="0" readonly></div></div></div>';
 
 		$("#description").append(str);
 

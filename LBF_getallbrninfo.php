@@ -77,18 +77,22 @@ if (!isset($_SESSION['groupid'])) { ?>
 		input[type="number"] {
 			-moz-appearance: textfield;
 		}
-		.header{
+
+		.header {
 			border: 1px solid #e8e9ee;
 			padding-bottom: 15px;
 		}
-		.card{
-			margin-bottom:20px;
+
+		.card {
+			margin-bottom: 20px;
 		}
-		.br{
-			display:flex;
+
+		.br {
+			display: flex;
 			align-items: center;
 		}
-		.header-content{
+
+		.header-content {
 			display: flex;
 			justify-content: space-between;
 			padding:5px 15px;
@@ -96,36 +100,43 @@ if (!isset($_SESSION['groupid'])) { ?>
 			background:#ede8e8;
 			margin-bottom: 15px;
 		}
-		.inner-content{
-				display: flex;
-				gap: 15px;
-				padding: 0 15px;
+
+		.inner-content {
+			display: flex;
+			gap: 15px;
+			padding: 0 15px;
 		}
-		.modal-body
-		{
+
+		.modal-body {
 			padding: 0;
 		}
-		.client-details{
+
+		.client-details {
 			width: 60%;
 		}
-		.check-in-details{
+
+		.check-in-details {
 			width: 40%;
 		}
-		.client-content{
+
+		.client-content {
 			padding: 10px 15px;
 			border: 1px solid #e8e9ee;
 		}
-		.content-header{
-			padding:5px;
+
+		.content-header {
+			padding: 5px;
 			color: #656D78;
 			background-color: #e8e9ee;
 			border-color: #e8e9ee;
 			text-transform: uppercase;
 		}
-		.client-content p{
-			margin:0 0 2px;
+
+		.client-content p {
+			margin: 0 0 2px;
 		}
-		.assign-head{
+
+		.assign-head {
 			padding: 10px;
 			font-size: 16px;
 			font-weight: 700;
@@ -134,22 +145,26 @@ if (!isset($_SESSION['groupid'])) { ?>
 			color: #e45452;
 			margin: 0 10px !important;
 			/* background-color:#dcdcdc; */
-			    border-bottom: 1px solid #dcdcdc;
-			margin-bottom:15px !important;
+			border-bottom: 1px solid #dcdcdc;
+			margin-bottom: 15px !important;
 		}
-		.card-body-inner-section{
+
+		.card-body-inner-section {
 			padding: 0 10px;
 		}
-		.border{
-			border:1px solid #dcdcdc;
+
+		.border {
+			border: 1px solid #dcdcdc;
 		}
-		.available{
+
+		.available {
 			padding: 4px;
-    		/* font-size: 12px; */
+			/* font-size: 12px; */
 		}
-		.booked{
+
+		.booked {
 			padding: 4px;
-    		font-size: 12px;
+			font-size: 12px;
 		}
 	</style>
 
@@ -160,8 +175,8 @@ if (!isset($_SESSION['groupid'])) { ?>
 		$bdate = date_create($_GET['date']);
 		$a = date_create($bdate->format("Y-m-d") . " " . '12' . ":" . '00');
 		$now = date_create(date("Y-m-d H:i"));
-		$roomTypeFilter = '';  
-		
+		$roomTypeFilter = '';
+
 		?>
 
 		<!-- 1st modal for checking availability-->
@@ -194,12 +209,12 @@ if (!isset($_SESSION['groupid'])) { ?>
                          AND (b.checkindatetime <= '$aFormatted' AND b.checkoutdatetime >= '$aFormatted') 
 						 AND rn.id = $roomNumberId
                          $roomTypeFilter GROUP BY b.id");
-						//  print_r($result);
+				//  print_r($result);
 
-					    while ($row = $result->fetch_assoc()) {
-					    if($_GET['id'] == "all"){
-                            $roomtype = execute('SELECT roomtype FROM roomtypes WHERE id=' . (int)$row['room_id']);
-					    }
+				while ($row = $result->fetch_assoc()) {
+					if ($_GET['id'] == "all") {
+						$roomtype = execute('SELECT roomtype FROM roomtypes WHERE id=' . (int)$row['room_id']);
+					}
 
 						$no_of_room = execute("select COUNT(*)cnt from room_distribution where bookingid=$row[id]");
 						$checkindate = new DateTime($row['checkindatetime']);
@@ -240,52 +255,52 @@ if (!isset($_SESSION['groupid'])) { ?>
 										<a id="assign-check-in" class="btn available" style="" href="LBF_assignroom.php?id=' . $row['id'] . '&roomtype=' . $row['room_id'] . '">Check in</a>
 
 										';
-									} else if ($todaysDate >= $checkindate->format("d-m-Y")) {
-										echo '<a id="edit-check-in" class="btn available" style="width: 67px; height: 32px;  padding: 7px 17px 5px 21px;" href="LBF_assignroom.php?id=' . $row['id'] . '&roomtype=' . $row['room_id'] . '">Edit</a>';
-									} else {
-										// done
-									}
-									?>
-									<?php
-									// Check the user status and show appropriate buttons
-									if ($row['usercheckedin'] == "0000-00-00 00:00:00" || $row['usercheckedin'] == "") {
-										// User has not checked in yet, show 'Check in' button
+											} else if ($todaysDate >= $checkindate->format("d-m-Y")) {
+												echo '<a id="edit-check-in" class="btn available" style="width: 67px; height: 32px;  padding: 7px 17px 5px 21px;" href="LBF_assignroom.php?id=' . $row['id'] . '&roomtype=' . $row['room_id'] . '">Edit</a>';
+											} else {
+												// done
+											}
+											?>
+											<?php
+											// Check the user status and show appropriate buttons
+											if ($row['usercheckedin'] == "0000-00-00 00:00:00" || $row['usercheckedin'] == "") {
+												// User has not checked in yet, show 'Check in' button
 
-										$todaysDate = date("d-m-Y");
-									} else if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] == "") {
-										// User is checked in but has not checked out yet, show 'Check out' button and check-in time
-										$checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin'])); // Format the check-in time
-										$btnvalue = "
+												$todaysDate = date("d-m-Y");
+											} else if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] == "") {
+												// User is checked in but has not checked out yet, show 'Check out' button and check-in time
+												$checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin'])); // Format the check-in time
+												$btnvalue = "
 													<a id='edit-checkout' href='LBF_usercheckinout.php?id=" . $row['id'] . "' class='fancybox2 fancybox.iframe' style='color:#FFFFFF'>
 													<button class='filter-action-btn2' style='' >Check out</button>
 													</a> 
 												";
-									} else {
-										// User has already checked out, show 'Checked out' status
-										$checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin']));
-										$checkOutTime = date("d-m-Y, g:i a", strtotime($row['usercheckedout']));
-										$btnvalue = "
+											} else {
+												// User has already checked out, show 'Checked out' status
+												$checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin']));
+												$checkOutTime = date("d-m-Y, g:i a", strtotime($row['usercheckedout']));
+												$btnvalue = "
 													<div>
 													<a href='LBF_usercheckinout.php?id=" . $row['id'] . "' class='fancybox fancybox.iframe' style='color:#FFFFFF;'><button class='btn booked'>Checked out</button></a>
 													</div>";
-									}
-									?>
+											}
+											?>
 
-									<?= $btnvalue ?>
+											<?= $btnvalue ?>
 
-									<!-- Only show 'No show' and 'Cancel Booking' buttons if the user has NOT checked in -->
-									<?php
-									$todaysDate = date("d-m-Y"); // Get today's date in the format "d-m-Y"
-									$checkindate = new DateTime($row['checkindatetime']);
+											<!-- Only show 'No show' and 'Cancel Booking' buttons if the user has NOT checked in -->
+											<?php
+											$todaysDate = date("d-m-Y"); // Get today's date in the format "d-m-Y"
+											$checkindate = new DateTime($row['checkindatetime']);
 
-									// First condition for "No show"
-									if (($row['usercheckedin'] == "0000-00-00 00:00:00" || $row['usercheckedin'] == "") && $todaysDate >= $checkindate->format("d-m-Y")): ?>
-										<a id="booking-edit" class="btn filter-action-btn1 mr-2" onclick="noshow('<?= $userInfo['cm_company_name'] ?>', '<?= $row['id'] ?>')">No show</a>
-									<?php
-									endif;
+											// First condition for "No show"
+											if (($row['usercheckedin'] == "0000-00-00 00:00:00" || $row['usercheckedin'] == "") && $todaysDate >= $checkindate->format("d-m-Y")): ?>
+												<a id="booking-edit" class="btn filter-action-btn1 mr-2" onclick="noshow('<?= $userInfo['cm_company_name'] ?>', '<?= $row['id'] ?>')">No show</a>
+											<?php
+											endif;
 
-									// Additional condition for "Cancel Booking"
-									if (($row['usercheckedin'] == "0000-00-00 00:00:00" || $row['usercheckedin'] == "") && $todaysDate < $checkindate->format('d-m-Y')): ?>
+											// Additional condition for "Cancel Booking"
+											if (($row['usercheckedin'] == "0000-00-00 00:00:00" || $row['usercheckedin'] == "") && $todaysDate < $checkindate->format('d-m-Y')): ?>
 
 										<button id="booking-cancel" onClick="handleClick('<?= $row['id'] ?>')" class="btn booked">Cancel Booking</button>
 									<?php
@@ -297,9 +312,11 @@ if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] ==
 }
 ?>
 
-							</div>
-						</div>
-						<div class="inner-content">
+											if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] == "") {
+												$checkInTime = date("d-m-Y, g:i a", strtotime($row['usercheckedin']));
+												echo "<small style='display: block; position: relative;left: -220%;top:-49%;'>Checked in at: " . $checkInTime . "</small>";
+											}
+											?>
 
 							<div class="client-details">
 								<div class="content-header">
@@ -317,19 +334,16 @@ if ($row['usercheckedout'] == "0000-00-00 00:00:00" || $row['usercheckedout'] ==
 									Check-in Detailes
 								</div>
 								<div class="client-content">
-									<p><b>Check-in Date:</b> (<?= $checkindate->format('d-m-Y') ?>)</p>
-									<p><b>Check-out Date:</b> (<?= $checkoutdate->format('d-m-Y') ?>)</p>
+									<p><b>Check-in Date:</b> (<?= htmlspecialchars(popdate($checkindate->format('Y-m-d'))) ?>)</p>
+                                    <p><b>Check-out Date:</b> (<?= htmlspecialchars(popdate($checkoutdate->format('Y-m-d'))) ?>)</p>
 									<p><b>Room Type:</b> <?= $roomtype['roomtype'] ?></p>
 									<p><b>No. of Rooms:</b> <?= $no_of_room['cnt'] ?></p>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				<?php } ?>
 			</div>
-		</div>
-<?php } ?> 
-		</div>
 		</div>
 		<?php include("js.php"); ?>
 

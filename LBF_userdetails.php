@@ -440,7 +440,7 @@ if (!isset($_SESSION['groupid'])) { ?>
     position: relative;
     left: 14%; width: 85%;">
                             <a id="submitAnchor" class="btn btn-primary" style="margin: 0px 0px 0px auto;" onClick="bookRoom('<?= $hotelcode['cm_company_name'] ?>')">
-                                Submit
+                                Book Now
                             </a>
                         </div>
                     </div>
