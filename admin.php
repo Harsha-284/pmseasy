@@ -13374,27 +13374,29 @@ $totalCommissionAmt += $commissionValue;
 																		</td>";
 
 																		$str .= "<td id='td9id$i'>";
+                                    $action = $isinvoiceCreated ? "&action=edit" : "";
+
 
 if ($invoice_type == "inclusive_invoice") {
     $str .= "<button style='width:182px; height:25px; padding:2px 4px; background:#8CC152;'
-                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}$action&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
                 class='btn btn available fancybox4 fancybox.iframe'>" .
                 ($isinvoiceCreated ? 'Edit Invoice' : 'Create Inclusive Invoice') .
             "</button>";
 } elseif ($invoice_type == "exclusive_invoice") {
     $str .= "<button style='width:168px; height:25px; padding:2px 4px; background:#37BC9B;'
-                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}$action&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
                 class='btn btn available fancybox4 fancybox.iframe'>" .
                 ($isinvoiceCreated ? 'Edit Invoice' : 'Create Exclusive Invoice') .
             "</button>";
 } else {
     // Both buttons
     $str .= "<button style='width:168px; height:25px; padding:2px 4px;'
-                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}$action&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
                 class='btn btn-warning fancybox4 fancybox.iframe'>Inclusive Invoice</button>
             &nbsp;
             <button style='width:168px; height:25px; padding:2px 4px;'
-                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
+                href='./taxinvoice/LBF_confirminvoice.php?id={$row['roomnumberid']}$action&type=$invoice_type&date=" . $date->format("Y-m-d") . "'
                 class='btn btn-info fancybox4 fancybox.iframe'>Exclusive Invoice</button>";
 }
 

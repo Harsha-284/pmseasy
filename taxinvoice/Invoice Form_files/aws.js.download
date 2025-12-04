@@ -1339,13 +1339,15 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 			var id = $(this).prop("id").replace("desc","");
 			var dtype = document.getElementById("dtype"+id).value;
 
+			var action = document.getElementById("action").value;
+			
 			if(document.getElementById("rates"+id).value=="")
 				rate = 0;
 			else if(isNaN(document.getElementById("rates"+id).value))
 				rate = 0;
 			else
 				rate = parseFloat(document.getElementById("rates"+id).value);
-
+			
 			rate = Math.round(rate * 100) * 0.01;
 
 			var discper = document.getElementById("discper"+id).value;
@@ -1369,6 +1371,7 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 			
 			var taxable = Math.round((subtot - discount)*100) * 0.01;
 			document.getElementById("taxable"+id).value = taxable;
+
 
 			var isvat = $("#isvat"+id).is(":checked");
 			
@@ -1400,6 +1403,7 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 			
 			cgst = sgst = parseFloat(cgst);
 			igst = parseFloat(igst);
+
 			
 			document.getElementById("cgst"+id).value = cgst;
 			document.getElementById("sgst"+id).value = sgst;
@@ -1409,23 +1413,24 @@ function invoice_calc(igst_flag,cgst_p,sgst_p,igst_p)
 				document.getElementById("vat"+id).value	 = vat;
 			
 				totalgst	+= cgst + sgst + igst;
-
+				
 		var invoice_type = document.getElementById("invoice_type").value;
 
+		
 		if (invoice_type == "inclusive_invoice" ) {
-			var rate =( rate * qty) - totalgst
+			var allgst = cgst + sgst + igst;
+			var rate = ( rate * qty) - allgst
+
 			var subtot = Math.round(rate * 100) * 0.01;
 			var taxable = Math.round((subtot - discount)*100) * 0.01;
-
 			var rate = rate/qty;
+			
 			document.getElementById("rate"+id).value=rate;
-		document.getElementById("taxable"+id).value = taxable.toFixed(2);
-
-
-		}
+		    document.getElementById("taxable"+id).value = taxable.toFixed(2);
+		}   		
+		
 			subtotal += taxable;
 			stotal = Math.floor((taxable + cgst + sgst + igst + vat) * 100) * 0.01;
-			//console.log(stotal);
 
 		
 			totalvat	+= vat;
