@@ -29,7 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$rs_row = execute("
 			select count(*)cnt from
 			(
-				select rd.roomnumber from bookings b join room_distribution rd on rd.bookingid=b.id left join roomnumbers rn on rn.id=rd.roomnumber where b.status in ('Scheduled', 'Cancelled') and rn.roomtype=$rt 
+				select rd.roomnumber from bookings b join room_distribution rd on rd.bookingid=b.id left join roomnumbers rn on rn.id=rd.roomnumber where b.status in ('Scheduled', 'Cancelled') AND (
+    b.usercheckedout IS NULL 
+    OR b.usercheckedout = '0000-00-00 00:00:00'
+    OR b.usercheckedout > NOW()
+) and rn.roomtype=$rt 
 				and
 				(
 					(
@@ -533,15 +537,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		foreach ($roomnumberids as $index => $roomnumberid) {
 			$roomdisid = $roomdisids[$index];
 
-			$booking_exsist = execute("SELECT rd.id 
-								FROM bookings b 
-								JOIN room_distribution rd ON rd.bookingid = b.id 
-								WHERE rd.roomnumber = $roomnumberid
-								AND (
-									('" . $checkindate->format("Y-m-d H:i") . "' < b.checkoutdatetime AND '" . $checkoutdate->format("Y-m-d H:i") . "' > b.checkindatetime)
-								);");
+			// $booking_exsist = execute("SELECT rd.id 
+			// 					FROM bookings b 
+			// 					JOIN room_distribution rd ON rd.bookingid = b.id 
+			// 					WHERE rd.roomnumber = $roomnumberid
+			// 					AND (
+			// 						('" . $checkindate->format("Y-m-d H:i") . "' < b.checkoutdatetime AND '" . $checkoutdate->format("Y-m-d H:i") . "' > b.checkindatetime)
+			// 					);");
+
+// 			$booking_exsist = execute("
+//     SELECT rd.id 
+//     FROM bookings b 
+//     JOIN room_distribution rd ON rd.bookingid = b.id 
+//     WHERE rd.roomnumber = $roomnumberid
+//     AND (
+//         ('" . $checkindate->format("Y-m-d H:i") . "' < b.checkoutdatetime 
+//          AND '" . $checkoutdate->format("Y-m-d H:i") . "' > b.checkindatetime)
+//     )
+//     AND (
+//         b.usercheckedout = '0000-00-00 00:00:00'
+//         OR b.usercheckedout IS NULL
+//         OR b.usercheckedout > NOW()   -- Still staying or checkout in future
+//     )
+// ");
+$roomnumberid = intval($roomnumberid);
+$ci = $checkindate->format('Y-m-d H:i:s');
+$co = $checkoutdate->format('Y-m-d H:i:s');
+$sql = "
+SELECT rd.id 
+FROM bookings b 
+JOIN room_distribution rd ON rd.bookingid = b.id 
+WHERE rd.roomnumber = $roomnumberid
+  AND b.status = 'Scheduled'
+  AND (
+        '$ci' < b.checkoutdatetime
+    AND '$co' > b.checkindatetime
+  )
+  AND (
+       b.usercheckedout = '0000-00-00 00:00:00'
+    OR b.usercheckedout IS NULL
+    OR b.usercheckedout > NOW()
+  )
+LIMIT 1;
+";
+			// print_r($sql);
+
+// run query using your helper
+$booking_exsist = execute($sql);
+
 
 			if ($booking_exsist != NULL) {
+				
 				$curr_roomnumberid = execute("select roomnumber from room_distribution where id='$roomdisid'");
 
 				$conn->query("update room_distribution set roomnumber='$curr_roomnumberid[roomnumber]' where id='$booking_exsist[id]'");

@@ -243,13 +243,11 @@ include 'udf.php'; ?>
 		$bdate = date_create($_GET['date']);
 		$now = date_create(date("Y-m-d H:i"));
 		$a = date_create($bdate->format("Y-m-d") . " " . '12' . ":" . '00');
-
 		$row = execute("select b.id,b.status,b.intialtariff,b.hours,b.reg_date,u.id_proof_path,u.id_proof,(declaredtariff-pcdiscount+hotelst+hsbc+hkcc+frotelst+fsbc+fkcc+lt+sc+stonsc)total,u.fullname,u.contact,u.email,u.address1, b.trav_name,b.checkindatetime,b.checkoutdatetime,b.usercheckedin,b.usercheckedout from bookings b left join room_distribution rd on b.id=rd.bookingid left join users u on u.id=b.guestid where (b.paid=1 or ticker>'" . $now->format("Y-m-d H:i") . "') and (b.status='Scheduled' or b.status='Cancelled' or b.status='Refunded') and rd.roomnumber=$_GET[id] 
 								and 
 			(
 			b.checkindatetime<='" . $a->format("Y-m-d H:i") . "' and b.checkoutdatetime>='" . $a->format("Y-m-d H:i") . "'
 		)");
-		// print_r($row);
 		if ($row && isset($row['id'])) {
 
 			$bookingId = intval($row['id']);
@@ -269,7 +267,17 @@ include 'udf.php'; ?>
 		}
 		$checkindate = new DateTime($row['checkindatetime']);
 		$checkoutdate = new DateTime($row['checkoutdatetime']);
-		?>
+		
+		 if ($row['usercheckedout'] != "0000-00-00 00:00:00" && $row['usercheckedout'] != "") { ?>
+<div style="margin-top:2px;margin-bottom:2px;">
+        <a href="LBF_bookroom.php?date=<?= $_GET['date'] ?>&roomname=<?= $userInfo['roomtype'] ?>" 
+           class="btn btn-primary"
+           style="">
+            New Booking
+        </a>
+    </div>
+		 <?php } ?>
+
 		<div class="inner-container">
 			<div class="brn-card" style="display: flex;justify-content: space-between;align-items: center; padding:10px 25px; background: #dcdcdc; margin-bottom:10px;">
 				<div>
@@ -338,7 +346,11 @@ include 'udf.php'; ?>
 			<div class="brn-card" style="padding:5px 0px">
 				<div style="padding: 0 15px;">
 					<div class="border">
-						<div class="bill-heading d-flex justify-content-between">Client Details 
+						<div class="bill-heading d-flex justify-content-between">Client Details
+							<?php $todaysDate = date("d-m-Y"); // Get today's date
+							if ($todaysDate <= $bdate->format("d-m-Y")) { ?>
+								<a id="assign-check-in" class="btn available" style="" href="LBF_assignroom.php?id=<?= $row['id'] ?>&roomtype=<?= $userInfo['id'] ?>">Assign Another Room</a>
+							<?php } ?>
 						</div>
 
 						<div class="inner-content">
@@ -418,108 +430,108 @@ include 'udf.php'; ?>
 							$reg_date = new DateTime($row['reg_date']);
 							$payment = $conn->query("select id,payment_type, date_of_payment, txnid, cheque_bank, cheque_no, cheque_date, comment,amount,discount_type,discount_percent,discount_flat from payment_mode where bookingid=$row[id] and deleted=0 order by id desc;");
 							$payment_count = $payment->num_rows;
-							if($payment_count > 0){ ?>
-							<table id="payment-table" class="table table-bordered br-none mg-top" style="border-collapse: collapse; width: 100%; border: none; margin: 5px 0px">
-								<thead style="border-bottom: 1px solid #ddd;">
-									<tr class="table-color" style="border-bottom: 1px solid #ddd;border-top: 1px solid #ddd; font-size: 15px; ">
-										<th class="border-none" style="font-size: 11px; border: none; ">Sr#</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Mode</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Date</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Txn id</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Cheque Bank</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Cheque no.</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Cheque Date</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Amount</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Discount</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Discount type</th>
-										<th class="border-none" style="font-size: 11px; border: none; ">Due Balance</th>
-										<th class="border-none" style="font-size: 11px; border: none; text-align: center ">Note</th>
-										<th class="border-none" style="font-size: 11px; border: none; text-align: center ">Edit</th>
-										<th class="border-none" style="font-size: 11px; border: none; text-align: center">Receipt</th>
-										<th class="border-none" style="font-size: 11px; border: none; text-align: center">Delete</th>
-									</tr>
-								</thead>
-								<script>
-									document.getElementById('number-of-nights').innerText = getDatesBetween('<?= $checkindate->format('Y-m-d') ?>', '<?= $checkoutdate->format('Y-m-d') ?>');
-								</script>
-								<tbody id="room-availability-body">
-									<?php
-									$reg_date = new DateTime($row['reg_date']);
-									$payment = $conn->query("select id,payment_type, date_of_payment, txnid, cheque_bank, cheque_no, cheque_date, comment,amount,discount_type,discount_percent,discount_flat from payment_mode where bookingid=$row[id] and deleted=0 order by id desc;");
-									$i = 0;
-									$total_paid_amount = 0;
-									$discount = 0;
-									$total_outstand = $row['total'];
-									while ($rs_row = $payment->fetch_assoc()) {
-										// Use ternary operator to set default value if data is missing
-										$payment_type = !empty($rs_row['payment_type']) ? $rs_row['payment_type'] : '-';
-										$date_of_payment = !empty($rs_row['date_of_payment']) ? new DateTime($rs_row['date_of_payment']) : '-';
-										$txnid = !empty($rs_row['txnid']) ? $rs_row['txnid'] : '-';
-										$cheque_bank = !empty($rs_row['cheque_bank']) ? $rs_row['cheque_bank'] : '-';
-										$cheque_date = $rs_row['cheque_date'] !== "0000-00-00" ? $rs_row['cheque_date'] : "-";
-										$cheque_no = !empty($rs_row['cheque_no']) ? $rs_row['cheque_no'] : '-';
-										$comment = !empty($rs_row['comment']) ? $rs_row['comment'] : '-';
-										if (!empty($rs_row['amount'])) {
-											$amount = $rs_row['amount'];
-											$total_paid_amount = $total_paid_amount + $amount;
-											$total_outstand = $total_outstand - $amount;
-											$due_balence = $total_outstand;
-										} else {
-											$amount = "-";
-											$total_outstand = $total_outstand - '0';
-											$due_balence = $total_outstand;
-										}
-										if ($rs_row['discount_type'] === "flat") {
-											$discount = $discount + $rs_row['discount_flat'];
-											$amount = $discount;
-											$total_outstand = $total_outstand - $amount;
-											$due_balence = $total_outstand;
-										} elseif ($rs_row['discount_type'] === "percentage") {
-											$percent = $rs_row['discount_percent'];
-											$discount = $discount + ($percent / 100) * $row['total'];
-											$amount = $discount;
-											$total_outstand = $total_outstand - $amount;
-											$due_balence = $total_outstand;
-										}
-									?>
+							if ($payment_count > 0) { ?>
+								<table id="payment-table" class="table table-bordered br-none mg-top" style="border-collapse: collapse; width: 100%; border: none; margin: 5px 0px">
+									<thead style="border-bottom: 1px solid #ddd;">
+										<tr class="table-color" style="border-bottom: 1px solid #ddd;border-top: 1px solid #ddd; font-size: 15px; ">
+											<th class="border-none" style="font-size: 11px; border: none; ">Sr#</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Mode</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Date</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Txn id</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Cheque Bank</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Cheque no.</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Cheque Date</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Amount</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Discount</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Discount type</th>
+											<th class="border-none" style="font-size: 11px; border: none; ">Due Balance</th>
+											<th class="border-none" style="font-size: 11px; border: none; text-align: center ">Note</th>
+											<th class="border-none" style="font-size: 11px; border: none; text-align: center ">Edit</th>
+											<th class="border-none" style="font-size: 11px; border: none; text-align: center">Receipt</th>
+											<th class="border-none" style="font-size: 11px; border: none; text-align: center">Delete</th>
+										</tr>
+									</thead>
+									<script>
+										document.getElementById('number-of-nights').innerText = getDatesBetween('<?= $checkindate->format('Y-m-d') ?>', '<?= $checkoutdate->format('Y-m-d') ?>');
+									</script>
+									<tbody id="room-availability-body">
 										<?php
-										if ($payment_type !== 'payatcheckout') {
-											$i++;
+										$reg_date = new DateTime($row['reg_date']);
+										$payment = $conn->query("select id,payment_type, date_of_payment, txnid, cheque_bank, cheque_no, cheque_date, comment,amount,discount_type,discount_percent,discount_flat from payment_mode where bookingid=$row[id] and deleted=0 order by id desc;");
+										$i = 0;
+										$total_paid_amount = 0;
+										$discount = 0;
+										$total_outstand = $row['total'];
+										while ($rs_row = $payment->fetch_assoc()) {
+											// Use ternary operator to set default value if data is missing
+											$payment_type = !empty($rs_row['payment_type']) ? $rs_row['payment_type'] : '-';
+											$date_of_payment = !empty($rs_row['date_of_payment']) ? new DateTime($rs_row['date_of_payment']) : '-';
+											$txnid = !empty($rs_row['txnid']) ? $rs_row['txnid'] : '-';
+											$cheque_bank = !empty($rs_row['cheque_bank']) ? $rs_row['cheque_bank'] : '-';
+											$cheque_date = $rs_row['cheque_date'] !== "0000-00-00" ? $rs_row['cheque_date'] : "-";
+											$cheque_no = !empty($rs_row['cheque_no']) ? $rs_row['cheque_no'] : '-';
+											$comment = !empty($rs_row['comment']) ? $rs_row['comment'] : '-';
+											if (!empty($rs_row['amount'])) {
+												$amount = $rs_row['amount'];
+												$total_paid_amount = $total_paid_amount + $amount;
+												$total_outstand = $total_outstand - $amount;
+												$due_balence = $total_outstand;
+											} else {
+												$amount = "-";
+												$total_outstand = $total_outstand - '0';
+												$due_balence = $total_outstand;
+											}
+											if ($rs_row['discount_type'] === "flat") {
+												$discount = $discount + $rs_row['discount_flat'];
+												$amount = $discount;
+												$total_outstand = $total_outstand - $amount;
+												$due_balence = $total_outstand;
+											} elseif ($rs_row['discount_type'] === "percentage") {
+												$percent = $rs_row['discount_percent'];
+												$discount = $discount + ($percent / 100) * $row['total'];
+												$amount = $discount;
+												$total_outstand = $total_outstand - $amount;
+												$due_balence = $total_outstand;
+											}
 										?>
-											<tr style="border-bottom: 1px solid #ddd;font-size: 15px">
-												<th class="border-none" style="font-size: 11px; border: none; "><?= $i ?></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><?= $payment_type ?></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><?= $date_of_payment->format("d-m-Y") ?></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><?= $txnid ?></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><input type="text" value=<?= $cheque_bank ?> style="width: 50px; border: none; background-color: white; " disabled></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><input type="text" value=<?= $cheque_no ?> style="width: 50px; border: none; background-color: white; " disabled></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><?= $cheque_date ?></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><input id="amount-<?= $i ?>" type="number" value=<?= $amount ?> style="width: 50px; border: none; background-color: white; " disabled></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"></th>
-												<th class="border-none" style="font-size: 11px; border: none; ;"><?= $due_balence ?></th>
-												<th class="border-none" style="font-size: 11px; border: none; text-align: center;"><input style="width: 55px; border: none; background-color: white; text-align: center; " type="text" value=<?= $comment ?> disabled></th>
-												<th class="border-none" style="border: none; text-align: center"><a href="LBF_editpaymentdetails.php" id="edit-payment-<?= $i ?>"><i class="fa fa-edit" style="color: #3BAFDA; cursor: pointer"></i></a></th>
+											<?php
+											if ($payment_type !== 'payatcheckout') {
+												$i++;
+											?>
+												<tr style="border-bottom: 1px solid #ddd;font-size: 15px">
+													<th class="border-none" style="font-size: 11px; border: none; "><?= $i ?></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><?= $payment_type ?></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><?= $date_of_payment->format("d-m-Y") ?></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><?= $txnid ?></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><input type="text" value=<?= $cheque_bank ?> style="width: 50px; border: none; background-color: white; " disabled></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><input type="text" value=<?= $cheque_no ?> style="width: 50px; border: none; background-color: white; " disabled></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><?= $cheque_date ?></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><input id="amount-<?= $i ?>" type="number" value=<?= $amount ?> style="width: 50px; border: none; background-color: white; " disabled></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"></th>
+													<th class="border-none" style="font-size: 11px; border: none; ;"><?= $due_balence ?></th>
+													<th class="border-none" style="font-size: 11px; border: none; text-align: center;"><input style="width: 55px; border: none; background-color: white; text-align: center; " type="text" value=<?= $comment ?> disabled></th>
+													<th class="border-none" style="border: none; text-align: center"><a href="LBF_editpaymentdetails.php" id="edit-payment-<?= $i ?>"><i class="fa fa-edit" style="color: #3BAFDA; cursor: pointer"></i></a></th>
 
-												<th class="border-none" style="border: none; text-align: center"><a href="LBF_paymentreceipt.php?id=<?= $_GET['id']; ?>&paymentid=<?= $rs_row['id']; ?>&date=<?= $_GET['date']; ?>&amount=<?= $amount; ?>" target="_blank" id="receipt-payment-<?= $i ?>"><i class="fa fa-print" style="color: #3BAFDA; cursor: pointer"></i></a></th>
+													<th class="border-none" style="border: none; text-align: center"><a href="LBF_paymentreceipt.php?id=<?= $_GET['id']; ?>&paymentid=<?= $rs_row['id']; ?>&date=<?= $_GET['date']; ?>&amount=<?= $amount; ?>" target="_blank" id="receipt-payment-<?= $i ?>"><i class="fa fa-print" style="color: #3BAFDA; cursor: pointer"></i></a></th>
 
-												<th class="border-none" style="border: none;text-align: center"><a id="delete-payment-<?= $i ?>" onClick="deletePaymentMode('<?= $rs_row['id'] ?>')"><i class="fa fa-trash-o" style="color: #fb3c3c; cursor: pointer"></i></a></th>
-												<script>
-													document.getElementById('outstand-amount').innerText = <?= $total_outstand ?>;
-													document.getElementById('total-paid-amount').innerText = <?= $total_paid_amount ?>;
-													document.getElementById('total-discount').innerText = <?= $discount ?>;
-													let data_to_send = JSON.stringify(<?= json_encode($rs_row) ?>)
+													<th class="border-none" style="border: none;text-align: center"><a id="delete-payment-<?= $i ?>" onClick="deletePaymentMode('<?= $rs_row['id'] ?>')"><i class="fa fa-trash-o" style="color: #fb3c3c; cursor: pointer"></i></a></th>
+													<script>
+														document.getElementById('outstand-amount').innerText = <?= $total_outstand ?>;
+														document.getElementById('total-paid-amount').innerText = <?= $total_paid_amount ?>;
+														document.getElementById('total-discount').innerText = <?= $discount ?>;
+														let data_to_send = JSON.stringify(<?= json_encode($rs_row) ?>)
 
-													let editUrl = document.getElementById('edit-payment-<?= $i ?>')
-													editUrl.href = `LBF_editpaymentdetails.php?data=${encodeURIComponent(data_to_send)}&isUpdate=1&id=<?= $row['id']; ?>`
-												</script>
-											</tr>
+														let editUrl = document.getElementById('edit-payment-<?= $i ?>')
+														editUrl.href = `LBF_editpaymentdetails.php?data=${encodeURIComponent(data_to_send)}&isUpdate=1&id=<?= $row['id']; ?>`
+													</script>
+												</tr>
+											<?php
+											} ?>
 										<?php
 										} ?>
-									<?php
-									} ?>
-								</tbody>
-							</table>
+									</tbody>
+								</table>
 							<?php } ?>
 							<div>
 								<a id="booking-edit-add" href="LBF_editpaymentdetails.php?id=<?= $row['id']; ?>&isUpdate=0" class="btn available">Add Payment details </a>

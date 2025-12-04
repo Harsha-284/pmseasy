@@ -13251,7 +13251,7 @@ $totalCommissionAmt += $commissionValue;
 																							$filt .= " AND id = " . $bookingid;
 																						}
 
-                                            if ($_SESSION['groupid'] == 2)
+                                            if ($_SESSION['groupid'] == 2 || $_SESSION['groupid'] == 0)
 																									$filt .= " and h.id=$_SESSION[hotel]";
 																								else if ($_SESSION['groupid'] == 1)
 																									$filt .= " and hotelid in (select id from hotels where admin=$_SESSION[id])";
@@ -13631,6 +13631,7 @@ $result = $conn->query($qry);
             </div>
         </div>
     </div>
+      </div>
 </div>
 
 <?php } 
@@ -14183,7 +14184,7 @@ else if ($_GET['Pg'] == "hotelstaff" and $page_access) {
 																							// 		$filt .= " and hotelid in (select id from hotels where admin=$_SESSION[id])";
 																							// 	else if (col("hotel") != "")
 																							// 		$filt .= " and h.hotelid=" . col("hotel");
-																						if ($_SESSION['groupid'] == 2) {
+																						if ($_SESSION['groupid'] == 2 || $_SESSION['groupid'] == 0) {
 																							$filt .= " AND iv.hotel = $_SESSION[hotel]";
 																						} elseif ($_SESSION['groupid'] == 1) {
 																							$filt .= " AND iv.hotel IN (SELECT id FROM hotels WHERE admin = $_SESSION[id])";
@@ -14465,7 +14466,7 @@ else if ($_GET['Pg'] == "hotelstaff" and $page_access) {
 																								} else {
 																									$current_page = 1;
 																								}
-
+                                              
 																								$base_query = "select b.id,b.reg_date,b.status,u.company as hotel,c.city as city,b.source,u_gst.fullname,b.checkindatetime,b.checkoutdatetime,b.hours,r.roomtype,b.declaredtariff,b.ip,COUNT(rd.roomnumber) AS cnt from bookings b join room_distribution rd on rd.bookingid=b.id join roomnumbers rn on rn.id=rd.roomnumber join roomtypes r on r.id=rn.roomtype join hotels h on r.hotel=h.id join users u on u.id=h.user join cities c on c.id=u.city join users u_gst on u_gst.id=b.guestid";
 
 																								$filt = "";
@@ -14483,6 +14484,8 @@ else if ($_GET['Pg'] == "hotelstaff" and $page_access) {
 																									$filt .= " h.id=$_SESSION[hotel]";
 																								else if ($_SESSION['groupid'] == 1)
 																									$filt .= " and hotelid in (select id from hotels where admin=$_SESSION[id])";
+                                                else if($_SESSION['groupid'] == 0)
+                                                  $filt .= " and h.id=$_SESSION[hotel]";
 																								else if (col("hotel") != "")
 																									$filt .= " and h.hotelid=" . col("hotel");
 
@@ -14505,7 +14508,7 @@ else if ($_GET['Pg'] == "hotelstaff" and $page_access) {
 																								// $a = new pagination($base_query . $filt, $current_page, $pagesize);
 																					
 																								// $current_page = $a->current_page_;
-																					
+                                          
 																								if ($_SESSION['groupid'] == 2) {
 																									$a = new pagination1($base_query . ' where' . $filt, $current_page, $pagesize);
 
@@ -22281,6 +22284,7 @@ $total = $res['total_amount'] ?? 0;
 															</div>
 														</div>
 													</div>
+<?php include 'footer.php'; ?>
 
 													<div id="back-top">
 
@@ -22310,6 +22314,7 @@ $total = $res['total_amount'] ?? 0;
               
               </div>
                           </div> -->
+
 			</body>
 
 		<?php include("js.php"); ?>

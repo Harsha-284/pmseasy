@@ -132,7 +132,12 @@ include 'functions.php';
             SELECT rd.roomnumber FROM bookings b
             JOIN room_distribution rd ON rd.bookingid = b.id
             WHERE b.status IN ('Scheduled', 'Cancelled') 
-            AND rd.isRoomAssigned = 1
+            AND rd.isRoomAssigned = 1 
+            AND (
+    b.usercheckedout IS NULL 
+    OR b.usercheckedout = '0000-00-00 00:00:00'
+    OR b.usercheckedout > NOW()
+)
             AND (
                 (
                     ('" . $checkindate->format("Y-m-d H:i") . "' >= b.checkindatetime AND '" . $checkoutdate->format("Y-m-d H:i") . "' <= b.checkoutdatetime) 
