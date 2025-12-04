@@ -10807,18 +10807,18 @@ button:disabled {
     padding: 5px;
 }
 
-#total-amount-with-services {
+.total-amount-with-services {
     background-color: #63C8FF;
     color: white;
 }
 
-#total-paid-amount {
+.total-paid-amount {
     background-color: #6cd4ba;
     color: white;
 
 }
 
-#outstand-amount {
+.outstand-amount {
     background-color: #FF6363;
     color: white;
 

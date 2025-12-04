@@ -425,11 +425,11 @@ include 'udf.php'; ?>
 								<h6 class="bill-heading">Payment Details</h6>
 								<div class="inner-content h-155">
 									<p style="display: flex;justify-content: space-between;"><strong>Total deal amount</strong> <span>₹ <span class="box-inp"><?= $row['intialtariff'] ?></span></span></p>
-									<p style="display: flex;justify-content: space-between;"><strong>Total amount of only services</strong><span>₹ <span class="box-inp" id="total-amount-of-only-services">0</span></span></p>
-									<p style="display: flex;justify-content: space-between;"><strong>Total amount with services</strong><span>₹ <span class="box-inp" id="total-amount-with-services">0</span></span></p>
-									<p style="display: flex;justify-content: space-between;"><strong>Discount</strong><span>₹ <span class="box-inp" id="total-discount">0</span></span></p>
-									<p style="display: flex;justify-content: space-between;"><strong>Total paid amount</strong><span>₹ <span class="box-inp" id="total-paid-amount">0</span></span></p>
-									<p style="display: flex;justify-content: space-between;"><strong>Total outstand</strong><span>₹ <span class="box-inp" id="outstand-amount">0</span></span></p>
+									<p style="display: flex;justify-content: space-between;"><strong>Total amount of only services</strong><span>₹ <span class="box-inp total-amount-of-only-services" id="total-amount-of-only-services-<?= $row['id'] ?>">0</span></span></p>
+									<p style="display: flex;justify-content: space-between;"><strong>Total amount with services</strong><span>₹ <span class="box-inp total-amount-with-services" id="total-amount-with-services-<?= $row['id'] ?>">0</span></span></p>
+									<p style="display: flex;justify-content: space-between;"><strong>Discount</strong><span>₹ <span class="box-inp total-discount" id="total-discount-<?= $row['id'] ?>">0</span></span></p>
+									<p style="display: flex;justify-content: space-between;"><strong>Total paid amount</strong><span>₹ <span class="box-inp total-paid-amount" id="total-paid-amount-<?= $row['id'] ?>">0</span></span></p>
+									<p style="display: flex;justify-content: space-between;"><strong>Total outstand</strong><span>₹ <span class="box-inp outstand-amount" id="outstand-amount-<?= $row['id'] ?>">0</span></span></p>
 								</div>
 							</div>
 						</div>
@@ -531,9 +531,9 @@ include 'udf.php'; ?>
 
 														<th class="border-none" style="border: none;text-align: center"><a id="delete-payment-<?= $i ?>" onClick="deletePaymentMode('<?= $rs_row['id'] ?>')"><i class="fa fa-trash-o" style="color: #fb3c3c; cursor: pointer"></i></a></th>
 														<script>
-															document.getElementById('outstand-amount').innerText = <?= $total_outstand ?>;
-															document.getElementById('total-paid-amount').innerText = <?= $total_paid_amount ?>;
-															document.getElementById('total-discount').innerText = <?= $discount ?>;
+															document.getElementById('outstand-amount-<?= $row['id'] ?>').innerText = <?= $total_outstand ?>;
+															document.getElementById('total-paid-amount-<?= $row['id'] ?>').innerText = <?= $total_paid_amount ?>;
+															document.getElementById('total-discount-<?= $row['id'] ?>').innerText = <?= $discount ?>;
 															let data_to_send = JSON.stringify(<?= json_encode($rs_row) ?>)
 
 															let editUrl = document.getElementById('edit-payment-<?= $i ?>')
@@ -618,8 +618,8 @@ include 'udf.php'; ?>
 											<th class="border-none" style="font-size: 11px; border: none; text-align: center">Delete</th>
 										</tr>
 										<script>
-											document.getElementById('total-amount-with-services').innerText = <?= $row['total'] ?>;
-											document.getElementById('total-amount-of-only-services').innerText = <?= $row['total'] - $row['intialtariff'] ?>;
+											document.getElementById('total-amount-with-services-<?= $row['id'] ?>').innerText = <?= $row['total'] ?>;
+											document.getElementById('total-amount-of-only-services-<?= $row['id'] ?>').innerText = <?= $row['total'] - $row['intialtariff'] ?>;
 										</script>
 									</thead>
 									<tbody id="room-additional-service-<?= $row['id'] ?>">
